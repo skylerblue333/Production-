@@ -11,21 +11,33 @@ import { ShoppingBag, Sparkles, Loader2 } from "lucide-react";
 type Currency = "SKY444" | "DODGE" | "TRUMP";
 const CURRENCIES: Currency[] = ["SKY444", "DODGE", "TRUMP"];
 
+interface Product {
+  id: string;
+  category: string;
+  title: string;
+  description: string;
+  priceSky: number;
+}
+
 export default function Marketplace() {
   const { isAuthenticated } = useAuth();
   const utils = trpc.useUtils();
-  const { data: products, isLoading } = trpc.marketplaceAdv.listCodeSnippets.useQuery();
+  const { data: products = [], isLoading } = trpc.marketplaceAdv.listCodeSnippets.useQuery({ category: undefined, limit: 20 }) as { data: Product[], isLoading: boolean };
   const [interest, setInterest] = useState("");
   const [reco, setReco] = useState("");
-  const [currency, setCurrency] = useState<Record<number, Currency>>({});
+  const [currency, setCurrency] = useState<Record<string, Currency>>({});
 
-  const recommend = trpc.marketplaceAdv.getStats.useMutation({
-    onSuccess: (r) => setReco(r.recommendation),
-    onError: (e) => toast.error(e.message),
+  const recommendMutation = trpc.marketplaceAdv.analyzePerformance.useMutation({
+    onSuccess: (r: any) => setReco(r.suggestions || 'No suggestions'),
+    onError: (e: any) => toast.error(e.message || 'Error'),
   });
+
   const purchase = trpc.marketplaceAdv.buyCodeSnippet.useMutation({
-    onSuccess: (r) => {
+    onSuccess: (r: any) => {
+      toast.success('Purchase successful!');
+      utils.marketplaceAdv.listCodeSnippets.invalidate();
     },
+    onError: (e: any) => toast.error(e.message || 'Purchase failed'),
   });
 
   return (
@@ -47,9 +59,9 @@ export default function Marketplace() {
           <>
             <div className="flex flex-col sm:flex-row gap-3">
               <Input value={interest} onChange={e => setInterest(e.target.value)} placeholder="What are you looking for? e.g. AI dev tools" className="bg-input border-border" />
-              <button onClick={() => recommend.mutate({ interest })} disabled={recommend.isPending || interest.length < 2}
+              <button onClick={() => recommendMutation.mutate({ codeId: '1', code: interest })} disabled={recommendMutation.isPending || interest.length < 2}
                 className="sk-gradient px-6 py-2.5 rounded-full font-bold disabled:opacity-50 flex items-center justify-center whitespace-nowrap">
-                {recommend.isPending ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Thinking…</> : "Recommend"}
+                {recommendMutation.isPending ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Thinking…</> : "Recommend"}
               </button>
             </div>
             {reco && <div className="prose prose-invert max-w-none text-sm mt-4"><Streamdown>{reco}</Streamdown></div>}
@@ -92,7 +104,7 @@ export default function Marketplace() {
       {isLoading && <Loader2 className="w-6 h-6 animate-spin" />}
       {products && products.length === 0 && <p className="text-muted-foreground">No products listed yet.</p>}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {products?.map((p: any) => (
+        {products?.map((p: Product) => (
           <Card key={p.id} className="p-5 flex flex-col" hover>
             <div className="text-xs uppercase tracking-wider text-[var(--neon-magenta)] mb-1">{p.category}</div>
             <h3 className="font-bold text-lg">{p.title}</h3>
@@ -104,7 +116,7 @@ export default function Marketplace() {
                   className="w-full bg-input border border-border rounded-lg px-3 py-2 text-sm">
                   {CURRENCIES.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
-                <button disabled={purchase.isPending} onClick={() => purchase.mutate({ productId: p.id, currency: currency[p.id] ?? "SKY444" })}
+                <button disabled={purchase.isPending} onClick={() => purchase.mutate({ listingId: p.id, amount: String(p.priceSky) })}
                   className="w-full sk-gradient py-2.5 rounded-full text-sm font-bold disabled:opacity-50">Buy now</button>
               </div>
             ) : (
