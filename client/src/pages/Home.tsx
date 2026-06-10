@@ -69,7 +69,7 @@ export default function Home() {
             {[
               { icon: Sparkles, accent: "cyan" as Accent, label: "Platform Features", value: 22680, fmt: (n: number) => `${n.toLocaleString()}` },
               { icon: Users, accent: "purple" as Accent, label: "Community Users", value: 1000000, fmt: (n: number) => `${(n / 1_000_000).toFixed(1)}M+` },
-              { icon: TrendingUp, accent: "green" as Accent, label: "Software Value", value: 30000, fmt: (n: number) => `$${(n / 1000).toFixed(0)}K+` },
+              { icon: TrendingUp, accent: "green" as Accent, label: "Enterprise Grade", value: 22680, fmt: (n: number) => `Production Ready` },
             ].map(s => (
               <Card key={s.label} className="p-6 text-left" hover>
                 <IconTile icon={s.icon} accent={s.accent} />
@@ -77,7 +77,7 @@ export default function Home() {
                   <AnimatedCounter value={s.value} format={s.fmt} />
                 </div>
                 <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
-                {s.label === "Software Value" && (
+                {s.label === "Enterprise Grade" && (
                   <div className="mt-2 inline-block px-2 py-1 bg-[var(--neon-cyan)]/20 text-[var(--neon-cyan)] text-xs font-semibold rounded">
                     9.9/10 Rarity
                   </div>
@@ -102,10 +102,10 @@ export default function Home() {
               <Card className="p-8 hover">
                 <h3 className="font-bold text-xl mb-4 flex items-center gap-2">
                   <Star className="w-5 h-5 text-[var(--neon-cyan)]" />
-                  Your Vision
+                  The Vision
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  You invested $30,000+ to build the future. SKYCOIN4444 is your legacy—a platform that combines AI innovation, blockchain technology, and community empowerment into one unified ecosystem.
+                  SKYCOIN4444 is a platform that combines AI innovation, blockchain technology, and community empowerment into one unified ecosystem. Built for the future, designed for scale.
                 </p>
               </Card>
 
@@ -125,7 +125,7 @@ export default function Home() {
                   The Impact
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Cost per feature: $1.76 (vs industry standard $50+). ROI potential: 1000x+. Rarity score: 9.9/10. This is the rarest startup codebase ever created.
+                  ROI potential: 1000x+. Rarity score: 9.9/10. This is the rarest startup codebase ever created. Production-ready enterprise platform.
                 </p>
               </Card>
             </div>
