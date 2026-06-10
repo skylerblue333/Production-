@@ -626,15 +626,14 @@ export const collaborativeSessions = mysqlTable('collaborative_sessions', {
   endedAt: timestamp('ended_at'),
   status: varchar('status', { length: 20 }).default('active'),
 });
-});
 
 // Phase 20 — Referral Tournaments Tables
 export const referralTournaments = mysqlTable('referral_tournaments', {
   id: bigint('id', { mode: 'bigint' }).primaryKey().autoincrement(),
   name: varchar('name', { length: 255 }).notNull(),
   description: text('description'),
-  startDate: datetime('start_date').notNull(),
-  endDate: datetime('end_date').notNull(),
+  startDate: date('start_date').notNull(),
+  endDate: date('end_date').notNull(),
   prizePool: decimal('prize_pool', { precision: 18, scale: 8 }).notNull(),
   prizeToken: varchar('prize_token', { length: 50 }).default('SKY444'),
   status: varchar('status', { length: 20 }).default('active'),
@@ -675,7 +674,7 @@ export const nftAuctions = mysqlTable('nft_auctions', {
   startPrice: decimal('start_price', { precision: 18, scale: 8 }).notNull(),
   currentBid: decimal('current_bid', { precision: 18, scale: 8 }).notNull(),
   highestBidderId: bigint('highest_bidder_id', { mode: 'bigint' }),
-  endDate: datetime('end_date').notNull(),
+  endDate: date('end_date').notNull(),
   currency: varchar('currency', { length: 50 }).default('SKY444'),
   status: varchar('status', { length: 20 }).default('active'),
   createdAt: timestamp('created_at').defaultNow(),
