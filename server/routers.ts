@@ -34,6 +34,7 @@ import { leaderboardsRouter } from "./routers/leaderboards";
 import { achievementsRouter } from "./routers/achievements";
 import { referralsRouter } from "./routers/referrals";
 import { tradingBotsRouter } from "./routers/trading-bots";
+import { walletRouter } from "./routers/wallet";
 
 export const appRouter = router({
   system: systemRouter,
@@ -88,6 +89,7 @@ export const appRouter = router({
   achievements: achievementsRouter,
   referrals: referralsRouter,
   bots: tradingBotsRouter,
+  wallet: walletRouter,
   seed: seedRouter,
 });
 

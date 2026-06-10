@@ -137,4 +137,14 @@
 - [x] Wire all 3 routers to appRouter
 - [x] TypeScript clean (0 errors)
 - [x] Share TRUMP/DOGE mining info with user
-- [ ] Save checkpoint + push live
+- [x] Save checkpoint + push live (v5a0f5e24)
+
+## Phase 14 — REAL Wallet Integration + Mining (Live)
+- [x] MetaMask + WalletConnect dependencies installed (ethers, web3, web3modal)
+- [x] WalletContext created with connect/disconnect/sendTransaction
+- [x] Wallet router created (connectWallet, getBalance, sendTransaction, verifyTransaction)
+- [x] WalletConnect component UI (connect button, balance display, address)
+- [x] Integrated WalletConnect into Crypto page
+- [x] WalletProvider added to main.tsx
+- [x] All TypeScript clean (0 errors)
+- [ ] Save checkpoint + push to live domain

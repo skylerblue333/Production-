@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Spinner } from "@/components/ui/spinner";
 import { toast } from "sonner";
 import { Wallet, Pickaxe, Lock, Flame, ArrowLeftRight, TrendingUp, TrendingDown, Coins } from "lucide-react";
+import { WalletConnect } from "@/components/WalletConnect";
 
 const TOKENS = ["SKY444", "DODGE", "TRUMP", "BTC", "USDT", "MONERO"] as const;
 type Token = typeof TOKENS[number];
@@ -27,8 +28,6 @@ const TOKEN_META: Record<Token, { name: string; color: string; emoji: string }> 
 export default function Crypto() {
   const { isAuthenticated, loading: authLoading } = useAuth();
   const utils = trpc.useUtils();
-
-  // Mining state
   const [mineToken, setMineToken] = useState<Token>("TRUMP");
   const [hashRate, setHashRate] = useState("100");
   // Staking state
@@ -159,6 +158,11 @@ export default function Crypto() {
 
   return (
     <div className="container py-8 max-w-6xl">
+      {/* Wallet Connection */}
+      <div className="mb-6">
+        <WalletConnect />
+      </div>
+
       {/* Header */}
       <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
         <div>
