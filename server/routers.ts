@@ -10,6 +10,7 @@ import { governanceRouter } from "./routers/governance";
 import { charityRouter } from "./routers/charity";
 import { marketplaceRouter } from "./routers/marketplace";
 import { analyticsRouter } from "./routers/analytics";
+import { tradingRouter } from "./routers/trading";
 import { uploadsRouter } from "./routers/uploads";
 import { seedRouter } from "./routers/seed";
 
@@ -44,6 +45,7 @@ export const appRouter = router({
   charity: charityRouter,
   marketplace: marketplaceRouter,
   analytics: analyticsRouter,
+  trading: tradingRouter,
   uploads: uploadsRouter,
   seed: seedRouter,
 });

@@ -17,6 +17,7 @@ import Governance from "./pages/Governance";
 import Analytics from "./pages/Analytics";
 import Charity from "./pages/Charity";
 import Marketplace from "./pages/Marketplace";
+import DayTradeRoom from "./pages/DayTradeRoom";
 
 // Fires the owner "new user signup" alert once after auth lands.
 function OnboardTrigger() {
@@ -49,6 +50,7 @@ function Router() {
       <Route path="/analytics" component={Analytics} />
       <Route path="/charity" component={Charity} />
       <Route path="/marketplace" component={Marketplace} />
+      <Route path="/trading" component={DayTradeRoom} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

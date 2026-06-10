@@ -4,7 +4,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import {
   Cpu, GraduationCap, Gamepad2, Vote, BarChart3, Heart,
-  ShoppingBag, Menu, X, LogOut, Zap, LayoutDashboard,
+  ShoppingBag, Menu, X, LogOut, Zap, LayoutDashboard, TrendingUp,
 } from "lucide-react";
 
 const NAV = [
@@ -14,6 +14,7 @@ const NAV = [
   { href: "/arcade", label: "Arcade", icon: Gamepad2 },
   { href: "/governance", label: "Governance", icon: Vote },
   { href: "/analytics", label: "Analytics", icon: BarChart3 },
+  { href: "/trading", label: "Trading", icon: TrendingUp },
   { href: "/charity", label: "Charity", icon: Heart },
   { href: "/marketplace", label: "Market", icon: ShoppingBag },
 ];

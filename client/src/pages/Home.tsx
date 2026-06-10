@@ -5,7 +5,7 @@ import { Card, IconTile, ModuleTile, type Accent } from "@/components/ui/sk";
 import { useLocation } from "wouter";
 import {
   Cpu, GraduationCap, Gamepad2, Vote, BarChart3, Heart, ShoppingBag,
-  ArrowRight, Zap, Shield, Globe, Sparkles, Users, TrendingUp,
+  ArrowRight, Zap, Shield, Globe, Sparkles, Users, TrendingUp, Gem,
 } from "lucide-react";
 
 const MODULES: { href: string; label: string; desc: string; icon: any; accent: Accent }[] = [
@@ -60,9 +60,9 @@ export default function Home() {
           {/* STATS */}
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
             {[
-              { icon: Sparkles, accent: "cyan" as Accent, label: "Platform Features", value: stats?.features ?? 3645, fmt: (n: number) => `${Math.round(n).toLocaleString()}+` },
-              { icon: Users, accent: "purple" as Accent, label: "Community Users", value: stats?.users ?? 1200000, fmt: (n: number) => `${(n / 1_000_000).toFixed(1)}M+` },
-              { icon: TrendingUp, accent: "green" as Accent, label: "Marketplace Volume", value: stats?.marketplaceVolume ?? 500000000, fmt: (n: number) => `$${(n / 1_000_000).toFixed(0)}M+` },
+              { icon: Sparkles, accent: "cyan" as Accent, label: "Platform Features", value: stats?.features ?? 0, fmt: (n: number) => `${Math.round(n)}` },
+              { icon: Users, accent: "purple" as Accent, label: "Community Users", value: stats?.users ?? 0, fmt: (n: number) => `${n > 0 ? (n / 1_000_000).toFixed(1) + "M" : "0"}` },
+              { icon: TrendingUp, accent: "green" as Accent, label: "Software Value", value: stats?.softwareValue ?? 0, fmt: (n: number) => `$${(n / 1000).toFixed(0)}K` },
             ].map(s => (
               <Card key={s.label} className="p-6 text-left" hover>
                 <IconTile icon={s.icon} accent={s.accent} />
@@ -70,6 +70,11 @@ export default function Home() {
                   <AnimatedCounter value={s.value} format={s.fmt} />
                 </div>
                 <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
+                {s.label === "Software Value" && stats?.rarity && (
+                  <div className="mt-2 inline-block px-2 py-1 bg-[var(--neon-cyan)]/20 text-[var(--neon-cyan)] text-xs font-semibold rounded">
+                    {stats.rarity}
+                  </div>
+                )}
               </Card>
             ))}
           </div>
