@@ -14,6 +14,7 @@ import { tradingRouter } from "./routers/trading";
 import { escrowRouter } from "./routers/escrow";
 import { videoRouter } from "./routers/video";
 import { socialRouter } from "./routers/social";
+import { agentsRouter } from "./routers/agents";
 import { uploadsRouter } from "./routers/uploads";
 import { seedRouter } from "./routers/seed";
 
@@ -52,6 +53,7 @@ export const appRouter = router({
   escrow: escrowRouter,
   video: videoRouter,
   social: socialRouter,
+  agents: agentsRouter,
   uploads: uploadsRouter,
   seed: seedRouter,
 });
