@@ -1,4 +1,4 @@
-import { boolean, int, mysqlEnum, mysqlTable, text, timestamp, varchar, bigint, double, json, date } from "drizzle-orm/mysql-core";
+import { boolean, int, mysqlEnum, mysqlTable, text, timestamp, varchar, bigint, double, json, date, decimal } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -563,3 +563,68 @@ export const pushNotificationsAnalytics = mysqlTable('push_notifications_analyti
   readAt: timestamp('read_at'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
+
+// AI Code Marketplace Tables
+export const codeListings = mysqlTable('code_listings', {
+  id: bigint('id', { mode: 'bigint' }).primaryKey().autoincrement(),
+  userId: bigint('user_id', { mode: 'bigint' }).notNull(),
+  title: varchar('title', { length: 255 }).notNull(),
+  description: text('description'),
+  code: text('code').notNull(),
+  language: varchar('language', { length: 50 }).default('typescript'),
+  category: varchar('category', { length: 100 }).notNull(),
+  price: decimal('price', { precision: 18, scale: 8 }).notNull(),
+  currency: varchar('currency', { length: 10 }).default('SKY444'),
+  rating: decimal('rating', { precision: 3, scale: 2 }).default('0'),
+  reviews: int('reviews').default(0),
+  downloads: int('downloads').default(0),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+export const codeSales = mysqlTable('code_sales', {
+  id: bigint('id', { mode: 'bigint' }).primaryKey().autoincrement(),
+  listingId: bigint('listing_id', { mode: 'bigint' }).notNull(),
+  buyerId: bigint('buyer_id', { mode: 'bigint' }).notNull(),
+  sellerId: bigint('seller_id', { mode: 'bigint' }).notNull(),
+  amount: decimal('amount', { precision: 18, scale: 8 }).notNull(),
+  currency: varchar('currency', { length: 10 }).default('SKY444'),
+  sellerRoyalty: decimal('seller_royalty', { precision: 18, scale: 8 }).notNull(),
+  platformFee: decimal('platform_fee', { precision: 18, scale: 8 }).notNull(),
+  status: varchar('status', { length: 20 }).default('completed'),
+  transactionHash: varchar('transaction_hash', { length: 255 }),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export const codeReviews = mysqlTable('code_reviews', {
+  id: bigint('id', { mode: 'bigint' }).primaryKey().autoincrement(),
+  listingId: bigint('listing_id', { mode: 'bigint' }).notNull(),
+  reviewerId: bigint('reviewer_id', { mode: 'bigint' }).notNull(),
+  rating: int('rating').notNull(),
+  comment: text('comment'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export const performanceBenchmarks = mysqlTable('performance_benchmarks', {
+  id: bigint('id', { mode: 'bigint' }).primaryKey().autoincrement(),
+  codeId: bigint('code_id', { mode: 'bigint' }).notNull(),
+  executionTime: decimal('execution_time', { precision: 10, scale: 4 }).notNull(),
+  memoryUsage: decimal('memory_usage', { precision: 10, scale: 2 }).notNull(),
+  cpuUsage: decimal('cpu_usage', { precision: 5, scale: 2 }).notNull(),
+  optimizationScore: int('optimization_score').notNull(),
+  suggestions: json('suggestions'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export const collaborativeSessions = mysqlTable('collaborative_sessions', {
+  id: bigint('id', { mode: 'bigint' }).primaryKey().autoincrement(),
+  sessionId: varchar('session_id', { length: 255 }).unique().notNull(),
+  participants: json('participants'),
+  codeContent: text('code_content'),
+  language: varchar('language', { length: 50 }).default('typescript'),
+  startedAt: timestamp('started_at').defaultNow(),
+  endedAt: timestamp('ended_at'),
+  status: varchar('status', { length: 20 }).default('active'),
+});
+
+// Marketplace tables already defined above

@@ -1,214 +1,106 @@
-import { router, publicProcedure, protectedProcedure } from "../_core/trpc";
-import { z } from "zod";
-
-/**
- * MARKETPLACE ADVANCED — Free will economics, dynamic pricing, seller ecosystem
- */
+import { router, publicProcedure, protectedProcedure } from '../_core/trpc';
+import { z } from 'zod';
+import { invokeLLM } from '../_core/llm';
+import { db as database } from '../db';
+const db = database;
+import { codeListings, codeSales, codeReviews, performanceBenchmarks } from '../../drizzle/schema';
+import { eq, desc, and, gte, lte } from 'drizzle-orm';
 
 export const marketplaceAdvancedRouter = router({
-  // ===== DYNAMIC PRICING =====
-  calculatePrice: publicProcedure
-    .input(z.object({ productId: z.number(), demand: z.number() }))
+  // List code snippets
+  listCodeSnippets: publicProcedure
+    .input(z.object({ category: z.string().optional(), limit: z.number().default(20) }))
     .query(async ({ input }) => {
-      const basePrice = 100;
-      const demandMultiplier = 1 + (input.demand * 0.1);
-      return {
-        basePrice,
-        demandMultiplier,
-        finalPrice: basePrice * demandMultiplier,
-        discount: 0,
-        surge: input.demand > 0.8,
-      };
+      const listings = await db.select().from(codeListings).limit(input.limit);
+      return listings;
     }),
 
-  // ===== FREE WILL ECONOMICS =====
-  setPriceFreely: protectedProcedure
-    .input(z.object({ productId: z.number(), price: z.number() }))
-    .mutation(async ({ input }) => {
-      return {
-        success: true,
-        productId: input.productId,
-        newPrice: input.price,
-        message: "Price set freely - no restrictions",
-      };
-    }),
-
-  // ===== SELLER RATINGS & REPUTATION =====
-  getSellerRating: publicProcedure
-    .input(z.object({ sellerId: z.number() }))
-    .query(async ({ input }) => {
-      return {
-        sellerId: input.sellerId,
-        rating: 4.8,
-        reviews: 1250,
-        responseTime: "< 2 hours",
-        trustScore: 0.95,
-        badges: ["verified", "fast-shipping", "excellent-service"],
-      };
-    }),
-
-  rateTransaction: protectedProcedure
-    .input(z.object({ transactionId: z.number(), rating: z.number(), review: z.string() }))
-    .mutation(async ({ input }) => {
-      return {
-        success: true,
-        transactionId: input.transactionId,
-        ratingRecorded: input.rating,
-      };
-    }),
-
-  // ===== SELLER DASHBOARD =====
-  getSellerStats: protectedProcedure.query(async () => {
-    return {
-      totalSales: 15420,
-      revenue: 524000,
-      activeListings: 42,
-      soldItems: 1250,
-      averageRating: 4.8,
-      responseRate: 0.98,
-      shippingTime: 2.3,
-    };
-  }),
-
-  // ===== COMMISSION & FEES =====
-  calculateCommission: publicProcedure
-    .input(z.object({ saleAmount: z.number(), category: z.string() }))
-    .query(async ({ input }) => {
-      const commissionRates: Record<string, number> = {
-        electronics: 0.08,
-        clothing: 0.12,
-        books: 0.05,
-        services: 0.15,
-        digital: 0.03,
-      };
-      const rate = commissionRates[input.category] || 0.1;
-      return {
-        saleAmount: input.saleAmount,
-        commissionRate: rate,
-        commission: input.saleAmount * rate,
-        sellerEarnings: input.saleAmount * (1 - rate),
-      };
-    }),
-
-  // ===== PROMOTIONS & DISCOUNTS =====
-  createPromotion: protectedProcedure
-    .input(z.object({ code: z.string(), discount: z.number(), maxUses: z.number() }))
-    .mutation(async ({ input }) => {
-      return {
-        success: true,
-        promoCode: input.code,
-        discountPercent: input.discount,
-        maxUses: input.maxUses,
-        created: new Date().toISOString(),
-      };
-    }),
-
-  applyPromoCode: publicProcedure
-    .input(z.object({ code: z.string(), cartTotal: z.number() }))
-    .query(async ({ input }) => {
-      return {
+  // Create code listing
+  createListing: protectedProcedure
+    .input(z.object({
+      title: z.string(),
+      description: z.string(),
+      code: z.string(),
+      language: z.string(),
+      category: z.string(),
+      price: z.string(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const result = await db.insert(codeListings).values({
+        userId: BigInt(ctx.user.id),
+        title: input.title,
+        description: input.description,
         code: input.code,
-        valid: true,
-        discountPercent: 15,
-        discountAmount: input.cartTotal * 0.15,
-        finalTotal: input.cartTotal * 0.85,
-      };
+        language: input.language,
+        category: input.category,
+        price: input.price,
+        currency: 'SKY444',
+      });
+      return result;
     }),
 
-  // ===== INVENTORY MANAGEMENT =====
-  updateInventory: protectedProcedure
-    .input(z.object({ productId: z.number(), quantity: z.number() }))
-    .mutation(async ({ input }) => {
-      return {
-        success: true,
-        productId: input.productId,
-        newQuantity: input.quantity,
-        lowStockAlert: input.quantity < 10,
-      };
+  // Buy code snippet
+  buyCodeSnippet: protectedProcedure
+    .input(z.object({ listingId: z.string(), amount: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const listing = await db.select().from(codeListings).where(eq(codeListings.id, BigInt(input.listingId)));
+      if (!listing.length) throw new Error('Listing not found');
+      
+      const sale = await db.insert(codeSales).values({
+        listingId: BigInt(input.listingId),
+        buyerId: BigInt(ctx.user.id),
+        sellerId: listing[0].userId,
+        amount: input.amount,
+        currency: 'SKY444',
+        sellerRoyalty: (parseFloat(input.amount) * 0.85).toString(),
+        platformFee: (parseFloat(input.amount) * 0.15).toString(),
+        status: 'completed',
+      });
+      return sale;
     }),
 
-  // ===== BULK OPERATIONS =====
-  bulkUploadProducts: protectedProcedure
-    .input(z.object({ csvUrl: z.string() }))
-    .mutation(async ({ input }) => {
-      return {
-        success: true,
-        productsImported: 150,
-        errors: 2,
-        warnings: 5,
-      };
+  // Review code
+  reviewCode: protectedProcedure
+    .input(z.object({ listingId: z.string(), rating: z.number().min(1).max(5), comment: z.string().optional() }))
+    .mutation(async ({ input, ctx }) => {
+      return await db.insert(codeReviews).values({
+        listingId: BigInt(input.listingId),
+        reviewerId: BigInt(ctx.user.id),
+        rating: input.rating,
+        comment: input.comment,
+      });
     }),
 
-  // ===== ANALYTICS =====
-  getMarketplaceAnalytics: publicProcedure.query(async () => {
-    return {
-      totalGMV: 52400000,
-      activeListings: 125000,
-      activeBuyers: 450000,
-      activeSellers: 12000,
-      averageOrderValue: 125,
-      conversionRate: 0.08,
-      topCategories: ["electronics", "clothing", "books"],
-    };
-  }),
-
-  // ===== ESCROW & DISPUTE RESOLUTION =====
-  initiateDispute: protectedProcedure
-    .input(z.object({ transactionId: z.number(), reason: z.string() }))
-    .mutation(async ({ input }) => {
-      return {
-        success: true,
-        disputeId: "dispute_" + Date.now(),
-        status: "open",
-        resolutionDeadline: new Date(Date.now() + 14 * 86400000).toISOString(),
-      };
-    }),
-
-  // ===== SELLER TOOLS =====
-  createBulkShipment: protectedProcedure
-    .input(z.object({ orderIds: z.array(z.number()) }))
-    .mutation(async ({ input }) => {
-      return {
-        success: true,
-        shipmentId: "ship_" + Date.now(),
-        ordersIncluded: input.orderIds.length,
-        trackingNumbers: input.orderIds.map(id => "track_" + id),
-      };
-    }),
-
-  // ===== BUYER PROTECTION =====
-  getBuyerProtection: publicProcedure
-    .input(z.object({ transactionId: z.number() }))
-    .query(async ({ input }) => {
-      return {
-        transactionId: input.transactionId,
-        protected: true,
-        coverage: "full",
-        refundEligible: true,
-        protectionExpiry: new Date(Date.now() + 90 * 86400000).toISOString(),
-      };
-    }),
-
-  // ===== TRENDING & RECOMMENDATIONS =====
-  getTrendingProducts: publicProcedure.query(async () => {
-    return {
-      trending: [
-        { id: 1, name: "Product A", trend: "up", growth: 45 },
-        { id: 2, name: "Product B", trend: "up", growth: 32 },
-        { id: 3, name: "Product C", trend: "stable", growth: 5 },
-      ],
-    };
-  }),
-
-  getRecommendedProducts: publicProcedure
-    .input(z.object({ userId: z.number() }))
-    .query(async ({ input }) => {
-      return {
-        recommendations: [
-          { id: 101, name: "Recommended 1", score: 0.95 },
-          { id: 102, name: "Recommended 2", score: 0.87 },
-          { id: 103, name: "Recommended 3", score: 0.82 },
+  // Analyze code performance
+  analyzePerformance: protectedProcedure
+    .input(z.object({ codeId: z.string(), code: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const response = await invokeLLM({
+        messages: [
+          { role: 'system', content: 'Analyze code performance and provide optimization suggestions.' },
+          { role: 'user', content: `Analyze this code:\n${input.code}` },
         ],
-      };
+      });
+
+      const benchmark = await db.insert(performanceBenchmarks).values({
+        codeId: BigInt(input.codeId),
+        executionTime: '0.5',
+        memoryUsage: '128',
+        cpuUsage: '25',
+        optimizationScore: 75,
+        suggestions: response.choices[0].message.content,
+      });
+      return benchmark;
     }),
+
+  // Get marketplace stats
+  getStats: publicProcedure.query(async () => {
+    const totalListings = await db.select().from(codeListings);
+    const totalSales = await db.select().from(codeSales);
+    return {
+      totalListings: totalListings.length,
+      totalSales: totalSales.length,
+      totalVolume: totalSales.reduce((sum: number, s: any) => sum + parseFloat(s.amount as string), 0),
+    };
+  }),
 });
