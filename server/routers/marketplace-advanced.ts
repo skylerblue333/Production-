@@ -104,3 +104,19 @@ export const marketplaceAdvancedRouter = router({
     };
   }),
 });
+
+// Additional marketplace procedures
+export const marketplaceExtendedRouter = router({
+  products: publicProcedure.query(async () => ({
+    items: [],
+  })),
+  recommend: publicProcedure.query(async () => ({
+    recommendations: [],
+  })),
+  purchase: protectedProcedure.input(z.object({ productId: z.string() })).mutation(async ({ input }) => ({
+    success: true,
+  })),
+  myTransactions: protectedProcedure.query(async () => ({
+    transactions: [],
+  })),
+});

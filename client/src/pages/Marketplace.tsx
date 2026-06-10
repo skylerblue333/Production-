@@ -14,19 +14,17 @@ const CURRENCIES: Currency[] = ["SKY444", "DODGE", "TRUMP"];
 export default function Marketplace() {
   const { isAuthenticated } = useAuth();
   const utils = trpc.useUtils();
-  const { data: products, isLoading } = trpc.marketplace.products.useQuery();
+  const { data: products, isLoading } = trpc.marketplaceAdv.listCodeSnippets.useQuery();
   const [interest, setInterest] = useState("");
   const [reco, setReco] = useState("");
   const [currency, setCurrency] = useState<Record<number, Currency>>({});
 
-  const recommend = trpc.marketplace.recommend.useMutation({
+  const recommend = trpc.marketplaceAdv.getStats.useMutation({
     onSuccess: (r) => setReco(r.recommendation),
     onError: (e) => toast.error(e.message),
   });
-  const purchase = trpc.marketplace.purchase.useMutation({
+  const purchase = trpc.marketplaceAdv.buyCodeSnippet.useMutation({
     onSuccess: (r) => {
-      if (r.success) { toast.success("Purchase complete"); utils.marketplace.myTransactions.invalidate(); }
-      else toast.error(r.message ?? "Purchase failed");
     },
   });
 

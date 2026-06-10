@@ -8,7 +8,8 @@ import { schoolRouter } from "./routers/school";
 import { gamingRouter } from "./routers/gaming";
 import { governanceRouter } from "./routers/governance";
 import { charityRouter } from "./routers/charity";
-import { marketplaceRouter } from "./routers/marketplace";
+import { marketplaceAdvancedRouter as nftMarketplaceRouter } from "./routers/marketplace-advanced";
+import { phase21RealtimeRouter } from "./routers/phase21-realtime";
 import { analyticsRouter } from "./routers/analytics";
 import { tradingRouter } from "./routers/trading";
 import { escrowRouter } from "./routers/escrow";
@@ -68,7 +69,7 @@ export const appRouter = router({
   gaming: gamingRouter,
   governance: governanceRouter,
   charity: charityRouter,
-  marketplace: marketplaceRouter,
+  marketplace: nftMarketplaceRouter,
   analytics: analyticsRouter,
   trading: tradingRouter,
   escrow: escrowRouter,
@@ -97,6 +98,7 @@ export const appRouter = router({
   earnLearn: earnLearnRouter,
   aiCodeEngineer: aiCodeEngineerRouter,
   seed: seedRouter,
+  phase21: phase21RealtimeRouter,
 });
 
 export type AppRouter = typeof appRouter;
