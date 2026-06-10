@@ -31,6 +31,9 @@ import { codeQualityRouter } from "./routers/code-quality";
 import { advancedSearchRouter } from "./routers/advanced-search";
 import { cryptoRouter } from "./routers/crypto";
 import { leaderboardsRouter } from "./routers/leaderboards";
+import { achievementsRouter } from "./routers/achievements";
+import { referralsRouter } from "./routers/referrals";
+import { tradingBotsRouter } from "./routers/trading-bots";
 
 export const appRouter = router({
   system: systemRouter,
@@ -82,6 +85,9 @@ export const appRouter = router({
   search: advancedSearchRouter,
   crypto: cryptoRouter,
   leaderboards: leaderboardsRouter,
+  achievements: achievementsRouter,
+  referrals: referralsRouter,
+  bots: tradingBotsRouter,
   seed: seedRouter,
 });
 

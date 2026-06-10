@@ -1,4 +1,4 @@
-import { boolean, int, mysqlEnum, mysqlTable, text, timestamp, varchar, bigint, double } from "drizzle-orm/mysql-core";
+import { boolean, int, mysqlEnum, mysqlTable, text, timestamp, varchar, bigint, double, json, date } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -404,3 +404,101 @@ export type SwapOrder = typeof swapOrders.$inferSelect;
 export type PriceFeed = typeof priceFeeds.$inferSelect;
 export type CryptoTransaction = typeof cryptoTransactions.$inferSelect;
 export type TokenSupply = typeof tokenSupply.$inferSelect;
+
+/* ===================== NFT ACHIEVEMENTS ===================== */
+export const nftAchievements = mysqlTable("nftAchievements", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  achievementType: varchar("achievementType", { length: 100 }).notNull(), // "top_miner", "top_staker", "top_burner", "wealthy", etc.
+  tier: mysqlEnum("tier", ["bronze", "silver", "gold", "platinum", "diamond"]).default("bronze").notNull(),
+  nftId: varchar("nftId", { length: 255 }).unique(), // Blockchain NFT ID
+  mintedAt: timestamp("mintedAt"),
+  expiresAt: timestamp("expiresAt"), // Weekly badges expire
+  metadata: json("metadata"), // { rank: 1, value: 1000, week: "2026-06-10" }
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export const achievementBadges = mysqlTable("achievementBadges", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  description: text("description"),
+  icon: text("icon"), // SVG or URL
+  criteria: json("criteria"), // { type: "mining", threshold: 1000 }
+  rarity: mysqlEnum("rarity", ["common", "rare", "epic", "legendary"]).default("common").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+/* ===================== REFERRAL SYSTEM ===================== */
+export const referrals = mysqlTable("referrals", {
+  id: int("id").autoincrement().primaryKey(),
+  referrerId: int("referrerId").notNull(),
+  referredUserId: int("referredUserId").notNull(),
+  referralCode: varchar("referralCode", { length: 50 }).unique().notNull(),
+  status: mysqlEnum("status", ["pending", "active", "completed"]).default("pending").notNull(),
+  rewardAmount: double("rewardAmount").default(0).notNull(),
+  rewardToken: varchar("rewardToken", { length: 50 }).default("SKY444").notNull(),
+  claimedAt: timestamp("claimedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export const referralStats = mysqlTable("referralStats", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().unique(),
+  totalReferrals: int("totalReferrals").default(0).notNull(),
+  activeReferrals: int("activeReferrals").default(0).notNull(),
+  totalRewardsEarned: double("totalRewardsEarned").default(0).notNull(),
+  totalRewardsClaimed: double("totalRewardsClaimed").default(0).notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+/* ===================== TRADING BOTS ===================== */
+export const tradingBots = mysqlTable("tradingBots", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  strategy: mysqlEnum("strategy", ["dca", "grid", "momentum", "mean_reversion", "arbitrage"]).notNull(),
+  status: mysqlEnum("status", ["active", "paused", "stopped", "error"]).default("paused").notNull(),
+  baseToken: varchar("baseToken", { length: 50 }).notNull(),
+  quoteToken: varchar("quoteToken", { length: 50 }).notNull(),
+  config: json("config"), // { buyThreshold: 0.05, sellThreshold: 0.1, gridLevels: 10 }
+  capital: double("capital").notNull(),
+  profitLoss: double("profitLoss").default(0).notNull(),
+  winRate: double("winRate").default(0).notNull(), // 0-1
+  totalTrades: int("totalTrades").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export const botTrades = mysqlTable("botTrades", {
+  id: int("id").autoincrement().primaryKey(),
+  botId: int("botId").notNull(),
+  userId: int("userId").notNull(),
+  entryPrice: double("entryPrice").notNull(),
+  exitPrice: double("exitPrice"),
+  quantity: double("quantity").notNull(),
+  pnl: double("pnl").default(0).notNull(),
+  status: mysqlEnum("status", ["open", "closed", "cancelled"]).default("open").notNull(),
+  enteredAt: timestamp("enteredAt").defaultNow().notNull(),
+  exitedAt: timestamp("exitedAt"),
+});
+
+export const botPerformance = mysqlTable("botPerformance", {
+  id: int("id").autoincrement().primaryKey(),
+  botId: int("botId").notNull(),
+  userId: int("userId").notNull(),
+  date: date("date").notNull(),
+  dailyPnl: double("dailyPnl").default(0).notNull(),
+  tradesExecuted: int("tradesExecuted").default(0).notNull(),
+  winCount: int("winCount").default(0).notNull(),
+  lossCount: int("lossCount").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+/* ===================== TYPES ===================== */
+export type NFTAchievement = typeof nftAchievements.$inferSelect;
+export type AchievementBadge = typeof achievementBadges.$inferSelect;
+export type Referral = typeof referrals.$inferSelect;
+export type ReferralStats = typeof referralStats.$inferSelect;
+export type TradingBot = typeof tradingBots.$inferSelect;
+export type BotTrade = typeof botTrades.$inferSelect;
+export type BotPerformance = typeof botPerformance.$inferSelect;

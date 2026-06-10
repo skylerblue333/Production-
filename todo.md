@@ -128,3 +128,13 @@
 - [x] Wire leaderboards to appRouter + nav entry + voice commands
 - [x] TypeScript clean, all features tested
 - [x] READY FOR FINAL CHECKPOINT + GITHUB PUSH + LIVE DEPLOYMENT + ZIP
+
+## Phase 13 — NFT Achievements + Referrals + Trading Bots (1 Hour Sprint)
+- [x] Database: 7 new tables (NFT achievements, referrals, trading bots)
+- [x] Achievements router: getUserAchievements, getAllBadges, claimReward
+- [x] Referrals router: generateReferralCode, getReferralStats, claimRewards
+- [x] Trading Bots router: createBot, getUserBots, startBot, getBotPerformance
+- [x] Wire all 3 routers to appRouter
+- [x] TypeScript clean (0 errors)
+- [x] Share TRUMP/DOGE mining info with user
+- [ ] Save checkpoint + push live
