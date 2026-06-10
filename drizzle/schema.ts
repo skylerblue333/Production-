@@ -691,3 +691,4 @@ export const nftTransactions = mysqlTable('nft_transactions', {
   transactionHash: varchar('transaction_hash', { length: 255 }),
   createdAt: timestamp('created_at').defaultNow(),
 });
+
