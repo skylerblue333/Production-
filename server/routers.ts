@@ -96,7 +96,13 @@ export const appRouter = router({
   gamification: gamificationRouter,
   earnLearn: earnLearnRouter,
   aiCodeEngineer: aiCodeEngineerRouter,
+  collaboration: realtimeCollaborationRouter,
+  analyticsAdv: analyticsAdvancedRouter,
   seed: seedRouter,
 });
 
 export type AppRouter = typeof appRouter;
+
+// Import new routers
+import { realtimeCollaborationRouter } from "./routers/realtime-collaboration";
+import { analyticsAdvancedRouter } from "./routers/analytics-advanced";
