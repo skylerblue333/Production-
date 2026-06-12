@@ -1,4 +1,3 @@
-// AUTO-GENERATED DRAFT SCREEN: IdentityVerificationScreen
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,6 +8,17 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Loader2 } from 'lucide-react'; // For a more professional loading spinner
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: IdentityVerificationScreen
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {

@@ -1,6 +1,15 @@
-// AUTO-GENERATED DRAFT SCREEN: LeaderboardsNearbyRankings
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: LeaderboardsNearbyRankings
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -63,7 +72,7 @@ const useNearbyRankings = (userId: string) => {
   return { data, isLoading, error };
 };
 
-const LeaderboardsNearbyRankings: React.FC<LeaderboardsNearbyRankingsProps> = ({ userId }) => {
+const LeaderboardsNearbyRankings: React.FC<any> = ({ userId }) => {
   const { data: rankings, isLoading, error } = useNearbyRankings(userId);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
 

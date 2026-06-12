@@ -1,4 +1,3 @@
-// AUTO-GENERATED DRAFT SCREEN: GMXInterface
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button'; // Assumed shadcn/ui button component
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'; // Assumed shadcn/ui card components
@@ -6,6 +5,17 @@ import { Switch } from '@/components/ui/switch'; // Assumed shadcn/ui switch com
 import { Label } from '@/components/ui/label'; // Assumed shadcn/ui label component
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // Assumed shadcn/ui alert component
 import { Terminal } from 'lucide-react'; // Assumed Lucide icons are available
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: GMXInterface
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -26,7 +36,7 @@ interface GMXInterfaceProps {
   // Define props here if needed, e.g., for initial data or configuration.
 }
 
-const GMXInterface: React.FC<GMXInterfaceProps> = () => {
+const GMXInterface: React.FC<any> = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       const savedTheme = localStorage.getItem('theme');

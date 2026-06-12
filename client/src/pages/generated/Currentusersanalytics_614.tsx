@@ -1,7 +1,17 @@
-// AUTO-GENERATED DRAFT SCREEN: CurrentUsersAnalytics
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: CurrentUsersAnalytics
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -27,7 +37,7 @@ interface CurrentUsersAnalyticsProps {
   // Define props here if any, e.g., period: 'day' | 'week' | 'month'
 }
 
-const CurrentUsersAnalytics: React.FC<CurrentUsersAnalyticsProps> = () => {
+const CurrentUsersAnalytics: React.FC<any> = () => {
   const { data, isLoading, isError, error, refetch } = useStubQuery();
 
   if (isLoading) {

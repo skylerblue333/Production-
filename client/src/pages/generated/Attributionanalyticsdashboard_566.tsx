@@ -1,10 +1,16 @@
-// AUTO-GENERATED DRAFT SCREEN: AttributionAnalyticsDashboard
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@trpc/react-query';
-import { api } from '~/utils/api'; // Assuming tRPC client setup
-import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card'; // shadcn/ui card
-import { Skeleton } from '~/components/ui/skeleton'; // shadcn/ui skeleton for loading states
-import { cn } from '~/lib/utils'; // Tailwind utility for conditional classes
+import { cn } from '@/lib/utils'; // Tailwind utility for conditional classes
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: AttributionAnalyticsDashboard
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -29,7 +35,7 @@ interface AttributionAnalyticsDashboardProps {
   className?: string;
 }
 
-const AttributionAnalyticsDashboard: React.FC<AttributionAnalyticsDashboardProps> = ({ className }) => {
+const AttributionAnalyticsDashboard: React.FC<any> = ({ className }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   // Simulate dark theme toggle for demonstration

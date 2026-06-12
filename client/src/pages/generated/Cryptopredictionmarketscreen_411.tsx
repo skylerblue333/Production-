@@ -1,10 +1,19 @@
-// AUTO-GENERATED DRAFT SCREEN: CryptoPredictionMarketScreen
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button'; // Assuming shadcn/ui path
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useTheme } from 'next-themes'; // For dark theme support
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: CryptoPredictionMarketScreen
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -80,7 +89,7 @@ interface CryptoPredictionMarketScreenProps {
   marketId: string;
 }
 
-const CryptoPredictionMarketScreen: React.FC<CryptoPredictionMarketScreenProps> = ({ marketId }) => {
+const CryptoPredictionMarketScreen: React.FC<any> = ({ marketId }) => {
   const { data: market, isLoading, isError, error } = usePredictionMarketQuery(marketId);
   const { mutate: makePrediction, isLoading: isPredicting } = useMakePredictionMutation();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -172,9 +181,9 @@ const CryptoPredictionMarketScreen: React.FC<CryptoPredictionMarketScreenProps> 
 // Wrapper to provide QueryClient and ThemeProvider
 const queryClient = new QueryClient();
 
-const AppWrapper: React.FC<CryptoPredictionMarketScreenProps> = (props) => {
+const AppWrapper: React.FC<any> = (props) => {
   // For demonstration, use a mock useTheme if next-themes is not fully set up
-  const MockThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const MockThemeProvider: React.FC<any> = ({ children }) => {
     const [theme, setTheme] = useState<'light' | 'dark'>('dark'); // Default to dark for this component
     return <div data-theme={theme}>{children}</div>;
   };

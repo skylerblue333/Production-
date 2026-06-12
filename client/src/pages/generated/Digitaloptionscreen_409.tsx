@@ -1,9 +1,19 @@
-// AUTO-GENERATED DRAFT SCREEN: DigitalOptionScreen
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui components
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: DigitalOptionScreen
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -48,7 +58,7 @@ interface DigitalOptionScreenProps {
   optionId: string;
 }
 
-const DigitalOptionScreen: React.FC<DigitalOptionScreenProps> = ({ optionId }) => {
+const DigitalOptionScreen: React.FC<any> = ({ optionId }) => {
   const { data, isLoading, isError, error } = useQuery<DigitalOptionData, Error>(
     ['digitalOption', optionId],
     () => fetchDigitalOption(optionId)

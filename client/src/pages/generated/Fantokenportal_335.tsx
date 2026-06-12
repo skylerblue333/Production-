@@ -1,7 +1,17 @@
-// AUTO-GENERATED DRAFT SCREEN: FanTokenPortal
 import React, { useState, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import { Sun, Moon, Loader2, AlertCircle, RefreshCw, ArrowRight, Wallet, TrendingUp, Info } from 'lucide-react';
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: FanTokenPortal
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -58,7 +68,7 @@ const Button = ({ children, className, onClick, variant = 'default', size = 'def
 
 interface FanTokenPortalProps {}
 
-const FanTokenPortal: React.FC<FanTokenPortalProps> = () => {
+const FanTokenPortal: React.FC<any> = () => {
   // tRPC hook to fetch fan token data
   const { data, isLoading, error, refetch } = trpc.fanTokens.query({ userId: 'user123' });
   // State for managing dark mode

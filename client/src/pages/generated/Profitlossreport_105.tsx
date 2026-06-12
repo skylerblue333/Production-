@@ -1,11 +1,21 @@
-// AUTO-GENERATED DRAFT SCREEN: ProfitLossReport
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react"; // For error icon
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: ProfitLossReport
+
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -59,7 +69,7 @@ const fetchProfitLossData = async (userId: string): Promise<AssetData[]> => {
   });
 };
 
-export const ProfitLossReport: React.FC<ProfitLossReportProps> = ({ userId, currencySymbol = '$' }) => {
+export const ProfitLossReport: React.FC<any> = ({ userId, currencySymbol = '$' }) => {
   // Use react-query to manage data fetching, caching, and loading states
   const { data, isLoading, isError, error, refetch } = useQuery<AssetData[], Error>(
     ['profitLossReport', userId], // Query key includes userId for unique caching

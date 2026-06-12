@@ -1,9 +1,19 @@
-// AUTO-GENERATED DRAFT SCREEN: UsdtDashboard
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Placeholder for shadcn/ui
 import { Button } from '@/components/ui/button'; // Placeholder for shadcn/ui
 import { Switch } from '@/components/ui/switch'; // Placeholder for shadcn/ui for dark mode toggle
 import { Label } from '@/components/ui/label'; // Placeholder for shadcn/ui for switch label
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: UsdtDashboard
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -51,7 +61,7 @@ interface UsdtDashboardProps {
   // For this dashboard, we're assuming it fetches its own data.
 }
 
-const UsdtDashboard: React.FC<UsdtDashboardProps> = () => {
+const UsdtDashboard: React.FC<any> = () => {
   // Manages the dark mode state for the component.
   const [isDarkMode, setIsDarkMode] = React.useState(false);
 

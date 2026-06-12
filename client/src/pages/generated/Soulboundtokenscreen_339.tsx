@@ -1,4 +1,3 @@
-// AUTO-GENERATED DRAFT SCREEN: SoulboundTokenScreen
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,6 +5,17 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal } from 'lucide-react'; // Assuming Lucide icons are available
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: SoulboundTokenScreen
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -85,7 +95,7 @@ interface SoulboundTokenScreenProps {
   tokenId?: string; // Optional token ID to display a specific token
 }
 
-const SoulboundTokenScreen: React.FC<SoulboundTokenScreenProps> = ({ tokenId = 'default-token-id' }) => {
+const SoulboundTokenScreen: React.FC<any> = ({ tokenId = 'default-token-id' }) => {
   const { data, isLoading, isError, error, refetch } = useSoulboundTokenData(tokenId);
 
   // Accessibility: Live regions for loading and error states

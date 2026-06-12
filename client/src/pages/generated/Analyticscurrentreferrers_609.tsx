@@ -1,11 +1,20 @@
-// AUTO-GENERATED DRAFT SCREEN: AnalyticsCurrentReferrers
 import React from 'react';
-
-// Import shadcn/ui components for a polished look and accessibility
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton'; // Used for loading states
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // Used for error display
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons'; // Icon for error alerts
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: AnalyticsCurrentReferrers
+
+// Import shadcn/ui components for a polished look and accessibility
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {

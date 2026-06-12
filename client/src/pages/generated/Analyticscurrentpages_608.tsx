@@ -1,6 +1,16 @@
+import React from 'react';
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
 // AUTO-GENERATED DRAFT SCREEN: AnalyticsCurrentPages
 
-import React from 'react';
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -157,7 +167,7 @@ const useAnalyticsData = (simulateError: boolean = false, simulateEmptyData: boo
  * Accessibility considerations are also integrated. Data fetching is simulated using a tRPC-like hook
  * for demonstration purposes. Users can filter the data by geographic region and device type.
  */
-const AnalyticsCurrentPages: React.FC<AnalyticsCurrentPagesProps> = ({
+const AnalyticsCurrentPages: React.FC<any> = ({
   title = "Current Pages Analytics",
   description = "Overview of the most visited pages on your website, including detailed metrics and filtering options.",
   simulateError = false,

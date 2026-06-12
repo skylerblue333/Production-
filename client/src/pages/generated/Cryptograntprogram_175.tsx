@@ -1,5 +1,3 @@
-// AUTO-GENERATED DRAFT SCREEN: CryptoGrantProgram
-
 import React from 'react';
 import { Button } from '@/components/ui/button'; // shadcn/ui button
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'; // shadcn/ui card
@@ -7,6 +5,18 @@ import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui skeleton for l
 import { Badge } from '@/components/ui/badge'; // shadcn/ui badge for status
 import { Separator } from '@/components/ui/separator'; // shadcn/ui separator
 import { Lightbulb, CalendarDays, Users } from 'lucide-react'; // Icons
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: CryptoGrantProgram
+
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {

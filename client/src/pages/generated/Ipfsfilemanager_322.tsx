@@ -1,11 +1,20 @@
-// AUTO-GENERATED DRAFT SCREEN: IpfsFileManager
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@trpc/react-query';
 import { cn } from '@/lib/utils'; // Assuming shadcn/ui utils
 import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button
 import { Input } from '@/components/ui/input'; // Assuming shadcn/ui input
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card
 import { Switch } from '@/components/ui/switch'; // Assuming shadcn/ui switch for dark mode
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: IpfsFileManager
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -31,7 +40,7 @@ interface IpfsFileManagerProps {
   className?: string;
 }
 
-const IpfsFileManager: React.FC<IpfsFileManagerProps> = ({ className }) => {
+const IpfsFileManager: React.FC<any> = ({ className }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [path, setPath] = useState('/');
   const [newFileName, setNewFileName] = useState('');

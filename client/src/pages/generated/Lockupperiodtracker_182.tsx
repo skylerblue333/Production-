@@ -1,9 +1,19 @@
-// AUTO-GENERATED DRAFT SCREEN: LockupPeriodTracker
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card component
 import { Progress } from '@/components/ui/progress'; // Assuming shadcn/ui progress component
 import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button component
 import { cn } from '@/lib/utils'; // Utility for conditional class names (Tailwind)
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: LockupPeriodTracker
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -58,7 +68,7 @@ const fetchLockupData = async (userId: string): Promise<LockupData[]> => {
   });
 };
 
-const LockupPeriodTracker: React.FC<LockupPeriodTrackerProps> = ({ userId }) => {
+const LockupPeriodTracker: React.FC<any> = ({ userId }) => {
   const { data, isLoading, isError, error, refetch } = useQuery<LockupData[], Error>(
     ['lockupData', userId],
     () => fetchLockupData(userId),

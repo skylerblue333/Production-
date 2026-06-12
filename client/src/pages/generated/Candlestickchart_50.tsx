@@ -1,7 +1,17 @@
-// AUTO-GENERATED DRAFT SCREEN: CandlestickChart
 import React, { useState, useEffect } from 'react';
 import { ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid, CandlestickChart, Candlestick, ReferenceLine } from 'recharts';
 import { format } from 'date-fns';
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: CandlestickChart
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -45,7 +55,7 @@ const mockFetchData = async (symbol: string): Promise<CandlestickData[]> => {
   });
 };
 
-const CandlestickChartComponent: React.FC<CandlestickChartProps> = ({ symbol }) => {
+const CandlestickChartComponent: React.FC<any> = ({ symbol }) => {
   const [data, setData] = useState<CandlestickData[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

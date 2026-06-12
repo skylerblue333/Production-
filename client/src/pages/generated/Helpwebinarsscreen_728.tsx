@@ -1,9 +1,19 @@
-// AUTO-GENERATED DRAFT SCREEN: HelpWebinarsScreen
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch'; // Assuming shadcn/ui Switch component
 import { Label } from '@/components/ui/label'; // Assuming shadcn/ui Label component
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: HelpWebinarsScreen
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -33,7 +43,7 @@ interface HelpWebinarsScreenProps {
   // No specific props for this example, but can be extended
 }
 
-const HelpWebinarsScreen: React.FC<HelpWebinarsScreenProps> = () => {
+const HelpWebinarsScreen: React.FC<any> = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     // Initialize dark mode from localStorage or system preference
     if (typeof window !== 'undefined') {

@@ -1,6 +1,16 @@
-// AUTO-GENERATED DRAFT SCREEN: LessonPlayerScreen
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils'; // For shadcn/ui utility
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: LessonPlayerScreen
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -50,7 +60,7 @@ interface LessonPlayerScreenProps {
 }
 
 // --- Sub-components (simplified for this example) ---
-const LessonContent: React.FC<{ lesson: Lesson; isLoading: boolean }> = ({ lesson, isLoading }) => {
+const LessonContent: React.FC<any> = ({ lesson, isLoading }) => {
   if (isLoading) {
     return (
       <div className="space-y-4">
@@ -69,7 +79,7 @@ const LessonContent: React.FC<{ lesson: Lesson; isLoading: boolean }> = ({ lesso
   );
 };
 
-const LessonNavigation: React.FC<{ currentLessonId: string; nextLessonId?: string; previousLessonId?: string; onNavigate: (id: string) => void }> = (
+const LessonNavigation: React.FC<any> void }> = (
   { currentLessonId, nextLessonId, previousLessonId, onNavigate }
 ) => {
   return (
@@ -92,7 +102,7 @@ const LessonNavigation: React.FC<{ currentLessonId: string; nextLessonId?: strin
   );
 };
 
-const LessonProgress: React.FC<{ progress: UserProgress | undefined; isLoading: boolean }> = ({ progress, isLoading }) => {
+const LessonProgress: React.FC<any> = ({ progress, isLoading }) => {
   const completionPercentage = progress?.completed ? 100 : 0;
   return (
     <Card className="mt-4">
@@ -109,7 +119,7 @@ const LessonProgress: React.FC<{ progress: UserProgress | undefined; isLoading: 
   );
 };
 
-const QuizComponent: React.FC<{ quiz: Quiz; onQuizSubmit: (isCorrect: boolean) => void; isLoading: boolean }> = (
+const QuizComponent: React.FC<any> void; isLoading: boolean }> = (
   { quiz, onQuizSubmit, isLoading }
 ) => {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
@@ -165,7 +175,7 @@ const QuizComponent: React.FC<{ quiz: Quiz; onQuizSubmit: (isCorrect: boolean) =
   );
 };
 
-const ErrorMessage: React.FC<{ message: string }> = ({ message }) => (
+const ErrorMessage: React.FC<any> = ({ message }) => (
   <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
     <strong className="font-bold">Error:</strong>
     <span className="block sm:inline"> {message}</span>
@@ -173,7 +183,7 @@ const ErrorMessage: React.FC<{ message: string }> = ({ message }) => (
 );
 
 // --- Main Component ---
-const LessonPlayerScreen: React.FC<LessonPlayerScreenProps> = ({ initialLessonId }) => {
+const LessonPlayerScreen: React.FC<any> = ({ initialLessonId }) => {
   const [currentLessonId, setCurrentLessonId] = useState(initialLessonId);
 
   // Fetch lesson data

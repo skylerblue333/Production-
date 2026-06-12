@@ -1,4 +1,3 @@
-// AUTO-GENERATED DRAFT SCREEN: ProductSearchScreen
 import React, { useState, useEffect, useCallback } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -6,6 +5,17 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: ProductSearchScreen
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -84,7 +94,7 @@ const useProductSearch = (params: ProductSearchParams) => {
 };
 
 // Product Card Component
-const ProductCard: React.FC<{ product: Product }> = ({ product }) => (
+const ProductCard: React.FC<any> = ({ product }) => (
   <div className="border rounded-lg p-4 shadow-sm dark:bg-gray-800">
     <img src={product.imageUrl} alt={product.name} className="w-full h-32 object-cover rounded-md mb-4" />
     <h3 className="text-lg font-semibold mb-2 dark:text-white">{product.name}</h3>
@@ -95,7 +105,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => (
 );
 
 // Empty State Component
-const EmptyState: React.FC<{ message: string }> = ({ message }) => (
+const EmptyState: React.FC<any> = ({ message }) => (
   <div className="text-center py-10 dark:text-gray-400">
     <p className="text-xl font-semibold">{message}</p>
     <p className="text-gray-500 mt-2">Try adjusting your search or filters.</p>

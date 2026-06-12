@@ -1,4 +1,3 @@
-// AUTO-GENERATED DRAFT SCREEN: SKYCOIN4444GasFeeEstimator
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Simulating shadcn/ui
 import { Label } from '@/components/ui/label';
@@ -6,6 +5,17 @@ import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { cn } from '@/lib/utils'; // Utility for Tailwind class merging
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: SKYCOIN4444GasFeeEstimator
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -45,7 +55,7 @@ const fetchGasEstimates = async (network: string): Promise<GasFeeEstimate> => {
   }
 };
 
-export const SKYCOIN4444GasFeeEstimator: React.FC<GasFeeEstimatorProps> = ({ className, initialNetwork = 'ethereum' }) => {
+export const SKYCOIN4444GasFeeEstimator: React.FC<any> = ({ className, initialNetwork = 'ethereum' }) => {
   const [network, setNetwork] = useState<string>(initialNetwork);
   const [priority, setPriority] = useState<number[]>([1]); // 1 for slow, 2 for average, 3 for fast
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);

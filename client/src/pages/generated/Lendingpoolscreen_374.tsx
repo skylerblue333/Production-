@@ -1,5 +1,3 @@
-// AUTO-GENERATED DRAFT SCREEN: LendingPoolScreen
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,8 +5,19 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Slider } from '@/components/ui/slider';
-import { useTheme } from 'next-themes';
 import { AlertCircle, CheckCircle, Loader2 } from 'lucide-react'; // For icons
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: LendingPoolScreen
+
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -35,7 +44,7 @@ const trpc = {
   },
 };
 
-const LendingPoolScreen: React.FC<LendingPoolScreenProps> = () => {
+const LendingPoolScreen: React.FC<any> = () => {
   const { theme, setTheme } = useTheme();
   const [amount, setAmount] = useState<number>(0);
   const [sliderValue, setSliderValue] = useState<number[]>([50]);

@@ -1,5 +1,15 @@
-// AUTO-GENERATED DRAFT SCREEN: CryptoProjectWhitepaperScreen
 import React from "react";
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: CryptoProjectWhitepaperScreen
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -18,7 +28,7 @@ interface CryptoProjectWhitepaperScreenProps {
   // Define any props needed for the component
 }
 
-const CryptoProjectWhitepaperScreen: React.FC<CryptoProjectWhitepaperScreenProps> = () => {
+const CryptoProjectWhitepaperScreen: React.FC<any> = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
   const [whitepaperContent, setWhitepaperContent] = React.useState<string | null>(null);

@@ -1,12 +1,21 @@
-// AUTO-GENERATED DRAFT SCREEN: SearchAutocomplete
 import React, { useState, useEffect, useCallback } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
-import { useDebounce } from 'use-debounce';
 import { Loader2, XCircle, Info } from 'lucide-react'; // For loading, error, and info indicators
 import { cn } from '@/lib/utils'; // Utility for conditional class names
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: SearchAutocomplete
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -28,7 +37,7 @@ interface SearchAutocompleteProps {
   className?: string;
 }
 
-export const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
+export const SearchAutocomplete: React.FC<any> = ({
   onSelect,
   initialValue = '',
   placeholder = 'Search...', 

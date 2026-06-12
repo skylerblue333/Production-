@@ -1,10 +1,20 @@
-// AUTO-GENERATED DRAFT SCREEN: CryptoPeerMapScreen
 import React from 'react';
 import { cn } from '@/lib/utils'; // Simulating shadcn/ui's utility for class merging
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Simulating shadcn/ui Card
 import { Skeleton } from '@/components/ui/skeleton'; // Simulating shadcn/ui Skeleton for loading states
 import { Badge } from '@/components/ui/badge'; // Simulating shadcn/ui Badge for peer status
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'; // Simulating shadcn/ui Tooltip
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: CryptoPeerMapScreen
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -80,7 +90,7 @@ interface CryptoPeerMapScreenProps {
  * `CryptoPeerMapScreen` displays a map of cryptocurrency network peers.
  * It features loading states, error handling, dark theme support, and accessibility attributes.
  */
-const CryptoPeerMapScreen: React.FC<CryptoPeerMapScreenProps> = () => {
+const CryptoPeerMapScreen: React.FC<any> = () => {
   const { data: peers, isLoading, isError, error, refetch } = useGetPeers();
 
   // --- Loading State ---

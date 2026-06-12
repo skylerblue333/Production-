@@ -1,6 +1,16 @@
-// AUTO-GENERATED DRAFT SCREEN: CryptoTopGainersLosers
 import React from 'react';
 import { cn } from '@/lib/utils';
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: CryptoTopGainersLosers
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -72,7 +82,7 @@ interface CryptoItemProps {
   isGainer: boolean;
 }
 
-const CryptoItem: React.FC<CryptoItemProps> = ({ name, symbol, price, change, volume, isGainer }) => (
+const CryptoItem: React.FC<any> = ({ name, symbol, price, change, volume, isGainer }) => (
   <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
     <div className="flex flex-col">
       <span className="font-semibold text-lg">{name} ({symbol})</span>

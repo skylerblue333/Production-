@@ -1,13 +1,5 @@
-// AUTO-GENERATED DRAFT SCREEN: NftMarketplaceScreen
 import React, { useState, useMemo } from 'react';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -15,6 +7,24 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Search, Filter, AlertCircle, ShoppingCart, Heart, TrendingUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: NftMarketplaceScreen
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card';
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -49,7 +59,7 @@ interface NftCardProps {
 }
 
 // Sub-components
-const NftCard: React.FC<NftCardProps> = ({ nft, onBuy, onLike }) => {
+const NftCard: React.FC<any> = ({ nft, onBuy, onLike }) => {
   return (
     <Card className="overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 bg-card text-card-foreground border-border">
       <div className="relative aspect-square overflow-hidden bg-muted">

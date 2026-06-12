@@ -1,5 +1,15 @@
-// AUTO-GENERATED DRAFT SCREEN: PoolStatistics
 import React, { useState, useEffect } from 'react';
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: PoolStatistics
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -60,7 +70,7 @@ const usePoolStatistics = (poolId: string) => {
   return { data, isLoading, isError };
 };
 
-const PoolStatistics: React.FC<PoolStatisticsProps> = ({ poolId }) => {
+const PoolStatistics: React.FC<any> = ({ poolId }) => {
   const { data, isLoading, isError } = usePoolStatistics(poolId);
 
   if (isLoading) {

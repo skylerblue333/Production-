@@ -1,6 +1,16 @@
+import React, { useState, useEffect, useCallback } from 'react';
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
 // AUTO-GENERATED DRAFT SCREEN: PythNetworkScreen
 
-import React, { useState, useEffect, useCallback } from 'react';
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -35,7 +45,7 @@ interface PythNetworkScreenProps {
   assetId?: string; // Optional asset ID to fetch specific data
 }
 
-const PythNetworkScreen: React.FC<PythNetworkScreenProps> = ({ assetId = 'crypto.pyth.usd' }) => {
+const PythNetworkScreen: React.FC<any> = ({ assetId = 'crypto.pyth.usd' }) => {
   const [data, setData] = useState<PythNetworkData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

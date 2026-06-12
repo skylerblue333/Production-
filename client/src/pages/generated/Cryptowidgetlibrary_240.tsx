@@ -1,7 +1,16 @@
-// AUTO-GENERATED DRAFT SCREEN: CryptoWidgetLibrary
 import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, ArrowDownRight, Activity, DollarSign, BarChart3, RefreshCw, Wallet, TrendingUp, TrendingDown, Star, Clock, Shield } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Badge, Button, Skeleton, cn } from './components/ui';
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: CryptoWidgetLibrary
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {

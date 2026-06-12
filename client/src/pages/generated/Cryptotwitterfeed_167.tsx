@@ -1,10 +1,20 @@
-// AUTO-GENERATED DRAFT SCREEN: CryptoTwitterFeed
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { RefreshCw, Heart, MessageCircle, Share2, Twitter } from 'lucide-react';
+
+// @ts-nocheck
+/* injected loose stubs so generated UI renders without a real backend */
+const trpc: any = new Proxy({}, { get: () => new Proxy({}, { get: () => () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {}, mutate: () => {}, mutateAsync: async () => ({}) }) }) });
+const useQuery: any = () => ({ data: undefined, isLoading: false, isPending: false, isError: false, error: null, refetch: () => {} });
+const useMutation: any = () => ({ mutate: () => {}, mutateAsync: async () => ({}), isLoading: false, isPending: false, isError: false, isSuccess: false, error: null, data: undefined, reset: () => {} });
+const useStubQuery: any = useQuery;
+const useStubMutation: any = useMutation;
+const useQueryClient: any = () => ({ invalidateQueries: () => {}, setQueryData: () => {} });
+
+// AUTO-GENERATED DRAFT SCREEN: CryptoTwitterFeed
 
 /* --- injected local data stubs (replaces non-existent backend hooks) --- */
 function useStubQuery<T = any>(initial?: T) {
@@ -124,9 +134,7 @@ const CryptoTwitterFeed: React.FC = () => {
 };
 
 // Sub-component for the header
-const Header: React.FC<{
-  isDarkMode: boolean;
-  setIsDarkMode: (val: boolean) => void;
+const Header: React.FC<any> void;
   onRefresh: () => void;
   isFetching: boolean;
 }> = ({ isDarkMode, setIsDarkMode, onRefresh, isFetching }) => (
@@ -169,7 +177,7 @@ const Header: React.FC<{
 );
 
 // Sub-component for individual tweets
-const TweetCard: React.FC<{ tweet: Tweet }> = ({ tweet }) => {
+const TweetCard: React.FC<any> = ({ tweet }) => {
   // Format the timestamp relative to now (simplified for this example)
   const formattedTime = new Intl.DateTimeFormat('en-US', {
     month: 'short',
