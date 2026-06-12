@@ -3,11 +3,23 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { trpc } from '../trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const StakingOverview: React.FC = () => {
-  const { data: overviewData, isLoading: isOverviewLoading, error: overviewError } = trpc.staking.getOverview.useQuery();
-  const { data: rewardsData, isLoading: isRewardsLoading, error: rewardsError } = trpc.staking.getRewardsHistory.useQuery({ page: 1, limit: 5 });
+  const { data: overviewData, isLoading: isOverviewLoading, error: overviewError } = useStubQuery();
+  const { data: rewardsData, isLoading: isRewardsLoading, error: rewardsError } = useStubQuery({ page: 1, limit: 5 });
 
   if (isOverviewLoading || isRewardsLoading) {
     return (

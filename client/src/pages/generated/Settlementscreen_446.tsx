@@ -7,7 +7,19 @@ import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useMutation } from '@tanstack/react-query'; // Using react-query for mock tRPC
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // 1. Define Zod schema for form validation
 const settlementSchema = z.object({
@@ -76,7 +88,7 @@ const SettlementScreen: React.FC = () => {
   });
 
   // 5. tRPC (mocked) mutation hook
-  const settlementMutation = mockTRPC.crypto.settle.useMutation();
+  const settlementMutation = mockTRPC.crypto.settle.useStubMutation();
 
   // 6. Form submission handler
   const onSubmit = async (data: SettlementFormValues) => {

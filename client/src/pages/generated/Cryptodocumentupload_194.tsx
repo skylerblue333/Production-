@@ -11,6 +11,19 @@ import { Switch } from '@/components/ui/switch'; // Assuming shadcn/ui Switch co
 import { useUploadDocument } from '@/trpc/hooks/useUploadDocument'; // Placeholder for tRPC hook
 import { Loader2, CheckCircle, XCircle } from 'lucide-react'; // For loading, success, and error icons
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Define schema for form validation
 const formSchema = z.object({
   documentType: z.string().min(1, { message: 'Document type is required.' }),

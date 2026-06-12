@@ -1,11 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoPermitSignaturesScreen
 import React from 'react';
 import { usePermitSignatures } from './trpc-hooks'; // Placeholder for tRPC hook
-import { Button } from './components/ui/button'; // Example shadcn/ui component
-import { Card, CardHeader, CardTitle, CardContent } from './components/ui/card';
-import { Input } from './components/ui/input';
-import { Label } from './components/ui/label';
-import { useToast } from './components/ui/use-toast'; // For error/success messages
+import { Button } from '@/components/ui/button'; // Example shadcn/ui component
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useToast } from '@/components/ui/use-toast'; // For error/success messages
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CryptoPermitSignaturesScreenProps {
   // Define props if any, for now, it's an empty interface

@@ -1,7 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoEcosystemMap
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Placeholder for tRPC client setup
 // In a real application, this would be configured in a separate file (e.g., src/utils/trpc.ts)
@@ -39,7 +51,7 @@ interface CryptoEcosystemMapProps {
 
 const CryptoEcosystemMap: React.FC<CryptoEcosystemMapProps> = ({ mapId = "default" }) => {
   // Fetch data using the mocked tRPC hook
-  const { data, isLoading, isError, error } = trpc.crypto.getEcosystemMap.useQuery({ id: mapId });
+  const { data, isLoading, isError, error } = useStubQuery({ id: mapId });
 
   // State for conceptual filtering/search within the map
   const [searchTerm, setSearchTerm] = useState('');

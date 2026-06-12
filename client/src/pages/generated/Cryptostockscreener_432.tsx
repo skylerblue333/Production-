@@ -1,16 +1,28 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoStockScreener
 import React, { useState } from 'react';
-import { trpc } from '../trpc';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { ScreenerFilter } from '../types';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const CryptoStockScreener: React.FC = () => {
   const [filters, setFilters] = useState<ScreenerFilter>({});
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const { data, isLoading, error } = trpc.crypto.list.useQuery(filters);
+  const { data, isLoading, error } = useStubQuery(filters);
 
   const handleFilterChange = (key: keyof ScreenerFilter, value: string) => {
     setFilters(prev => ({

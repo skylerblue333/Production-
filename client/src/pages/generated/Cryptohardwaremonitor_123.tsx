@@ -1,12 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoHardwareMonitor
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC setup
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'; // shadcn/ui
-import { Skeleton } from './components/ui/skeleton'; // shadcn/ui
-import { Switch } from './components/ui/switch'; // shadcn/ui
-import { Label } from './components/ui/label'; // shadcn/ui
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui
+import { Switch } from '@/components/ui/switch'; // shadcn/ui
+import { Label } from '@/components/ui/label'; // shadcn/ui
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface HardwareStatus {
   id: string;
@@ -18,7 +29,7 @@ interface HardwareStatus {
 }
 
 const CryptoHardwareMonitor: React.FC = () => {
-  const { data, isLoading, isError, error } = trpc.hardware.getStatus.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
   const [darkMode, setDarkMode] = React.useState(false);
 
   React.useEffect(() => {

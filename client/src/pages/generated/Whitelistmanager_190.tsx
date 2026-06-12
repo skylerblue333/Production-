@@ -1,8 +1,6 @@
 // AUTO-GENERATED DRAFT SCREEN: WhitelistManager
 
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC client setup
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,6 +12,19 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { toast } from 'sonner';
 import { Loader2, PlusCircle, Trash2 } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Zod schema for whitelist entry validation
 const whitelistEntrySchema = z.object({
@@ -32,10 +43,10 @@ const WhitelistManager: React.FC = () => {
   });
 
   // Fetch whitelist entries
-  const { data: whitelist, isLoading, error, refetch } = trpc.whitelist.getAll.useQuery();
+  const { data: whitelist, isLoading, error, refetch } = useStubQuery();
 
   // Add whitelist entry mutation
-  const addEntryMutation = trpc.whitelist.add.useMutation({
+  const addEntryMutation = useStubMutation({
     onSuccess: () => {
       toast.success('Whitelist entry added successfully!');
       refetch();
@@ -47,7 +58,7 @@ const WhitelistManager: React.FC = () => {
   });
 
   // Remove whitelist entry mutation
-  const removeEntryMutation = trpc.whitelist.remove.useMutation({
+  const removeEntryMutation = useStubMutation({
     onSuccess: () => {
       toast.success('Whitelist entry removed successfully!');
       refetch();

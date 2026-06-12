@@ -5,7 +5,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { useQuery, useMutation } from '@tanstack/react-query';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration purposes
 const trpc = {
@@ -35,8 +47,8 @@ const HardwareWalletScreen: React.FC<HardwareWalletScreenProps> = () => {
   const [deviceId, setDeviceId] = useState<string>('');
   const [darkTheme, setDarkTheme] = useState<boolean>(false);
 
-  const { data: walletStatus, isLoading: isStatusLoading, isError: isStatusError, error: statusError, refetch } = trpc.wallet.getWalletStatus.useQuery();
-  const { mutate: connectWallet, isLoading: isConnecting, isError: isConnectError, error: connectError } = trpc.wallet.connectWallet.useMutation();
+  const { data: walletStatus, isLoading: isStatusLoading, isError: isStatusError, error: statusError, refetch } = useStubQuery();
+  const { mutate: connectWallet, isLoading: isConnecting, isError: isConnectError, error: connectError } = useStubMutation();
 
   const handleConnect = () => {
     connectWallet({ deviceId });

@@ -1,7 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoRedditFeed
 import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -9,6 +7,19 @@ import { Terminal, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface RedditPost {
   id: string;
@@ -27,7 +38,7 @@ const CryptoRedditFeed: React.FC = () => {
 
   // Mock tRPC hook for demonstration. Replace with actual tRPC query.
   // In a real application, the tRPC query would handle pagination and search.
-  const { data, isLoading, isError, error } = trpc.reddit.getCryptoFeed.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   const filteredPosts = data?.filter(post =>
     post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

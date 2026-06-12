@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: SkycoinMarketplaceSubscriptionProductsScreen
 import React, { useState, useEffect, useMemo } from 'react';
-import { useQuery } from '@tanstack/react-query'; // In a real app, this would be a tRPC hook like trpc.subscription.list.useQuery
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
@@ -8,6 +7,19 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input'; // For search/filter
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'; // For sorting
 import { Loader2, Search, ArrowUpNarrowWide, ArrowDownWideNarrow } from 'lucide-react'; // Icons for loading, search, sorting
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface SubscriptionProduct {
   id: string;

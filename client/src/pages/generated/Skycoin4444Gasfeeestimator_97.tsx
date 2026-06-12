@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: SKYCOIN4444GasFeeEstimator
 import React, { useState, useEffect, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Simulating tRPC hook usage
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Simulating shadcn/ui
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { cn } from '@/lib/utils'; // Utility for Tailwind class merging
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface GasFeeEstimate {
   fast: number;

@@ -5,8 +5,20 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import { trpc } from "@/trpc";
 import { useTheme } from "./theme-provider"; // Assuming a theme provider for dark mode
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const ApiTester: React.FC = () => {
   const [method, setMethod] = useState("GET");
@@ -17,7 +29,7 @@ const ApiTester: React.FC = () => {
   const [responseBody, setResponseBody] = useState("");
   const { theme } = useTheme(); // For dark mode
 
-  const testApiMutation = trpc.testApi.useMutation({
+  const testApiMutation = useStubMutation({
     onMutate: () => {
       setResponseStatus("Loading...");
       setResponseTime("Loading...");

@@ -8,7 +8,19 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const formSchema = z.object({
   webhookUrl: z.string().url({ message: 'Invalid URL format' }).min(1, { message: 'Webhook URL is required' }),
@@ -20,8 +32,8 @@ type FormValues = z.infer<typeof formSchema>;
 
 const DiscordNotifications: React.FC = () => {
   const { toast } = useToast();
-  const { data, isLoading, error } = trpc.discord.getSettings.useQuery();
-  const updateSettings = trpc.discord.updateSettings.useMutation();
+  const { data, isLoading, error } = useStubQuery();
+  const updateSettings = useStubMutation();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),

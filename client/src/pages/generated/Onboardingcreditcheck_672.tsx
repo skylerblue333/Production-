@@ -3,12 +3,24 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { trpc } from '../utils/trpc';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { Label } from '../components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const creditCheckSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -21,7 +33,7 @@ type CreditCheckFormValues = z.infer<typeof creditCheckSchema>;
 
 const OnboardingCreditCheck: React.FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const { mutate, isPending, error } = trpc.creditCheck.useMutation();
+  const { mutate, isPending, error } = useStubMutation();
 
   const { register, handleSubmit, formState: { errors } } = useForm<CreditCheckFormValues>({
     resolver: zodResolver(creditCheckSchema),

@@ -5,12 +5,24 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Switch } from '@/components/ui/switch';
-import { trpc } from './trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const DAODashboard: React.FC = () => {
   const { theme, setTheme } = useTheme();
-  const { data: stats, isLoading: isLoadingStats, error: statsError } = trpc.getDaoStats.useQuery();
-  const { data: proposals, isLoading: isLoadingProposals, error: proposalsError } = trpc.getRecentProposals.useQuery();
+  const { data: stats, isLoading: isLoadingStats, error: statsError } = useStubQuery();
+  const { data: proposals, isLoading: isLoadingProposals, error: proposalsError } = useStubQuery();
 
   if (isLoadingStats || isLoadingProposals) {
     return <div className="sa-min-h-screen sa-flex sa-items-center sa-justify-center">Loading...</div>;

@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: IncomeVerificationScreen
 import React, { useState, useCallback } from 'react';
 import { Upload, CheckCircle2, AlertCircle, Loader2, FileText, X } from 'lucide-react';
-import { trpc } from '@/utils/trpc';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 export default function IncomeVerificationScreen() {
   const [file, setFile] = useState<File | null>(null);
@@ -13,7 +25,7 @@ export default function IncomeVerificationScreen() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [fileError, setFileError] = useState<string | null>(null);
 
-  const verifyIncomeMutation = trpc.onboarding.verifyIncome.useMutation({
+  const verifyIncomeMutation = useStubMutation({
     onSuccess: () => {
       // Handle success, e.g., navigate to next step or show success state
     },

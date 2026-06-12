@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoTravelCard
 
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC hooks integrate with react-query
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card component
 import { Button } from '@/components/ui/button'; // shadcn/ui button component
 import { Switch } from '@/components/ui/switch'; // shadcn/ui switch component for dark mode
 import { Label } from '@/components/ui/label';
 import { DollarSign, CreditCard, Loader2, WifiOff } from 'lucide-react'; // Icons for UI
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration. In a real app, this would be generated.
 const trpc = {

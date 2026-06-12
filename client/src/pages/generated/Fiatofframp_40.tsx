@@ -10,9 +10,21 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { useMutation } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RocketIcon } from '@radix-ui/react-icons';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // 1. Define your form schema using Zod
 const formSchema = z.object({
@@ -51,7 +63,7 @@ export function FiatOffRamp() {
     resolver: zodResolver(formSchema),
   });
 
-  const { mutate, isLoading, isError, isSuccess, error } = trpc.fiatOffRamp.createTransaction.useMutation();
+  const { mutate, isLoading, isError, isSuccess, error } = useStubMutation();
 
   const onSubmit = (data: FormData) => {
     mutate(data);

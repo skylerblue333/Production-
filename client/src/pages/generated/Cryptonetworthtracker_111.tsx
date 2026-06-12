@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoNetWorthTracker
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { api } from '@/utils/api'; // Assuming tRPC client setup
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils'; // Utility for conditional class names
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Asset {
   id: string;
@@ -24,7 +36,7 @@ interface NetWorthData {
 
 const fetchNetWorth = async (): Promise<NetWorthData> => {
   // Simulate API call with tRPC
-  // Replace with actual tRPC hook call, e.g., const { data, isLoading, error } = api.crypto.getNetWorth.useQuery();
+  // Replace with actual tRPC hook call, e.g., const { data, isLoading, error } = api.crypto.getNetWorth.useStubQuery();
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({

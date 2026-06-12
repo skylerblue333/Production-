@@ -1,8 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: AchievementSystemScreen
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // Assuming shadcn/ui card component
-import { Button } from './ui/button'; // Assuming shadcn/ui button component
-import { Progress } from './ui/progress'; // Assuming shadcn/ui progress component
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card component
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button component
+import { Progress } from '@/components/ui/progress'; // Assuming shadcn/ui progress component
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Achievement {
   id: string;
@@ -28,7 +41,7 @@ const AchievementSystemScreen: React.FC<AchievementSystemScreenProps> = () => {
       setError(null);
       try {
         // In a real application, this would be a tRPC call:
-        // const data = await trpc.achievements.getAchievements.useQuery();
+        // const data = await useStubQuery();
         // For now, simulate API call
         await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
         const mockAchievements: Achievement[] = [

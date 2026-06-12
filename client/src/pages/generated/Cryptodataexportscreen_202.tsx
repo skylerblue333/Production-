@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoDataExportScreen
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { Button } from '@/components/ui/button'; // shadcn/ui button
 import { Input } from '@/components/ui/input';   // shadcn/ui input
 import { Label } from '@/components/ui/label';   // shadcn/ui label
 import { toast } from 'sonner'; // Assuming a toast notification system for errors
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Placeholder for tRPC client. In a real app, this would be configured elsewhere.
 // For this component, we'll simulate a tRPC hook.
@@ -53,7 +65,7 @@ const CryptoDataExportScreen: React.FC<CryptoDataExportScreenProps> = () => {
   const [dateRange, setDateRange] = useState('last_30_days');
 
   // tRPC hook simulation
-  const { data, isLoading, isError, error, refetch } = trpc.crypto.exportData.useQuery({
+  const { data, isLoading, isError, error, refetch } = useStubQuery({
     onError: (err) => {
       // Centralized error handling for this specific query
       console.error('tRPC exportData error:', err);

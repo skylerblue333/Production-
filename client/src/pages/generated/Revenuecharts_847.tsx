@@ -1,7 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: RevenueCharts
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { useQuery } from '@tanstack/react-query'; // Placeholder for tRPC hook
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC-like data fetching function
 const fetchRevenueData = async () => {
@@ -21,7 +33,7 @@ interface RevenueChartProps {
 }
 
 const RevenueCharts: React.FC<RevenueChartProps> = ({ isDarkMode = false }) => {
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error } = useStubQuery({
     queryKey: ['revenueCharts'],
     queryFn: fetchRevenueData,
   });

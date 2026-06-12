@@ -4,6 +4,19 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Placeholder for tRPC client and hooks
 // In a real application, this would be imported from your tRPC setup
 const trpc = {
@@ -51,7 +64,7 @@ interface CryptoHelpCenterProps {
 }
 
 const CryptoHelpCenter: React.FC<CryptoHelpCenterProps> = () => {
-  const { data, isLoading, isError, error } = trpc.help.getArticles.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   return (
     <div className="min-h-screen bg-background text-foreground dark:bg-gray-900 dark:text-gray-100 p-4 sm:p-6 lg:p-8" aria-live="polite" aria-busy={isLoading}>

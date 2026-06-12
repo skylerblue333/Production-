@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoCorrelationMatrixScreen
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming @tanstack/react-query for tRPC
-import { Card, CardHeader, CardTitle, CardContent } from './ui/card'; // shadcn/ui Card components
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from './ui/table'; // shadcn/ui Table components
-import { Skeleton } from './ui/skeleton'; // shadcn/ui Skeleton for loading states
-import { Alert, AlertDescription, AlertTitle } from './ui/alert'; // shadcn/ui Alert for error handling
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'; // shadcn/ui Card components
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table'; // shadcn/ui Table components
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton for loading states
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui Alert for error handling
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'; // Icon for error
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define types for the correlation matrix data
 interface CorrelationMatrixData {
@@ -52,7 +64,7 @@ const trpc = {
 
 const CryptoCorrelationMatrixScreen: React.FC = () => {
   // Fetch data using the mock tRPC hook
-  const { data, isLoading, isError, error } = trpc.crypto.getCorrelationMatrix.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   // Accessibility: Add a visually hidden heading for screen readers
   // Dark theme: Tailwind classes are configured for dark mode automatically

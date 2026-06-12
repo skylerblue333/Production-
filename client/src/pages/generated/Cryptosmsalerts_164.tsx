@@ -7,8 +7,19 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { useMutation } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
-import { trpc } from '@/utils/trpc'; // Assuming tRPC client setup
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const formSchema = z.object({
   phoneNumber: z.string().regex(/^\+[1-9]\d{1,14}$/, 'Invalid phone number format. E.g., +1234567890'),
@@ -33,7 +44,7 @@ const CryptoSmsAlerts: React.FC = () => {
   const enableAlerts = watch('enableAlerts');
 
   // Mock tRPC mutation for setting SMS alerts
-  const setSmsAlertsMutation = trpc.smsAlerts.set.useMutation();
+  const setSmsAlertsMutation = useStubMutation();
 
   const onSubmit = async (data: FormValues) => {
     try {

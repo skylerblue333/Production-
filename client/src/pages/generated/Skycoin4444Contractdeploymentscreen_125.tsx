@@ -5,7 +5,19 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import { useMutation } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC hook for contract deployment
 const trpc = {
@@ -43,7 +55,7 @@ export function Skycoin4444ContractDeploymentScreen() {
   });
   const [deployedAddress, setDeployedAddress] = useState<string | null>(null);
 
-  const { mutate, isLoading, isError, error, isSuccess } = trpc.crypto.deployContract.useMutation();
+  const { mutate, isLoading, isError, error, isSuccess } = useStubMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormState({

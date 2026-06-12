@@ -1,9 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoCardPaymentScreen
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'; // Assuming shadcn/ui card component
-import { Input } from './ui/input'; // Assuming shadcn/ui input component
-import { Button } from './ui/button'; // Assuming shadcn/ui button component
-import { Label } from './ui/label'; // Assuming shadcn/ui label component
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card component
+import { Input } from '@/components/ui/input'; // Assuming shadcn/ui input component
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button component
+import { Label } from '@/components/ui/label'; // Assuming shadcn/ui label component
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC hook for demonstration purposes
 const useCardPayment = () => {

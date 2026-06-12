@@ -6,8 +6,20 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { useMutation } from '@tanstack/react-query'; // Assuming tRPC hooks are integrated with react-query
 import { Loader2 } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface TokenSwapProps {
   // Define any props if necessary
@@ -28,7 +40,7 @@ const TokenSwap: React.FC<TokenSwapProps> = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   // Mock tRPC mutation hook
-  const swapTokensMutation = useMutation({
+  const swapTokensMutation = useStubMutation({
     mutationFn: async (data: SwapFormState) => {
       // Simulate API call
       return new Promise((resolve) => {

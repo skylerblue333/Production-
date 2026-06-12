@@ -4,14 +4,26 @@ import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { trpc } from '../trpc';
 
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Textarea } from './ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const reportSchema = z.object({
   activityType: z.string().min(1, { message: 'Activity type is required.' }),
@@ -33,8 +45,8 @@ const SuspiciousActivityReport: React.FC = () => {
     },
   });
 
-  const reportActivityMutation = trpc.reportActivity.useMutation();
-  const { data: activities, isLoading: isLoadingActivities, error: activitiesError } = trpc.getActivities.useQuery();
+  const reportActivityMutation = useStubMutation();
+  const { data: activities, isLoading: isLoadingActivities, error: activitiesError } = useStubQuery();
 
   const onSubmit = async (data: ReportFormValues) => {
     try {

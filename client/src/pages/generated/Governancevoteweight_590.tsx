@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: GovernanceVoteWeight
 import React, { useState, useEffect } from 'react';
-import { cn } from './lib/utils';
-import { Button } from './components/ui/button';
-import { Input } from './components/ui/input';
-import { Label } from './components/ui/label';
-import { Progress } from './components/ui/progress';
-import { useQuery, useMutation, QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { toast } from './components/ui/use-toast';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Progress } from '@/components/ui/progress';
+import { toast } from '@/components/ui/use-toast';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration purposes
 const trpc = {
@@ -45,8 +57,8 @@ const GovernanceVoteWeightScreen: React.FC<GovernanceVoteWeightProps> = ({ class
   const [delegateToAddress, setDelegateToAddress] = useState<string>('');
   const [delegateAmount, setDelegateAmount] = useState<number>(0);
 
-  const { data: voteWeight, isLoading, isError, error, refetch } = trpc.governance.getVoteWeight.useQuery(walletAddress);
-  const { mutate: delegate, isPending: isDelegating } = trpc.governance.delegateVoteWeight.useMutation();
+  const { data: voteWeight, isLoading, isError, error, refetch } = useStubQuery(walletAddress);
+  const { mutate: delegate, isPending: isDelegating } = useStubMutation();
 
   const handleDelegate = () => {
     if (!walletAddress || !delegateToAddress || delegateAmount <= 0) {

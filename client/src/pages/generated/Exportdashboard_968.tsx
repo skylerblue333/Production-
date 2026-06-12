@@ -1,7 +1,6 @@
 // AUTO-GENERATED DRAFT SCREEN: ExportDashboard
 
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query'; // Simulating tRPC hooks with react-query
 import { Button } from '@/components/ui/button'; // shadcn/ui button
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card
 import { Input } from '@/components/ui/input'; // shadcn/ui input
@@ -10,6 +9,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch'; // shadcn/ui switch
 import { toast } from 'sonner'; // Simulating a toast notification library
 import { Loader2 } from 'lucide-react'; // Lucide icons for loading state
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define types for export options and data
 interface ExportOptions {

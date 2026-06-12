@@ -2,6 +2,19 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface Ticket {
   id: string;
   subject: string;
@@ -104,8 +117,8 @@ const SupportTicketsScreen: React.FC = () => {
   const [selectedTicketId, setSelectedTicketId] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterOptions>({});
 
-  const { data: tickets, isLoading: isLoadingTickets, isError: isErrorTickets, error: ticketsError } = trpc.ticket.list.useQuery(filters);
-  const { data: selectedTicket, isLoading: isLoadingSelectedTicket, isError: isErrorSelectedTicket, error: selectedTicketError } = trpc.ticket.getById.useQuery(selectedTicketId || '');
+  const { data: tickets, isLoading: isLoadingTickets, isError: isErrorTickets, error: ticketsError } = useStubQuery(filters);
+  const { data: selectedTicket, isLoading: isLoadingSelectedTicket, isError: isErrorSelectedTicket, error: selectedTicketError } = useStubQuery(selectedTicketId || '');
 
   const handleTicketSelect = (ticketId: string) => {
     setSelectedTicketId(ticketId);

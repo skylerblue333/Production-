@@ -3,16 +3,28 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { trpc } from '@/utils/trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CapacityReportsProps {
   // Define props here if needed
 }
 
 const CapacityReports: React.FC<CapacityReportsProps> = () => {
-  const { data: capacityData, isLoading: isLoadingCapacity, error: errorCapacity } = trpc.reports.getCapacityData.useQuery();
-  const { data: recentActivity, isLoading: isLoadingActivity, error: errorActivity } = trpc.reports.getRecentActivity.useQuery();
-  const { data: capacityOverview, isLoading: isLoadingOverview, error: errorOverview } = trpc.reports.getCapacityOverview.useQuery();
+  const { data: capacityData, isLoading: isLoadingCapacity, error: errorCapacity } = useStubQuery();
+  const { data: recentActivity, isLoading: isLoadingActivity, error: errorActivity } = useStubQuery();
+  const { data: capacityOverview, isLoading: isLoadingOverview, error: errorOverview } = useStubQuery();
 
   if (isLoadingCapacity || isLoadingActivity || isLoadingOverview) {
     return <div className="p-6 text-center">Loading reports...</div>;

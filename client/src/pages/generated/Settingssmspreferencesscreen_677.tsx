@@ -8,7 +8,19 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const smsPreferencesSchema = z.object({
   receiveSmsNotifications: z.boolean().default(true),
@@ -20,8 +32,8 @@ type SmsPreferencesFormValues = z.infer<typeof smsPreferencesSchema>;
 
 const SettingsSmsPreferencesScreen: React.FC = () => {
   const { toast } = useToast();
-  const { data, isLoading, error } = trpc.user.getSmsPreferences.useQuery(); // Example tRPC hook
-  const updateSmsPreferences = trpc.user.updateSmsPreferences.useMutation(); // Example tRPC mutation
+  const { data, isLoading, error } = useStubQuery(); // Example tRPC hook
+  const updateSmsPreferences = useStubMutation(); // Example tRPC mutation
 
   const { register, handleSubmit, watch, setValue, formState: { errors, isSubmitting } } = useForm<SmsPreferencesFormValues>({
     resolver: zodResolver(smsPreferencesSchema),

@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoPaymentConfirmation
 import React, { useState } from 'react';
-import { trpc } from '../trpc';
-import { Button } from './ui/button'; // Assuming shadcn/ui button component
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'; // Assuming shadcn/ui card components
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button component
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card components
 import { Loader2 } from 'lucide-react'; // Assuming lucide-react for loading spinner
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CryptoPaymentConfirmationProps {
   transactionId?: string;

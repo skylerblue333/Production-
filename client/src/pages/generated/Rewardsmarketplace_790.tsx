@@ -1,14 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: RewardsMarketplace
 
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC setup
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { MoonIcon, SunIcon, GiftIcon, ShoppingCartIcon } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Reward {
   id: string;
@@ -30,7 +41,7 @@ const RewardsMarketplace: React.FC = () => {
     }
   }, [isDarkMode]);
 
-  const { data: rewards, isLoading, isError, error } = trpc.rewards.getRewards.useQuery();
+  const { data: rewards, isLoading, isError, error } = useStubQuery();
 
   const filteredRewards = rewards?.filter(reward =>
     reward.name.toLowerCase().includes(searchTerm.toLowerCase())

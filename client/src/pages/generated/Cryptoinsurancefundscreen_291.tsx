@@ -1,16 +1,28 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoInsuranceFundScreen
 import React from 'react';
-import { trpc } from '../trpc';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CryptoInsuranceFundScreenProps {
   // Define props here if any
 }
 
 const CryptoInsuranceFundScreen: React.FC<CryptoInsuranceFundScreenProps> = () => {
-  const { data, isLoading, isError, error } = trpc.insuranceFund.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   // Dummy data for the chart
   const chartData = [

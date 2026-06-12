@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: LessonViewer
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC setup in ../utils/trpc
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ModeToggle } from '@/components/mode-toggle'; // Assuming a dark mode toggle component
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Lesson {
   id: string;
@@ -22,7 +33,7 @@ interface LessonViewerProps {
 }
 
 const LessonViewer: React.FC<LessonViewerProps> = ({ lessonId }) => {
-  const { data: lesson, isLoading, isError, error } = trpc.lesson.getLessonById.useQuery({
+  const { data: lesson, isLoading, isError, error } = useStubQuery({
     id: lessonId,
   });
 

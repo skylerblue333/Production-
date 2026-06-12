@@ -3,13 +3,25 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { trpc } from '../utils/trpc';
 
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Switch } from './ui/switch';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const formSchema = z.object({
   apiKey: z.string().min(1, { message: 'API Key is required.' }),
@@ -20,8 +32,8 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const TelegramNotifications: React.FC = () => {
-  const { data, isLoading, error } = trpc.telegram.getSettings.useQuery();
-  const updateSettingsMutation = trpc.telegram.updateSettings.useMutation();
+  const { data, isLoading, error } = useStubQuery();
+  const updateSettingsMutation = useStubMutation();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),

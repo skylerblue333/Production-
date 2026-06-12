@@ -1,12 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: BackupRestoreScreen
 import React, { useState } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup
-import { Button } from './components/ui/button'; // shadcn/ui button
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card'; // shadcn/ui card
-import { Switch } from './components/ui/switch'; // shadcn/ui switch for dark mode
-import { Label } from './components/ui/label';
-import { useToast } from './components/ui/use-toast'; // shadcn/ui toast for notifications
+import { Button } from '@/components/ui/button'; // shadcn/ui button
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card
+import { Switch } from '@/components/ui/switch'; // shadcn/ui switch for dark mode
+import { Label } from '@/components/ui/label';
+import { useToast } from '@/components/ui/use-toast'; // shadcn/ui toast for notifications
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface BackupStatus {
   lastBackup: string | null;
@@ -24,13 +35,13 @@ const BackupRestoreScreen: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   // Fetch backup status
-  const { data: backupStatus, isLoading: isLoadingBackupStatus, error: backupStatusError } = trpc.admin.getBackupStatus.useQuery();
+  const { data: backupStatus, isLoading: isLoadingBackupStatus, error: backupStatusError } = useStubQuery();
 
   // Fetch restore status
-  const { data: restoreStatus, isLoading: isLoadingRestoreStatus, error: restoreStatusError } = trpc.admin.getRestoreStatus.useQuery();
+  const { data: restoreStatus, isLoading: isLoadingRestoreStatus, error: restoreStatusError } = useStubQuery();
 
   // Backup mutation
-  const backupMutation = trpc.admin.startBackup.useMutation({
+  const backupMutation = useStubMutation({
     onSuccess: () => {
       toast({ title: 'Backup Initiated', description: 'Backup process has started successfully.' });
     },
@@ -40,7 +51,7 @@ const BackupRestoreScreen: React.FC = () => {
   });
 
   // Restore mutation
-  const restoreMutation = trpc.admin.startRestore.useMutation({
+  const restoreMutation = useStubMutation({
     onSuccess: () => {
       toast({ title: 'Restore Initiated', description: 'Restore process has started successfully.' });
     },

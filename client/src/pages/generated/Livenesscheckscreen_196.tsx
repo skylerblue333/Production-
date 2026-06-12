@@ -6,6 +6,19 @@ import { Input } from '@repo/ui/input'; // Not directly used in the plan, but go
 import { useLivenessCheck } from '@repo/trpc/react'; // Placeholder for tRPC hook
 import { cn } from '@repo/lib/utils'; // For Tailwind class merging
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface LivenessCheckScreenProps {
   // Potentially props for user ID or other context
 }

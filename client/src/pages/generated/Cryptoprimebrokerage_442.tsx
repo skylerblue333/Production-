@@ -1,14 +1,27 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoPrimeBrokerage
 import React from 'react';
 import { useQuery } from '@trpc/react-query'; // Assuming tRPC setup with react-query
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // shadcn/ui Card component
-import { Skeleton } from './ui/skeleton'; // shadcn/ui Skeleton for loading states
-import { Alert, AlertDescription, AlertTitle } from './ui/alert'; // shadcn/ui Alert for error handling
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card component
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton for loading states
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui Alert for error handling
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'; // Icon for errors
-import { Button } from './ui/button'; // shadcn/ui Button
-import { Input } from './ui/input'; // shadcn/ui Input
-import { Label } from './ui/label'; // shadcn/ui Label
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table'; // shadcn/ui Table
+import { Button } from '@/components/ui/button'; // shadcn/ui Button
+import { Input } from '@/components/ui/input'; // shadcn/ui Input
+import { Label } from '@/components/ui/label'; // shadcn/ui Label
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'; // shadcn/ui Table
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the data structure for prime brokerage assets
 interface PrimeBrokerageData {
@@ -89,13 +102,13 @@ const CryptoPrimeBrokerage: React.FC<CryptoPrimeBrokerageProps> = () => {
   // Handler for deposit action. This would typically involve a tRPC mutation.
   const handleDeposit = () => {
     console.log('Deposit initiated');
-    // Example: useMutation(['primeBrokerage.deposit'], { ... }).mutate({ asset: '...', amount: ... });
+    // Example: useStubMutation(['primeBrokerage.deposit'], { ... }).mutate({ asset: '...', amount: ... });
   };
 
   // Handler for withdraw action. This would also involve a tRPC mutation.
   const handleWithdraw = () => {
     console.log('Withdraw initiated');
-    // Example: useMutation(['primeBrokerage.withdraw'], { ... }).mutate({ asset: '...', amount: ... });
+    // Example: useStubMutation(['primeBrokerage.withdraw'], { ... }).mutate({ asset: '...', amount: ... });
   };
 
   // Display loading state using shadcn/ui Skeleton components

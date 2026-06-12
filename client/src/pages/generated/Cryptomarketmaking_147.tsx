@@ -2,10 +2,22 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Placeholder for tRPC client and hooks. In a real application, this would be configured
 // to connect to your tRPC server and provide type-safe API calls.
 // For this example, we'll simulate data fetching.
-// import { trpc } from '@/utils/trpc'; // Assuming trpc context is set up
 
 interface MarketData {
   symbol: string;
@@ -20,7 +32,7 @@ const CryptoMarketMaking: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // In a real tRPC setup, you might use something like:
-  // const { data, isLoading, error: trpcError } = trpc.market.getMarketData.useQuery();
+  // const { data, isLoading, error: trpcError } = useStubQuery();
 
   useEffect(() => {
     const fetchMarketData = async () => {

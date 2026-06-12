@@ -1,16 +1,28 @@
 // AUTO-GENERATED DRAFT SCREEN: IntegrationsNotificationEnrichment
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'; // Assuming shadcn/ui path
-import { Label } from './ui/label';
-import { Switch } from './ui/switch';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui path
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useForm } from 'react-hook-form'; // For form management
 import { zodResolver } from '@hookform/resolvers/zod'; // For schema validation
 import * as z from 'zod'; // For schema definition
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Assume tRPC types and hooks are available
-// import { trpc } from '../utils/trpc';
 
 const formSchema = z.object({
   enableEnrichment: z.boolean().default(false),
@@ -26,13 +38,13 @@ const IntegrationsNotificationEnrichment: React.FC = () => {
     isLoading: false, 
     isError: false, 
     error: null 
-  }; // trpc.integrations.getNotificationEnrichment.useQuery();
+  }; // useStubQuery();
 
   // Simulate tRPC mutation
   const { mutate, isLoading: isMutating } = { 
     mutate: (values: FormValues) => console.log('Saving:', values), 
     isLoading: false 
-  }; // trpc.integrations.updateNotificationEnrichment.useMutation();
+  }; // useStubMutation();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),

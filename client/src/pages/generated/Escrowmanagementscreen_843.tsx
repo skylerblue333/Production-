@@ -32,8 +32,20 @@ import {
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle, CheckCircle2, Clock, ShieldAlert, Plus } from 'lucide-react';
-import { trpc } from '@/utils/trpc';
 import { toast } from 'sonner';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Types
 type EscrowStatus = 'PENDING' | 'FUNDED' | 'RELEASED' | 'DISPUTED' | 'CANCELLED';
@@ -54,9 +66,9 @@ export function EscrowManagementScreen() {
   const [newEscrow, setNewEscrow] = useState({ title: '', amount: '', sellerId: '' });
 
   // tRPC Hooks
-  const { data: escrows, isLoading, error, refetch } = trpc.marketplace.getEscrows.useQuery();
+  const { data: escrows, isLoading, error, refetch } = useStubQuery();
   
-  const createEscrowMutation = trpc.marketplace.createEscrow.useMutation({
+  const createEscrowMutation = useStubMutation({
     onSuccess: () => {
       toast.success('Escrow created successfully');
       setIsCreateDialogOpen(false);
@@ -68,7 +80,7 @@ export function EscrowManagementScreen() {
     }
   });
 
-  const releaseFundsMutation = trpc.marketplace.releaseEscrowFunds.useMutation({
+  const releaseFundsMutation = useStubMutation({
     onSuccess: () => {
       toast.success('Funds released successfully');
       refetch();
@@ -78,7 +90,7 @@ export function EscrowManagementScreen() {
     }
   });
 
-  const disputeMutation = trpc.marketplace.disputeEscrow.useMutation({
+  const disputeMutation = useStubMutation({
     onSuccess: () => {
       toast.success('Escrow disputed successfully');
       refetch();

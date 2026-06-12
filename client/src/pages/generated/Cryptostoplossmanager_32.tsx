@@ -1,6 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoStopLossManager
 import React, { useState } from 'react';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Mock external dependencies for compilation
 const useQuery = () => ({ data: [], isLoading: false, error: null });
 const useMutation = () => ({ mutate: () => {}, isLoading: false, error: null });
@@ -75,10 +88,10 @@ const CryptoStopLossManager: React.FC = () => {
   const [stopPrice, setStopPrice] = useState<number | ''>('');
   const [quantity, setQuantity] = useState<number | ''>('');
 
-  const { data: orders, isLoading: isLoadingOrders, error: ordersError } = trpc.stopLoss.list.useQuery();
-  const { mutate: createOrder, isLoading: isCreatingOrder } = trpc.stopLoss.create.useMutation();
-  const { mutate: updateOrder, isLoading: isUpdatingOrder } = trpc.stopLoss.update.useMutation();
-  const { mutate: deleteOrder, isLoading: isDeletingOrder } = trpc.stopLoss.delete.useMutation();
+  const { data: orders, isLoading: isLoadingOrders, error: ordersError } = useStubQuery();
+  const { mutate: createOrder, isLoading: isCreatingOrder } = useStubMutation();
+  const { mutate: updateOrder, isLoading: isUpdatingOrder } = useStubMutation();
+  const { mutate: deleteOrder, isLoading: isDeletingOrder } = useStubMutation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

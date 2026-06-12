@@ -9,7 +9,19 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
-import { trpc } from '@/lib/trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 type CallStatus = 'ringing' | 'active' | 'missed' | 'ended';
 
@@ -49,31 +61,31 @@ export function SocialVoiceCallsScreen(): React.JSX.Element {
   const [selectedId, setSelectedId] = React.useState<string | null>(null);
 
   const utils = trpc.useUtils();
-  const callsQuery = trpc.social.voice.list.useQuery(
+  const callsQuery = useStubQuery(
     { search: search.trim(), limit: 24 },
     { staleTime: 30_000, retry: 1 }
   );
-  const preferencesQuery = trpc.social.voice.preferences.useQuery(undefined, {
+  const preferencesQuery = useStubQuery(undefined, {
     staleTime: 60_000,
     retry: 1,
   });
 
-  const startCall = trpc.social.voice.start.useMutation({
+  const startCall = useStubMutation({
     onSuccess: async () => {
       await utils.social.voice.list.invalidate();
     },
   });
-  const endCall = trpc.social.voice.end.useMutation({
+  const endCall = useStubMutation({
     onSuccess: async () => {
       await utils.social.voice.list.invalidate();
     },
   });
-  const toggleMute = trpc.social.voice.toggleMute.useMutation({
+  const toggleMute = useStubMutation({
     onSuccess: async () => {
       await utils.social.voice.list.invalidate();
     },
   });
-  const updatePreferences = trpc.social.voice.updatePreferences.useMutation({
+  const updatePreferences = useStubMutation({
     onSuccess: async () => {
       await utils.social.voice.preferences.invalidate();
     },

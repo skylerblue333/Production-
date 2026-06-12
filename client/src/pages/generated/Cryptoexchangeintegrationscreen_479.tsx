@@ -7,9 +7,22 @@ import React, { useState, useEffect } from 'react';
 
 import { useQuery } from '@trpc/react-query';
 import { api } from './utils/api'; // Assuming tRPC client setup
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'; // shadcn/ui card
-import { Button } from './components/ui/button'; // shadcn/ui button
-import { Skeleton } from './components/ui/skeleton'; // shadcn/ui skeleton for loading states
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card
+import { Button } from '@/components/ui/button'; // shadcn/ui button
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui skeleton for loading states
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ExchangeData {
   id: string;
@@ -34,7 +47,7 @@ const CryptoExchangeIntegrationScreen: React.FC<CryptoExchangeIntegrationScreenP
     return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
-  const { data, isLoading, isError, error } = useQuery(
+  const { data, isLoading, isError, error } = useStubQuery(
     api.crypto.getExchangeData, // Assuming a tRPC procedure for fetching exchange data
     { retry: 1, staleTime: 5 * 60 * 1000 } // Basic caching
   );

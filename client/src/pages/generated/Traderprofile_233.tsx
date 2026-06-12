@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: TraderProfile
 import React, { useState } from 'react';
-import { trpc } from '@/utils/trpc';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -9,6 +8,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AlertCircle, TrendingUp, Activity, Wallet, Clock, ShieldCheck } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Asset { symbol: string; percentage: number; }
 interface Position { id: string; pair: string; type: 'LONG' | 'SHORT'; leverage: number; pnl: number; entryPrice: number; }
@@ -20,7 +32,7 @@ interface TraderProfileData {
 }
 
 export const TraderProfile: React.FC<{ traderId: string }> = ({ traderId }) => {
-  const { data: profile, isLoading, error, refetch } = trpc.trader.getProfile.useQuery({ id: traderId }, { retry: 1 });
+  const { data: profile, isLoading, error, refetch } = useStubQuery({ id: traderId }, { retry: 1 });
   const [activeTab, setActiveTab] = useState('overview');
 
   if (isLoading) return (

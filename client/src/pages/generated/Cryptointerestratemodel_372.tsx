@@ -5,9 +5,20 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc';
 import { useState } from 'react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 type InterestRateModelProps = {
   // Add any props if needed
@@ -19,12 +30,12 @@ const CryptoInterestRateModel: React.FC<InterestRateModelProps> = () => {
   const [amount, setAmount] = useState<number>(1000);
 
   // Example tRPC query
-  const { data: interestRateData, isLoading, isError } = trpc.crypto.getInterestRate.useQuery({
+  const { data: interestRateData, isLoading, isError } = useStubQuery({
     asset, collateral, amount
   });
 
   // Example tRPC mutation
-  const { mutate: updateModel, isLoading: isUpdating } = trpc.crypto.updateInterestRateModel.useMutation();
+  const { mutate: updateModel, isLoading: isUpdating } = useStubMutation();
 
   const handleUpdate = () => {
     updateModel({ asset, collateral, amount });

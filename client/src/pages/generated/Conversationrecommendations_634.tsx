@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: ConversationRecommendations
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
@@ -9,6 +8,19 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { SunIcon, MoonIcon, RefreshCcw } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC-like hooks for demonstration
 const trpc = {
@@ -51,7 +63,7 @@ const ConversationRecommendations: React.FC<ConversationRecommendationsProps> = 
     document.documentElement.classList.toggle('dark', isDarkTheme);
   }, [isDarkTheme]);
 
-  const { data: recommendations, isLoading, isError, refetch } = useQuery({
+  const { data: recommendations, isLoading, isError, refetch } = useStubQuery({
     queryKey: ['conversationRecommendations', userId, categoryFilter],
     queryFn: () => trpc.conversation.getRecommendations({ userId, count: 5, category: categoryFilter || undefined }),
   });

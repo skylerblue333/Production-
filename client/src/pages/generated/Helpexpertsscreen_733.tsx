@@ -5,6 +5,19 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Assuming a Spinner component exists or can be created for loading states
 const Spinner = () => (
   <div className="flex items-center justify-center p-4">
@@ -83,7 +96,7 @@ const trpc = {
 
 export function HelpExpertsScreen() {
   const [searchTerm, setSearchTerm] = useState('');
-  const { data: experts, isLoading, isError, error } = trpc.expert.list.useQuery({ search: searchTerm });
+  const { data: experts, isLoading, isError, error } = useStubQuery({ search: searchTerm });
 
   // Determine if dark mode is active (for demonstration, assume a simple check or context)
   const isDarkMode = useMemo(() => {

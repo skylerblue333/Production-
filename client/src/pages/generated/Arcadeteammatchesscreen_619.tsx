@@ -1,7 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: ArcadeTeamMatchesScreen
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { trpc } from "../trpc";
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface TeamMatch {
   id: string;
@@ -16,7 +28,7 @@ const ArcadeTeamMatchesScreen: React.FC = () => {
   const [teamMatches, setTeamMatches] = useState<TeamMatch[]>([]);
 
   // Mock tRPC hook for fetching team matches
-  const { data, isLoading, isError, error: trpcError } = trpc.hello.useQuery(undefined, {
+  const { data, isLoading, isError, error: trpcError } = useStubQuery(undefined, {
     queryFn: async () => {
       return new Promise<TeamMatch[]>((resolve) => {
         setTimeout(() => {

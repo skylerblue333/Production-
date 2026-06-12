@@ -1,10 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: TrustFundScreen
 import React, { useState, useEffect } from 'react';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Input } from '../components/ui/input';
-import { Label } from '../components/ui/label';
-import { Switch } from '../components/ui/switch';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client and hooks for demonstration
 const trpc = {
@@ -79,8 +92,8 @@ interface TrustFundScreenProps {
 }
 
 const TrustFundScreen: React.FC<TrustFundScreenProps> = ({ fundId }) => {
-  const { data, isLoading, isError } = trpc.trustFund.getDetails.useQuery({ id: fundId });
-  const { mutate: updateFund, isLoading: isUpdating, isSuccess: updateSuccess, isError: updateError } = trpc.trustFund.updateFund.useMutation();
+  const { data, isLoading, isError } = useStubQuery({ id: fundId });
+  const { mutate: updateFund, isLoading: isUpdating, isSuccess: updateSuccess, isError: updateError } = useStubMutation();
 
   const [depositAmount, setDepositAmount] = useState<number>(0);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);

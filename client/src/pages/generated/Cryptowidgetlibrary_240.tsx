@@ -3,6 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, ArrowDownRight, Activity, DollarSign, BarChart3, RefreshCw, Wallet, TrendingUp, TrendingDown, Star, Clock, Shield } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent, Badge, Button, Skeleton, cn } from './components/ui';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Mock tRPC hooks for demonstration
 const trpc = {
   crypto: {
@@ -42,8 +55,8 @@ const trpc = {
 
 // Main Component
 export default function CryptoWidgetLibrary() {
-  const { data: marketData, isLoading: isMarketLoading, isError: isMarketError, refetch } = trpc.crypto.getMarketData.useQuery();
-  const { data: portfolioData, isLoading: isPortfolioLoading } = trpc.crypto.getPortfolio.useQuery();
+  const { data: marketData, isLoading: isMarketLoading, isError: isMarketError, refetch } = useStubQuery();
+  const { data: portfolioData, isLoading: isPortfolioLoading } = useStubQuery();
 
   const formatCurrency = (value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
   const formatPercent = (value: number) => `${value > 0 ? '+' : ''}${value.toFixed(2)}%`;

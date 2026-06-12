@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoRingSignatureScreen
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query for data fetching
 import { cn } from '@/lib/utils'; // Utility for conditionally joining Tailwind CSS classes
 import { Button } from '@/components/ui/button'; // Re-usable button component from shadcn/ui
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'; // Card components for structured content display
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the interface for the ring signature data structure.
 // This ensures type safety and clear data contracts within the component.

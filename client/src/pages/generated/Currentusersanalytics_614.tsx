@@ -2,7 +2,19 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { trpc } from "@/trpc/client";
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Placeholder for a chart component (e.g., using recharts or chart.js)
 const AnalyticsChart = () => (
@@ -16,7 +28,7 @@ interface CurrentUsersAnalyticsProps {
 }
 
 const CurrentUsersAnalytics: React.FC<CurrentUsersAnalyticsProps> = () => {
-  const { data, isLoading, isError, error, refetch } = trpc.analytics.getCurrentUsers.useQuery();
+  const { data, isLoading, isError, error, refetch } = useStubQuery();
 
   if (isLoading) {
     return (

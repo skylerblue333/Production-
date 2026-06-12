@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: AnalyticsCurrentReferrers
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integration via react-query
-import { trpc } from '../utils/trpc'; // Adjust path as needed for tRPC client
 
 // Import shadcn/ui components for a polished look and accessibility
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton'; // Used for loading states
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // Used for error display
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'; // Icon for error alerts
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the interface for referrer data to ensure type safety
 interface ReferrerData {
@@ -30,7 +41,7 @@ interface ReferrerData {
 export function AnalyticsCurrentReferrers() {
   // Use tRPC hook to fetch current referrer data
   // The `useQuery` hook provides `data`, `isLoading`, `isError`, and `error` states
-  const { data, isLoading, isError, error } = trpc.analytics.getCurrentReferrers.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   // --- Loading State --- 
   // Display skeleton loaders while data is being fetched

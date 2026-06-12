@@ -3,13 +3,25 @@ import React, { useState } from 'react';
 import { useForm } from '@hookform/resolvers/zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { trpc } from '../utils/trpc'; // Assuming tRPC setup
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Switch } from './ui/switch';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Switch } from '@/components/ui/switch';
 import { useTheme } from 'next-themes'; // For dark theme
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const userBanSchema = z.object({
   userId: z.string().min(1, { message: 'User ID is required.' }),
@@ -27,7 +39,7 @@ const AdminUserBanning: React.FC = () => {
   });
 
   // Example tRPC mutation (replace with actual tRPC hook)
-  const banUserMutation = trpc.admin.banUser.useMutation();
+  const banUserMutation = useStubMutation();
 
   const onSubmit = async (data: UserBanFormValues) => {
     try {

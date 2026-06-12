@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: CommunityForum
 import React from 'react';
-import { trpc } from './trpc';
-import { Button } from './components/ui/button';
+import { Button } from '@/components/ui/button';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 function App() {
-  const { data: posts, isLoading, isError, error } = trpc.post.getPosts.useQuery();
+  const { data: posts, isLoading, isError, error } = useStubQuery();
   const [darkMode, setDarkMode] = React.useState(false);
 
   if (isLoading) return <div>Loading posts...</div>;

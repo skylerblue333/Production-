@@ -1,6 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: TradeHistory
 import React from 'react';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface Trade {
   id: string;
   date: string;
@@ -61,7 +74,7 @@ const TradeHistory: React.FC = () => {
       try {
         setLoading(true);
         // In a real application, this would be a tRPC call:
-        // const data = await trpc.trade.getHistory.useQuery();
+        // const data = await useStubQuery();
         await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
         if (Math.random() > 0.8) {
           throw new Error('Failed to fetch trade history');

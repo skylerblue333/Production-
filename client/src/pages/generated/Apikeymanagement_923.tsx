@@ -6,7 +6,19 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-// import { trpc } from '@/utils/trpc'; // Uncomment when actual tRPC setup is ready
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ApiKey {
   id: string;
@@ -75,10 +87,10 @@ const ApiKeyManagement: React.FC = () => {
     });
   };
 
-  // const { data: apiKeys, isLoading: isFetchingKeys, error: fetchError } = trpc.apiKey.list.useQuery();
-  // const createMutation = trpc.apiKey.create.useMutation();
-  // const toggleStatusMutation = trpc.apiKey.toggleStatus.useMutation();
-  // const deleteMutation = trpc.apiKey.delete.useMutation();
+  // const { data: apiKeys, isLoading: isFetchingKeys, error: fetchError } = useStubQuery();
+  // const createMutation = useStubMutation();
+  // const toggleStatusMutation = useStubMutation();
+  // const deleteMutation = useStubMutation();
 
   const handleGenerateNewKey = async () => {
     try {

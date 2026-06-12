@@ -1,13 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: GroupManagement
 import React, { useState, useMemo } from 'react';
 import { Group } from '../types';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from './ui/dialog';
-import { trpc } from '../lib/trpc';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
 import { Loader2, Search, PlusCircle } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const GroupManagement: React.FC = () => {
   const [newGroupName, setNewGroupName] = useState<string>('');
@@ -15,8 +27,8 @@ const GroupManagement: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const { data: groups, isLoading, isError, error } = trpc.group.list.useQuery();
-  const addGroupMutation = trpc.group.create.useMutation({
+  const { data: groups, isLoading, isError, error } = useStubQuery();
+  const addGroupMutation = useStubMutation({
     onSuccess: () => {
       setNewGroupName('');
       setNewGroupDescription('');
@@ -24,7 +36,7 @@ const GroupManagement: React.FC = () => {
       trpc.group.list.invalidate(); // Refetch groups after adding a new one
     },
   });
-  const deleteGroupMutation = trpc.group.delete.useMutation({
+  const deleteGroupMutation = useStubMutation({
     onSuccess: () => {
       trpc.group.list.invalidate(); // Refetch groups after deleting one
     },

@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoPeerMapScreen
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Simulating tRPC's underlying query library
 import { cn } from '@/lib/utils'; // Simulating shadcn/ui's utility for class merging
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Simulating shadcn/ui Card
 import { Skeleton } from '@/components/ui/skeleton'; // Simulating shadcn/ui Skeleton for loading states
 import { Badge } from '@/components/ui/badge'; // Simulating shadcn/ui Badge for peer status
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'; // Simulating shadcn/ui Tooltip
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // --- Type Definitions ---
 /**

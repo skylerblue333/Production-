@@ -1,9 +1,20 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoWhitelist
 import React, { useState } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC client setup
 import { z } from 'zod';
 import { useTheme } from 'next-themes';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Shadcn/ui components (simplified for brevity)
 const Card = ({ children }: { children: React.ReactNode }) => <div className="bg-card text-card-foreground rounded-lg shadow-sm p-6">{children}</div>;
@@ -37,10 +48,10 @@ const CryptoWhitelist: React.FC = () => {
   const { theme } = useTheme(); // For dark theme
 
   // Fetch whitelist entries
-  const { data: whitelist, isLoading, isError, error, refetch } = trpc.crypto.getWhitelist.useQuery();
+  const { data: whitelist, isLoading, isError, error, refetch } = useStubQuery();
 
   // Add new entry
-  const addMutation = trpc.crypto.addWhitelistEntry.useMutation({
+  const addMutation = useStubMutation({
     onSuccess: () => {
       setNewAddress('');
       setNewLabel('');
@@ -49,7 +60,7 @@ const CryptoWhitelist: React.FC = () => {
   });
 
   // Remove entry
-  const removeMutation = trpc.crypto.removeWhitelistEntry.useMutation({
+  const removeMutation = useStubMutation({
     onSuccess: () => {
       refetch();
     },

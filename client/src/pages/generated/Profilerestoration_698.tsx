@@ -2,14 +2,26 @@
 import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { trpc } from "../utils/trpc";
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const ProfileRestoration: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [restorationCode, setRestorationCode] = useState<string>('');
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
-  const restoreProfile = trpc.profile.restore.useMutation({
+  const restoreProfile = useStubMutation({
     onSuccess: (data) => {
       setMessage({ type: 'success', text: data.message });
       setEmail('');

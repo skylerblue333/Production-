@@ -1,13 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: ConversionTracking
 import React, { useState } from 'react';
-import { trpc } from '@/utils/trpc';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 const ConversionTracking: React.FC = () => {
   const [period, setPeriod] = useState('6months');
-  const { data, isLoading, isError, error } = trpc.conversion.getConversionData.useQuery({ period });
+  const { data, isLoading, isError, error } = useStubQuery({ period });
 
   if (isLoading) {
     return <div className="flex items-center justify-center h-screen text-lg font-semibold">Loading conversion data...</div>;

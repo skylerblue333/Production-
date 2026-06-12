@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: SushiSwapInterface
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Token { 
   address: string;
@@ -38,8 +49,8 @@ const SushiSwapInterface: React.FC = () => {
     document.documentElement.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
 
-  const { data: tokens, isLoading: isLoadingTokens, error: tokensError } = trpc.crypto.getTokens.useQuery();
-  const { mutate: performSwap, isLoading: isSwapping, error: swapError } = trpc.crypto.performSwap.useMutation();
+  const { data: tokens, isLoading: isLoadingTokens, error: tokensError } = useStubQuery();
+  const { mutate: performSwap, isLoading: isSwapping, error: swapError } = useStubMutation();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

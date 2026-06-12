@@ -20,7 +20,19 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-// import { useQuery } from '../utils/trpc'; // Placeholder for tRPC hook - uncomment and configure in a real project
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface DeFiProtocol {
   id: string;
@@ -31,7 +43,7 @@ interface DeFiProtocol {
 
 const CryptoDeFiProtocols: React.FC = () => {
   // In a real application, you would use a tRPC hook like this:
-  // const { data, isLoading, error } = useQuery(['defiProtocols.list']);
+  // const { data, isLoading, error } = useStubQuery(['defiProtocols.list']);
 
   // Mock data, loading, and error states for demonstration purposes
   const mockData: DeFiProtocol[] = [

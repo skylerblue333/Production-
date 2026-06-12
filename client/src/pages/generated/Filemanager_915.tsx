@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: FileManager
 import React, { useState, useEffect } from 'react';
-import { trpc } from '@/utils/trpc';
 import {
   Table,
   TableBody,
@@ -18,6 +17,19 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
   FileIcon,
   FolderIcon,
   MoreVerticalIcon,
@@ -42,17 +54,17 @@ export const FileManager: React.FC = () => {
   const [currentPath, setCurrentPath] = useState<string>('/');
 
   // Mock tRPC query for fetching files
-  const { data: files, isLoading, error, refetch } = trpc.fileManager.getFiles.useQuery({
+  const { data: files, isLoading, error, refetch } = useStubQuery({
     path: currentPath,
     search: searchQuery,
   });
 
   // Mock tRPC mutations
-  const deleteFileMutation = trpc.fileManager.deleteFile.useMutation({
+  const deleteFileMutation = useStubMutation({
     onSuccess: () => refetch(),
   });
 
-  const uploadFileMutation = trpc.fileManager.uploadFile.useMutation({
+  const uploadFileMutation = useStubMutation({
     onSuccess: () => refetch(),
   });
 

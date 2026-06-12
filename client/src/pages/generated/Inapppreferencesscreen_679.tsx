@@ -2,7 +2,19 @@
 import React, { useState } from 'react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
-import { useMutation, useQuery } from '@tanstack/react-query';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 type UserPreferences = {
   enableNotifications: boolean;
@@ -40,7 +52,7 @@ export function InAppPreferencesScreen() {
     queryFn: api.preferences.get,
   });
 
-  const updatePreferencesMutation = useMutation({
+  const updatePreferencesMutation = useStubMutation({
     mutationFn: api.preferences.update,
     onSuccess: () => {
       // Invalidate and refetch after a successful update

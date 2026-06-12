@@ -1,15 +1,27 @@
 // AUTO-GENERATED DRAFT SCREEN: NotificationTransformation
 import React, { useState, useEffect } from 'react';
-import { Switch } from '../components/ui/switch';
-import { Label } from '../components/ui/label';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQuery, useMutation } from '@tanstack/react-query';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define schema for form validation
 const formSchema = z.object({
@@ -49,8 +61,8 @@ const NotificationTransformation: React.FC = () => {
     resolver: zodResolver(formSchema),
   });
 
-  const { data, isLoading, error } = useQuery({ queryKey: ['integrationSettings'], queryFn: fetchIntegrationSettings });
-  const mutation = useMutation({ mutationFn: saveIntegrationSettings });
+  const { data, isLoading, error } = useStubQuery({ queryKey: ['integrationSettings'], queryFn: fetchIntegrationSettings });
+  const mutation = useStubMutation({ mutationFn: saveIntegrationSettings });
 
   useEffect(() => {
     if (data) {

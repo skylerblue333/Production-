@@ -1,15 +1,26 @@
 // AUTO-GENERATED DRAFT SCREEN: AuditTrailScreen
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC setup is correctly configured
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table';
-import { Switch } from './components/ui/switch';
-import { Label } from './components/ui/label';
-import { Skeleton } from './components/ui/skeleton';
-import { Alert, AlertDescription, AlertTitle } from './components/ui/alert';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal, Info } from 'lucide-react'; // Added Info icon for better error/info messages
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the interface for an individual audit log entry
 interface AuditLog {
@@ -59,7 +70,7 @@ const AuditTrailScreen: React.FC = () => {
 
   // tRPC query to fetch audit logs
   // In a real application, pagination and filtering would be added here.
-  const { data, isLoading, isError, error, refetch } = trpc.audit.getAuditLogs.useQuery();
+  const { data, isLoading, isError, error, refetch } = useStubQuery();
 
   // Callback to handle refreshing the audit logs
   const handleRefresh = useCallback(() => {

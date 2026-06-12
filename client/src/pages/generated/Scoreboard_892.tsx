@@ -1,9 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: ScoreBoard
 
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // Assuming shadcn/ui components are in ./ui
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
-import { Skeleton } from './ui/skeleton'; // For loading states
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui components are in ./ui
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Skeleton } from '@/components/ui/skeleton'; // For loading states
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC hooks for demonstration purposes
 const trpc = {
@@ -46,7 +59,7 @@ const trpc = {
 interface ScoreBoardProps {}
 
 const ScoreBoard: React.FC<ScoreBoardProps> = () => {
-  const { data, isLoading, isError } = trpc.arcade.getScoreBoard.useQuery();
+  const { data, isLoading, isError } = useStubQuery();
 
   if (isLoading) {
     return (

@@ -1,14 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoGrantProgram
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup
-import { Button } from './components/ui/button'; // shadcn/ui button
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './components/ui/card'; // shadcn/ui card
-import { Skeleton } from './components/ui/skeleton'; // shadcn/ui skeleton for loading states
-import { Badge } from './components/ui/badge'; // shadcn/ui badge for status
-import { Separator } from './components/ui/separator'; // shadcn/ui separator
+import { Button } from '@/components/ui/button'; // shadcn/ui button
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'; // shadcn/ui card
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui skeleton for loading states
+import { Badge } from '@/components/ui/badge'; // shadcn/ui badge for status
+import { Separator } from '@/components/ui/separator'; // shadcn/ui separator
 import { Lightbulb, CalendarDays, Users } from 'lucide-react'; // Icons
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface GrantProgram {
   id: string;
@@ -22,7 +33,7 @@ interface GrantProgram {
 }
 
 const CryptoGrantProgram: React.FC = () => {
-  const { data, isLoading, isError, error } = trpc.getGrantPrograms.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   if (isLoading) {
     return (

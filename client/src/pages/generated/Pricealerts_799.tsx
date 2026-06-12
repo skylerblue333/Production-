@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: PriceAlerts
 import React, { useState } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { z } from 'zod'; // For validation
 
 // shadcn/ui components (placeholder imports, actual paths might vary)
@@ -13,8 +12,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/components/ui/use-toast';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Assuming tRPC client setup is available globally or passed via context
-// import { trpc } from '@/utils/trpc'; // Placeholder for tRPC client
 
 interface PriceAlert {
   id: string;
@@ -36,19 +47,19 @@ const trpc = {
         { id: '2', cryptocurrency: 'Ethereum', targetPrice: 3500, alertType: 'below', status: 'active', createdAt: new Date().toISOString() },
       ];
     }),
-    create: () => useMutation((newAlert: Omit<PriceAlert, 'id' | 'status' | 'createdAt'>) => {
+    create: () => useStubMutation((newAlert: Omit<PriceAlert, 'id' | 'status' | 'createdAt'>) => {
       // Simulate API call
       return new Promise<PriceAlert>(resolve => setTimeout(() => {
         resolve({ ...newAlert, id: String(Math.random()), status: 'active', createdAt: new Date().toISOString() });
       }, 500));
     }),
-    update: () => useMutation((updatedAlert: PriceAlert) => {
+    update: () => useStubMutation((updatedAlert: PriceAlert) => {
       // Simulate API call
       return new Promise<PriceAlert>(resolve => setTimeout(() => {
         resolve(updatedAlert);
       }, 500));
     }),
-    delete: () => useMutation((id: string) => {
+    delete: () => useStubMutation((id: string) => {
       // Simulate API call
       return new Promise<void>(resolve => setTimeout(() => {
         resolve();

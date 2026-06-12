@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: VideoPlayerModule
 import React, { useState, useEffect, useCallback } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query'; // Placeholder for tRPC hooks
 import { cn } from '@/lib/utils'; // Placeholder for shadcn/ui utility
 import { Button } from '@/components/ui/button'; // Placeholder for shadcn/ui Button
 import { Slider } from '@/components/ui/slider'; // Placeholder for shadcn/ui Slider
 import { Volume2, VolumeX, Play, Pause, Loader2, Maximize, Minimize } from 'lucide-react'; // Placeholder for Lucide icons
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface VideoPlayerProps {
   videoId: string;
@@ -15,7 +27,7 @@ interface VideoPlayerProps {
 
 // Mock tRPC-like hooks for demonstration
 const useVideoData = (videoId: string) => {
-  return useQuery({
+  return useStubQuery({
     queryKey: ['videoData', videoId],
     queryFn: async () => {
       // Simulate API call
@@ -31,7 +43,7 @@ const useVideoData = (videoId: string) => {
 };
 
 const useUpdateVideoProgress = () => {
-  return useMutation({
+  return useStubMutation({
     mutationFn: async (data: { videoId: string; progress: number }) => {
       // Simulate API call to update progress
       await new Promise(resolve => setTimeout(resolve, 500));

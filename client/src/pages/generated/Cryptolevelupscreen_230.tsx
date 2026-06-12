@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoLevelUpScreen
 import React, { useState } from 'react';
-import { trpc } from '@/utils/trpc';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2, Trophy, Star, ArrowUpCircle, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CryptoLevelUpScreenProps {
   userId: string;
@@ -17,13 +29,13 @@ export const CryptoLevelUpScreen: React.FC<CryptoLevelUpScreenProps> = ({ userId
   const [isAnimating, setIsAnimating] = useState(false);
 
   // Fetch user level data
-  const { data: levelData, isLoading, error, refetch } = trpc.user.getLevelData.useQuery(
+  const { data: levelData, isLoading, error, refetch } = useStubQuery(
     { userId },
     { retry: 2, refetchOnWindowFocus: false }
   );
 
   // Level up mutation
-  const levelUpMutation = trpc.user.levelUp.useMutation({
+  const levelUpMutation = useStubMutation({
     onSuccess: () => {
       setIsAnimating(true);
       setTimeout(() => setIsAnimating(false), 3000);

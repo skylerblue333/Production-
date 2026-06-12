@@ -2,8 +2,20 @@
 import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { trpc } from '@/utils/trpc';
 import { z } from 'zod';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const urlSchema = z.string().url({ message: 'Invalid URL format.' });
 
@@ -12,7 +24,7 @@ const UrlShortener: React.FC = () => {
   const [shortUrl, setShortUrl] = useState<string>('');
   const [inputError, setInputError] = useState<string | null>(null);
 
-  const { mutate: shortenUrl, isLoading, error } = trpc.shortenUrl.useMutation({
+  const { mutate: shortenUrl, isLoading, error } = useStubMutation({
     onSuccess: (data) => {
       setShortUrl(data.shortUrl);
       setInputError(null); // Clear input error on success

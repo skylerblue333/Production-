@@ -5,6 +5,19 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal } from 'lucide-react';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface EventLog {
   id: string;
   timestamp: string;
@@ -14,8 +27,7 @@ interface EventLog {
 }
 
 // Placeholder for tRPC hooks - in a real application, these would be generated
-// import { trpc } from '@/utils/trpc';
-// const { data: eventLogs, isLoading, isError, error } = trpc.crypto.getEventLogs.useQuery();
+// const { data: eventLogs, isLoading, isError, error } = useStubQuery();
 
 const CryptoEventLogsScreen: React.FC = () => {
   const [eventLogs, setEventLogs] = useState<EventLog[]>([]);

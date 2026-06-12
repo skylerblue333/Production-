@@ -1,7 +1,6 @@
 // AUTO-GENERATED DRAFT SCREEN: StablecoinManager
 
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
 import { ArrowUpDown, MoreHorizontal, PlusCircle, Loader2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -11,6 +10,19 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { toast } from '@/components/ui/use-toast';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC-like hooks for demonstration
 const trpc = {
@@ -56,12 +68,12 @@ interface Stablecoin {
 }
 
 const StablecoinManager: React.FC = () => {
-  const { data: stablecoins, isLoading, isError, error, refetch } = trpc.stablecoin.list.useQuery();
-  const depositMutation = trpc.stablecoin.deposit.useMutation({
+  const { data: stablecoins, isLoading, isError, error, refetch } = useStubQuery();
+  const depositMutation = useStubMutation({
     onSuccess: () => refetch(),
     onError: (err) => toast({ title: 'Deposit Error', description: err.message, variant: 'destructive' }),
   });
-  const withdrawMutation = trpc.stablecoin.withdraw.useMutation({
+  const withdrawMutation = useStubMutation({
     onSuccess: () => refetch(),
     onError: (err) => toast({ title: 'Withdrawal Error', description: err.message, variant: 'destructive' }),
   });

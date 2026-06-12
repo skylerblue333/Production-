@@ -1,6 +1,18 @@
 // AUTO-GENERATED DRAFT SCREEN: PortfolioRebalancer
 import React, { useState } from 'react';
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Placeholder for tRPC client setup
 // In a real application, this would be configured to connect to your tRPC server.
@@ -41,7 +53,7 @@ const fetchPortfolioData = async (): Promise<PortfolioData> => {
 };
 
 const PortfolioRebalancer: React.FC = () => {
-  const { data, isLoading, error } = trpc.portfolio.getPortfolio.useQuery();
+  const { data, isLoading, error } = useStubQuery();
   const [rebalanceAmount, setRebalanceAmount] = useState<number>(0);
 
   const handleRebalance = () => {

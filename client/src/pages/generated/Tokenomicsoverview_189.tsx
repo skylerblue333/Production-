@@ -3,6 +3,19 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Define the shape of the tokenomics data. In a real application, this would come from your tRPC schema.
 interface TokenomicsData {
   supplyDistribution: string;
@@ -12,7 +25,6 @@ interface TokenomicsData {
 }
 
 // Mock tRPC hook for demonstration. Replace with actual tRPC client integration.
-// Example: import { trpc } from '@/utils/trpc';
 const useTokenomicsOverviewQuery = (): {
   data: TokenomicsData | undefined;
   isLoading: boolean;

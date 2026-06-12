@@ -1,12 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoCoinDetailPage
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 type CoinDetail = {
   id: string;
@@ -21,7 +32,7 @@ type CoinDetail = {
 
 export function CryptoCoinDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const { data, isLoading, isError, error } = trpc.coin.getCoinDetail.useQuery({ coinId: id! });
+  const { data, isLoading, isError, error } = useStubQuery({ coinId: id! });
 
   if (isLoading) {
     return (

@@ -8,6 +8,19 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // 
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons'; // Example icons for theme toggle
 import { Button } from '@/components/ui/button'; // shadcn/ui button
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Define a mock tRPC client and types for demonstration
 // In a real app, these would come from your tRPC setup
 type DashboardData = {
@@ -50,7 +63,7 @@ const trpc = {
 };
 
 export function CryptoCustodianDashboard() {
-  const { data, isLoading, error } = trpc.dashboard.getData.useQuery();
+  const { data, isLoading, error } = useStubQuery();
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
   const toggleTheme = () => {

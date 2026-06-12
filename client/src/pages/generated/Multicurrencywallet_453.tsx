@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: MultiCurrencyWallet
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { createTRPCReact } from '@trpc/react-query';
-import type { AppRouter } from '../trpc';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
-import { Button } from './ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
 import { Loader2, Moon, Sun } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme'; // Assuming a simple theme hook
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 export const trpc = createTRPCReact<AppRouter>();
 
@@ -38,7 +49,7 @@ interface WalletBalance {
  */
 const MultiCurrencyWallet: React.FC = () => {
   const { theme, toggleTheme } = useTheme(); // Use the theme hook
-  const { data, isLoading, isError, error, refetch } = trpc.getBalances.useQuery({ userId: 'user123' });
+  const { data, isLoading, isError, error, refetch } = useStubQuery({ userId: 'user123' });
 
   if (isLoading) {
     return (

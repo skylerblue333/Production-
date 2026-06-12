@@ -1,6 +1,18 @@
 // AUTO-GENERATED DRAFT SCREEN: VideoCallScreen
 import React, { useState, useEffect } from 'react';
-import { trpc } from '../trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface VideoCallScreenProps {
   callId: string;
@@ -18,7 +30,7 @@ const VideoCallScreen: React.FC<VideoCallScreenProps> = ({ callId, userId }) => 
   };
 
   // Example tRPC hook (assuming a `videoCall` procedure exists on the server)
-  const { data, isLoading: trpcLoading, error: trpcError } = trpc.hello.useQuery({ name: userId });
+  const { data, isLoading: trpcLoading, error: trpcError } = useStubQuery({ name: userId });
 
   useEffect(() => {
     // Simulate loading for video call setup

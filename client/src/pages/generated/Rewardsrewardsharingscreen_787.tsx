@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: RewardsRewardSharingScreen
 import React from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query'; // Using @tanstack/react-query for tRPC hooks
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './components/ui/card';
-import { Button } from './components/ui/button';
-import { Input } from './components/ui/input';
-import { Switch } from './components/ui/switch';
-import { Label } from './components/ui/label';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration purposes
 // In a real application, this would be configured to connect to a tRPC server
@@ -64,9 +76,9 @@ interface ShareOption {
 
 const RewardsRewardSharingScreen: React.FC = () => {
   // tRPC hooks for data fetching and mutations
-  const { data: rewards, isLoading: isLoadingRewards, error: rewardsError } = useQuery({ queryKey: ['rewards', 'getRewards'], queryFn: trpc.rewards.getRewards });
-  const { data: shareOptions, isLoading: isLoadingShareOptions, error: shareOptionsError } = useQuery({ queryKey: ['rewards', 'getShareOptions'], queryFn: trpc.rewards.getShareOptions });
-  const shareRewardMutation = useMutation({ mutationFn: trpc.rewards.shareReward });
+  const { data: rewards, isLoading: isLoadingRewards, error: rewardsError } = useStubQuery({ queryKey: ['rewards', 'getRewards'], queryFn: trpc.rewards.getRewards });
+  const { data: shareOptions, isLoading: isLoadingShareOptions, error: shareOptionsError } = useStubQuery({ queryKey: ['rewards', 'getShareOptions'], queryFn: trpc.rewards.getShareOptions });
+  const shareRewardMutation = useStubMutation({ mutationFn: trpc.rewards.shareReward });
 
   // State for sharing input (e.g., recipient, amount)
   const [recipient, setRecipient] = React.useState<string>('');

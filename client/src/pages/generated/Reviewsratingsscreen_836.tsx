@@ -1,18 +1,30 @@
 // AUTO-GENERATED DRAFT SCREEN: ReviewsRatingsScreen
 import React, { useState } from 'react';
-import { trpc } from './utils/trpc';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 // shadcn/ui components
-import { Button } from './components/ui/button';
-import { Input } from './components/ui/input';
-import { Textarea } from './components/ui/textarea';
-import { Label } from './components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card';
-import { Separator } from './components/ui/separator';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 import { Star } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define Zod schema for review form validation
 const reviewSchema = z.object({
@@ -27,8 +39,8 @@ type ReviewFormInputs = z.infer<typeof reviewSchema>;
 const ReviewsRatingsScreen: React.FC = () => {
   const [productId, setProductId] = useState('product1'); // Example product ID
 
-  const { data: reviews, isLoading, isError, error, refetch } = trpc.review.list.useQuery({ productId });
-  const addReviewMutation = trpc.review.add.useMutation({
+  const { data: reviews, isLoading, isError, error, refetch } = useStubQuery({ productId });
+  const addReviewMutation = useStubMutation({
     onSuccess: () => {
       alert('Review added successfully!');
       refetch(); // Refetch reviews after successful submission

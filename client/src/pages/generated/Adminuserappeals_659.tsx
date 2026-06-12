@@ -1,7 +1,20 @@
 // AUTO-GENERATED DRAFT SCREEN: AdminUserAppeals
 import React, { useState, useEffect } from 'react';
-import { Button } from './components/ui/button'; // Placeholder for shadcn/ui button
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'; // Placeholder for shadcn/ui card
+import { Button } from '@/components/ui/button'; // Placeholder for shadcn/ui button
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Placeholder for shadcn/ui card
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface UserAppeal {
   id: string;

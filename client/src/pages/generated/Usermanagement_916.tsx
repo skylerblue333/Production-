@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: UserManagement
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query'; // Placeholder for tRPC hooks
 import { Button } from '@/components/ui/button'; // shadcn/ui button
 import { Input } from '@/components/ui/input'; // shadcn/ui input
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'; // shadcn/ui table
 import { Switch } from '@/components/ui/switch'; // shadcn/ui switch
 import { Label } from '@/components/ui/label'; // shadcn/ui label
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface User {
   id: string;

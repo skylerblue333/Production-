@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoTwitterFeed
 import React, { useState, useEffect, useCallback } from 'react';
-import { trpc } from './trpc';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { RefreshCw, Heart, MessageCircle, Share2, Twitter } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the structure of a Tweet for strong typing
 export interface Tweet {
@@ -22,7 +34,7 @@ export interface Tweet {
 
 const CryptoTwitterFeed: React.FC = () => {
   // tRPC hook for fetching the latest crypto tweets
-  const { data, isLoading, isError, error, refetch, isFetching } = trpc.tweet.getLatest.useQuery(undefined, {
+  const { data, isLoading, isError, error, refetch, isFetching } = useStubQuery(undefined, {
     refetchInterval: 60000, // Auto-refresh every minute
     staleTime: 30000,
   });

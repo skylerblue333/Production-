@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: GroupInvites
 import React from 'react';
-import { useQuery, useMutation, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner'; // Assuming sonner is installed for toasts
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client and types for demonstration
 interface GroupInvite {
@@ -85,10 +97,10 @@ const trpc = {
 const queryClient = new QueryClient();
 
 const GroupInvites: React.FC = () => {
-  const { data: invites, isLoading, isError, error } = trpc.group.getInvites.useQuery();
-  const acceptInviteMutation = trpc.group.acceptInvite.useMutation();
-  const declineInviteMutation = trpc.group.declineInvite.useMutation();
-  const sendInviteMutation = trpc.group.sendInvite.useMutation();
+  const { data: invites, isLoading, isError, error } = useStubQuery();
+  const acceptInviteMutation = useStubMutation();
+  const declineInviteMutation = useStubMutation();
+  const sendInviteMutation = useStubMutation();
 
   const [newInviteGroupId, setNewInviteGroupId] = React.useState('');
   const [newInviteUserId, setNewInviteUserId] = React.useState('');

@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: NewsFeed
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils'; // Assuming a utility for conditional class names
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the shape of a news item
 interface NewsItem {
@@ -17,7 +29,7 @@ interface NewsItem {
 
 // --- tRPC Integration Placeholder ---
 // In a real application, this would be replaced with actual tRPC client setup.
-// For example, you might have a `trpc.news.getNewsFeed.useQuery()` hook.
+// For example, you might have a `useStubQuery()` hook.
 // For this task, we simulate an asynchronous data fetch using react-query.
 const useNewsFeed = () => {
   return useQuery<NewsItem[], Error>({

@@ -7,7 +7,6 @@ import { format } from 'date-fns';
 import { Calendar as CalendarIcon, Clock, Trash2, AlertCircle, Loader2, BellRing } from 'lucide-react';
 
 // Assuming tRPC is set up in the project
-import { trpc } from '@/utils/trpc';
 
 // shadcn/ui components (mock imports for the environment)
 import { Button } from '@/components/ui/button';
@@ -19,6 +18,19 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/components/ui/use-toast';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const scheduleSchema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters'),
@@ -39,9 +51,9 @@ export default function NotificationSchedulingScreen() {
     data: scheduledNotifications, 
     isLoading: isLoadingNotifications, 
     error: fetchError 
-  } = trpc.notifications.getScheduled.useQuery();
+  } = useStubQuery();
   
-  const scheduleMutation = trpc.notifications.schedule.useMutation({
+  const scheduleMutation = useStubMutation({
     onSuccess: () => {
       toast({ title: 'Success', description: 'Notification scheduled successfully.' });
       utils.notifications.getScheduled.invalidate();
@@ -52,7 +64,7 @@ export default function NotificationSchedulingScreen() {
     }
   });
 
-  const cancelMutation = trpc.notifications.cancel.useMutation({
+  const cancelMutation = useStubMutation({
     onSuccess: () => {
       toast({ title: 'Cancelled', description: 'Scheduled notification cancelled.' });
       utils.notifications.getScheduled.invalidate();

@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: AdminUserRestoration
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup
-import { Button } from './components/ui/button'; // shadcn/ui button
-import { Input } from './components/ui/input'; // shadcn/ui input
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './components/ui/card'; // shadcn/ui card
-import { Label } from './components/ui/label'; // shadcn/ui label
-import { Switch } from './components/ui/switch'; // shadcn/ui switch
+import { Button } from '@/components/ui/button'; // shadcn/ui button
+import { Input } from '@/components/ui/input'; // shadcn/ui input
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'; // shadcn/ui card
+import { Label } from '@/components/ui/label'; // shadcn/ui label
+import { Switch } from '@/components/ui/switch'; // shadcn/ui switch
 import { useTheme } from './context/theme-provider'; // Assuming a theme provider for dark mode
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface User {
   id: string;
@@ -24,12 +35,12 @@ const AdminUserRestoration: React.FC = () => {
     setIsDarkMode(theme === 'dark');
   }, [theme]);
 
-  const { data: user, isLoading, isError, error, refetch } = trpc.admin.getUserForRestoration.useQuery(
+  const { data: user, isLoading, isError, error, refetch } = useStubQuery(
     { userId },
     { enabled: !!userId, retry: false }
   );
 
-  const restoreUserMutation = trpc.admin.restoreUser.useMutation({
+  const restoreUserMutation = useStubMutation({
     onSuccess: () => {
       alert('User restored successfully!');
       setUserId('');

@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: NotificationTypes
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC hooks integrate with react-query
 import { Switch } from '@/components/ui/switch'; // shadcn/ui switch
 import { Label } from '@/components/ui/label';   // shadcn/ui label
 import { useTheme } from 'next-themes'; // For dark theme
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration. In a real app, this would be generated.
 const trpc = {
@@ -47,8 +59,8 @@ interface NotificationType {
 
 const NotificationTypes: React.FC = () => {
   const { theme, setTheme } = useTheme();
-  const { data, isLoading, isError, error, refetch } = trpc.notification.getNotificationTypes.useQuery();
-  const { mutate: updateNotification, isLoading: isUpdating } = trpc.notification.updateNotificationType.useMutation();
+  const { data, isLoading, isError, error, refetch } = useStubQuery();
+  const { mutate: updateNotification, isLoading: isUpdating } = useStubMutation();
 
   const handleToggle = useCallback((id: string, enabled: boolean) => {
     updateNotification({ id, enabled });

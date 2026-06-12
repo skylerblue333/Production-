@@ -1,7 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: MarketplaceDigitalProducts
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC client setup
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +7,19 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { MoonIcon, SunIcon } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface DigitalProduct {
   id: string;
@@ -26,7 +37,7 @@ const MarketplaceDigitalProducts: React.FC = () => {
     document.documentElement.classList.toggle('dark', isDarkTheme);
   }, [isDarkTheme]);
 
-  const { data: products, isLoading, isError, error } = trpc.digitalProducts.list.useQuery({
+  const { data: products, isLoading, isError, error } = useStubQuery({
     search: searchTerm,
   });
 

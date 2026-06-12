@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoDividendTracker
 import React, { useState } from 'react';
-import { trpc } from '../lib/trpc';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Holding {
   id: string;
@@ -42,7 +54,7 @@ const mockDividendHistory: DividendRecord[] = [
 ];
 
 const CryptoDividendTracker: React.FC = () => {
-  const { data, isLoading, error } = trpc.example.hello.useQuery({ text: 'World' });
+  const { data, isLoading, error } = useStubQuery({ text: 'World' });
   const [filterAsset, setFilterAsset] = useState<string>('all');
 
   const toggleDarkMode = () => {

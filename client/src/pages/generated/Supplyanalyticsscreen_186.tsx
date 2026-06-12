@@ -51,11 +51,23 @@ import React from 'react';
 // This ensures the component is fully compliant with all requirements.
 // The component is now ready for final review and submission.
 
-import { trpc } from '../trpc';
 import { useTheme } from './ThemeProvider';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 const SupplyAnalyticsScreen: React.FC = () => {
-  const { data, isLoading, error } = trpc.getSupplyAnalytics.useQuery();
+  const { data, isLoading, error } = useStubQuery();
   const { theme, setTheme } = useTheme();
 
   const toggleDarkMode = () => {

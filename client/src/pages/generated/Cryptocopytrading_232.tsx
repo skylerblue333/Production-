@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoCopyTrading
 import React, { useState } from 'react';
-import { trpc } from '../../trpc';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/card';
 import { Button } from '@ui/button';
 import { Switch } from '@ui/switch';
@@ -8,6 +7,19 @@ import { Label } from '@ui/label';
 import { Separator } from '@ui/separator';
 import { Input } from '@ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@ui/table';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Trader {
   id: string;
@@ -25,7 +37,7 @@ const mockTraders: Trader[] = [
 ];
 
 const CryptoCopyTrading: React.FC = () => {
-  const { data, isLoading, isError, error, refetch } = trpc.hello.useQuery();
+  const { data, isLoading, isError, error, refetch } = useStubQuery();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 

@@ -1,20 +1,31 @@
 // AUTO-GENERATED DRAFT SCREEN: VerifiableCredentialsScreen
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card';
-import { Button } from './components/ui/button';
-import { Input } from './components/ui/input';
-import { Label } from './components/ui/label';
-import { Switch } from './components/ui/switch';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from './trpc'; // Import the tRPC client instance
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 // Main component
 const VerifiableCredentialsScreen: React.FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [newCredentialRecipient, setNewCredentialRecipient] = useState('');
   const [newCredentialType, setNewCredentialType] = useState('');
 
-  const { data: credentials, isLoading, isError, error } = trpc.vc.getCredentials.useQuery();
-  const issueCredentialMutation = trpc.vc.issueCredential.useMutation();
+  const { data: credentials, isLoading, isError, error } = useStubQuery();
+  const issueCredentialMutation = useStubMutation();
 
   const handleIssueCredential = () => {
     if (newCredentialRecipient && newCredentialType) {

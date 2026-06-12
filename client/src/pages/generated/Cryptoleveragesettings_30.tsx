@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoLeverageSettings
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup for API calls
-import { Switch } from './components/ui/switch'; // shadcn/ui Switch component for toggling features
-import { Label } from './components/ui/label'; // shadcn/ui Label component for accessibility
-import { Slider } from './components/ui/slider'; // shadcn/ui Slider component for numerical input
-import { Button } from './components/ui/button'; // shadcn/ui Button component for actions
+import { Switch } from '@/components/ui/switch'; // shadcn/ui Switch component for toggling features
+import { Label } from '@/components/ui/label'; // shadcn/ui Label component for accessibility
+import { Slider } from '@/components/ui/slider'; // shadcn/ui Slider component for numerical input
+import { Button } from '@/components/ui/button'; // shadcn/ui Button component for actions
 import { useTheme } from 'next-themes'; // For managing dark/light theme
 import { toast } from 'sonner'; // For displaying user notifications
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the shape of our leverage settings data
 type LeverageSettings = {
@@ -32,7 +43,7 @@ const CryptoLeverageSettings: React.FC = () => {
   const isDarkTheme = theme === 'dark';
 
   // Fetch current leverage settings from the backend using tRPC
-  const { data, isLoading, isError, error, refetch } = trpc.leverage.getSettings.useQuery();
+  const { data, isLoading, isError, error, refetch } = useStubQuery();
 
   // State to manage the form inputs, initialized with fetched data or defaults
   const [settings, setSettings] = useState<LeverageSettings>({
@@ -48,7 +59,7 @@ const CryptoLeverageSettings: React.FC = () => {
   }, [data]);
 
   // tRPC mutation hook for updating settings on the server
-  const updateSettingsMutation = trpc.leverage.updateSettings.useMutation({
+  const updateSettingsMutation = useStubMutation({
     onSuccess: () => {
       toast.success('Leverage settings saved successfully!');
       refetch(); // Re-fetch settings to ensure UI is up-to-date

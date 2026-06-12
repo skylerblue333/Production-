@@ -1,7 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: NodeDashboard
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Simulating tRPC hook usage with react-query
 import { cn } from '@/lib/utils'; // Simulating shadcn/ui utility
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define types for node data
 interface NodeData {

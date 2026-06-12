@@ -3,13 +3,25 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Loader2 } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const formSchema = z.object({
   documentType: z.string().min(1, { message: 'Document type is required.' }),
@@ -30,7 +42,7 @@ const DocumentVerificationScreen: React.FC = () => {
     },
   });
 
-  const { mutate: verifyDocument, isLoading, error } = trpc.onboarding.verifyDocument.useMutation();
+  const { mutate: verifyDocument, isLoading, error } = useStubMutation();
 
   const onSubmit = async (data: FormData) => {
     try {

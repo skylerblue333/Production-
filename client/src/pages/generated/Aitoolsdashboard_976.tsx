@@ -9,6 +9,19 @@ import { Skeleton } from '@/components/ui/skeleton'; // For loading states
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // For error handling
 import { Terminal } from 'lucide-react'; // Example icon for Alert
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Mock tRPC hook for demonstration purposes
 const useQuery = <T,>(key: string, options?: { initialData?: T }) => {
   const [data, setData] = useState<T | undefined>(options?.initialData);

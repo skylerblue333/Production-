@@ -1,9 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoCliffCalculator
 import React, { useState, useEffect, useCallback } from 'react';
-import { cn } from './lib/utils';
-import { Input } from './components/ui/input';
-import { Label } from './components/ui/label';
-import { Button } from './components/ui/button';
+import { cn } from '@/lib/utils';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CryptoCliffCalculatorProps {
   // Define props here if any
@@ -58,7 +71,7 @@ const CryptoCliffCalculator: React.FC<CryptoCliffCalculatorProps> = () => {
   const [tokenPrice, setTokenPrice] = useState<number>(0.5);
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
-  const { data, isLoading, error } = trpc.crypto.getCliffData.useQuery({
+  const { data, isLoading, error } = useStubQuery({
     initialInvestment,
     cliffDuration,
     vestingDuration,

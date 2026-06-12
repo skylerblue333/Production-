@@ -1,7 +1,6 @@
 // AUTO-GENERATED DRAFT SCREEN: NftMarketplaceScreen
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@trpc/react-query';
-import { trpc } from '@/utils/trpc';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,6 +8,19 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Search, Filter, AlertCircle, ShoppingCart } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Types
 interface NFT {
@@ -26,13 +38,13 @@ export const NftMarketplaceScreen: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
 
   // Mock tRPC query for NFTs
-  const { data: nfts, isLoading, error } = trpc.nft.getMarketplaceListings.useQuery({
+  const { data: nfts, isLoading, error } = useStubQuery({
     search: searchQuery,
     category: activeCategory === 'All' ? undefined : activeCategory,
   });
 
   // Mock tRPC mutation for buying NFT
-  const buyNftMutation = trpc.nft.buy.useMutation();
+  const buyNftMutation = useStubMutation();
 
   const handleBuy = async (nftId: string) => {
     try {

@@ -1,9 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: CommentThread
 import React from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from './components/ui/avatar';
-import { Button } from './components/ui/button';
-import { Textarea } from './components/ui/textarea';
-import { Card, CardContent, CardHeader } from './components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define types for comments and authors
 interface Comment {
@@ -96,8 +109,8 @@ interface CommentThreadProps {
 const CommentThread: React.FC<CommentThreadProps> = ({ postId }) => {
   const [newCommentContent, setNewCommentContent] = React.useState<string>('');
 
-  const { data: comments, isLoading: isLoadingComments, error: commentsError } = trpc.comment.list.useQuery({ postId });
-  const { mutate: addComment, isLoading: isLoadingPost, error: addCommentError } = trpc.comment.add.useMutation();
+  const { data: comments, isLoading: isLoadingComments, error: commentsError } = useStubQuery({ postId });
+  const { mutate: addComment, isLoading: isLoadingPost, error: addCommentError } = useStubMutation();
 
   const handleSubmit = async () => {
     if (newCommentContent.trim()) {

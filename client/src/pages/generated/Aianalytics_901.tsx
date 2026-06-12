@@ -7,6 +7,19 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { useTheme } from '@/lib/utils'; // Placeholder for theme context
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface AIAnalyticsData {
   totalQueries: number;
   successfulQueries: number;
@@ -25,7 +38,7 @@ const AIAnalytics: React.FC = () => {
 
   // Placeholder for actual tRPC hook integration.
   // In a real scenario, you would use something like:
-  // const { data, isLoading, error, refetch } = trpc.aiAnalytics.getAnalytics.useQuery();
+  // const { data, isLoading, error, refetch } = useStubQuery();
   const fetchAnalyticsData = async () => {
     setLoading(true);
     setError(null);

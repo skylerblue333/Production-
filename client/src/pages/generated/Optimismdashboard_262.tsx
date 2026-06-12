@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: OptimismDashboard
 import React, { useState, useMemo } from 'react';
-import { trpc } from '@/utils/trpc';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -9,6 +8,19 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { ArrowUpRight, ArrowDownRight, Activity, Wallet, RefreshCw, AlertCircle } from 'lucide-react';
 
 import { TokenData, ChartData } from './types';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 export default function OptimismDashboard() {
   const [timeRange, setTimeRange] = useState<'1D' | '1W' | '1M' | '1Y'>('1W');
@@ -19,7 +31,7 @@ export default function OptimismDashboard() {
     isLoading: isLoadingPortfolio, 
     error: portfolioError, 
     refetch: refetchPortfolio 
-  } = trpc.optimism.getPortfolio.useQuery(undefined, {
+  } = useStubQuery(undefined, {
     retry: 2,
   });
 
@@ -27,7 +39,7 @@ export default function OptimismDashboard() {
     data: chartData, 
     isLoading: isLoadingChart, 
     error: chartError 
-  } = trpc.optimism.getHistory.useQuery({ range: timeRange }, {
+  } = useStubQuery({ range: timeRange }, {
     retry: 2,
   });
 

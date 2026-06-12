@@ -28,8 +28,20 @@ import {
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Laptop, Smartphone, Globe, AlertCircle, ShieldAlert, CheckCircle2, XCircle, Clock } from 'lucide-react';
-import { trpc } from '@/utils/trpc';
 import { formatDistanceToNow } from 'date-fns';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Session {
   id: string;
@@ -63,16 +75,16 @@ export default function CryptoSessionManager() {
   const [selectedSession, setSelectedSession] = useState<string | null>(null);
   const [isRevokeDialogOpen, setIsRevokeDialogOpen] = useState(false);
 
-  const { data: sessions, isLoading, isError, error, refetch } = trpc.security.getSessions.useQuery(undefined, {
+  const { data: sessions, isLoading, isError, error, refetch } = useStubQuery(undefined, {
     retry: 2,
     refetchOnWindowFocus: false,
   });
 
-  const revokeMutation = trpc.security.revokeSession.useMutation({
+  const revokeMutation = useStubMutation({
     onSuccess: () => { setIsRevokeDialogOpen(false); setSelectedSession(null); refetch(); },
   });
 
-  const revokeAllMutation = trpc.security.revokeAllOtherSessions.useMutation({
+  const revokeAllMutation = useStubMutation({
     onSuccess: () => { refetch(); },
   });
 

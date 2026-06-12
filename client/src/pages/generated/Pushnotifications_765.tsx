@@ -4,8 +4,20 @@ import React, { useState, useEffect } from 'react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
 import { SunIcon, MoonIcon, BellIcon } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface PushNotificationsProps {
   userId: string;
@@ -18,7 +30,7 @@ const PushNotifications: React.FC<PushNotificationsProps> = ({ userId }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   // Simulate fetching initial state
-  const { data, isLoading: trpcLoading, error } = trpc.notifications.getSettings.useQuery({ userId });
+  const { data, isLoading: trpcLoading, error } = useStubQuery({ userId });
 
   useEffect(() => {
     if (data) {
@@ -36,7 +48,7 @@ const PushNotifications: React.FC<PushNotificationsProps> = ({ userId }) => {
     }
   }, [isDarkTheme]);
 
-  const mutation = trpc.notifications.updateSettings.useMutation({
+  const mutation = useStubMutation({
     onSuccess: () => {
       toast({
         title: 'Success',

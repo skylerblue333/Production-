@@ -1,11 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: Skycoin4444PerformanceAnalyticsScreen
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC hooks integrate with react-query
-import { trpc } from './utils/trpc'; // Placeholder for tRPC client setup
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card component
 import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton for loading states
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui Alert for error handling
 import { Terminal, TrendingUp, TrendingDown, Info } from 'lucide-react'; // Example icons for alerts and metrics
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the structure for performance data
 interface PerformanceData {
@@ -45,7 +56,7 @@ const Skycoin4444PerformanceAnalyticsScreen: React.FC<Skycoin4444PerformanceAnal
         { metric: 'Transaction Count (24h)', value: 150000, change: 10.05, unit: '', description: 'Number of transactions in the last 24 hours' },
       ];
     },
-    // In a real application, you would use trpc.crypto.getPerformanceAnalytics.useQuery();
+    // In a real application, you would use useStubQuery();
     // For now, we are simulating the data fetching process.
   });
 

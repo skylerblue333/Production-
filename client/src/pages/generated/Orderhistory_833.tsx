@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: OrderHistory
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Placeholder for shadcn/ui Card
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'; // Placeholder for shadcn/ui Table
 import { Skeleton } from '@/components/ui/skeleton'; // Placeholder for shadcn/ui Skeleton
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // Placeholder for shadcn/ui Alert
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'; // Placeholder for an icon
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define types for order data
 interface OrderItem {

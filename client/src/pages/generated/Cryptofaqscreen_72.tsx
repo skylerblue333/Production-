@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoFaqScreen
 import React, { useState } from 'react';
-import { trpc } from '@/utils/trpc';
 import {
   Accordion,
   AccordionContent,
@@ -12,6 +11,19 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AlertCircle, Search, HelpCircle } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Types
 interface FAQ {
@@ -31,7 +43,7 @@ export default function CryptoFaqScreen() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   // tRPC query for fetching FAQs
-  const { data: faqs, isLoading, error, refetch } = trpc.faq.getFaqs.useQuery(
+  const { data: faqs, isLoading, error, refetch } = useStubQuery(
     { search: searchQuery, category: activeCategory },
     {
       staleTime: 1000 * 60 * 5, // 5 minutes
@@ -40,7 +52,7 @@ export default function CryptoFaqScreen() {
   );
 
   // tRPC query for fetching categories
-  const { data: categories, isLoading: isLoadingCategories } = trpc.faq.getCategories.useQuery();
+  const { data: categories, isLoading: isLoadingCategories } = useStubQuery();
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);

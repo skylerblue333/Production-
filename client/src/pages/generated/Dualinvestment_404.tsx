@@ -1,7 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: DualInvestment
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { trpc } from '../trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface DualInvestmentProps {
   // Define props if any
@@ -12,7 +24,7 @@ const DualInvestment: React.FC<DualInvestmentProps> = () => {
   const [currency, setCurrency] = useState<string>('USDT');
 
   // tRPC hook for data fetching
-  const { data, isLoading: trpcLoading, error: trpcError } = trpc.dualInvestment.getData.useQuery();
+  const { data, isLoading: trpcLoading, error: trpcError } = useStubQuery();
 
   const handleInvest = () => {
     // Simulate investment logic, potentially using a tRPC mutation

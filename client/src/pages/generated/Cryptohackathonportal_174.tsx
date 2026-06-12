@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoHackathonPortal
 import React from 'react';
 import { useTheme } from 'next-themes';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
 import { ThemeToggle } from './theme-toggle';
-import { trpc } from '../trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Hackathon {
   id: string;
@@ -14,7 +26,7 @@ interface Hackathon {
 }
 
 const CryptoHackathonPortal: React.FC = () => {
-  const { data, isLoading, error } = trpc.hackathons.useQuery({ limit: 5 });
+  const { data, isLoading, error } = useStubQuery({ limit: 5 });
 
   if (isLoading) {
     return (

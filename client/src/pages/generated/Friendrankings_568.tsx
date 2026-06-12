@@ -1,6 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: FriendRankings
 import React from 'react';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface FriendRanking {
   id: string;
   name: string;
@@ -9,7 +22,7 @@ interface FriendRanking {
 }
 
 // Placeholder for tRPC hooks - would typically fetch data here
-// For example: const { data, isLoading, isError, error } = trpc.leaderboards.getFriendRankings.useQuery();
+// For example: const { data, isLoading, isError, error } = useStubQuery();
 const useFriendRankings = () => {
   // Simulate loading and data for demonstration
   const isLoading = false;

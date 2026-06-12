@@ -11,6 +11,19 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { AlertCircle, ChevronLeft, ChevronRight, ArrowUp, ArrowDown, ArrowUpDown, XCircle, Search, Trophy } from 'lucide-react';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface RankingItem {
   id: string;
   name: string;
@@ -59,7 +72,7 @@ const LeaderboardsMutualRankingsScreen: React.FC = () => {
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
   const [itemsPerPage, setItemsPerPage] = useState<number>(ITEMS_PER_PAGE_OPTIONS[0]);
 
-  const { data, isLoading, isError, error } = useQuery([`leaderboards.getMutualRankings`]);
+  const { data, isLoading, isError, error } = useStubQuery([`leaderboards.getMutualRankings`]);
 
   useEffect(() => { setCurrentPage(1); }, [searchTerm, itemsPerPage]);
 

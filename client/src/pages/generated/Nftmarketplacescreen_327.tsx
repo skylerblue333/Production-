@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: NftMarketplaceScreen
 import React, { useState, useMemo } from 'react';
-import { trpc } from '@/utils/trpc';
 import {
   Card,
   CardContent,
@@ -16,6 +15,19 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Search, Filter, AlertCircle, ShoppingCart, Heart, TrendingUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Types
 interface NFT {
@@ -101,7 +113,7 @@ export default function NftMarketplaceScreen() {
   const [activeTab, setActiveTab] = useState('trending');
 
   // tRPC Hooks
-  const { data: nfts, isLoading, error, refetch } = trpc.nft.getMarketplaceItems.useQuery(
+  const { data: nfts, isLoading, error, refetch } = useStubQuery(
     { category: activeTab, limit: 12 },
     { 
       staleTime: 60000,
@@ -109,8 +121,8 @@ export default function NftMarketplaceScreen() {
     }
   );
 
-  const buyMutation = trpc.nft.buyItem.useMutation();
-  const likeMutation = trpc.nft.toggleLike.useMutation();
+  const buyMutation = useStubMutation();
+  const likeMutation = useStubMutation();
 
   // Handlers
   const handleBuy = async (id: string) => {

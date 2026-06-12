@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoSavingsAccountScreen
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { cn } from '@/lib/utils'; // Assuming shadcn/ui utils path
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration. In a real app, this would be generated.
 const trpc = {
@@ -57,7 +69,7 @@ interface CryptoSavingsAccountScreenProps {
 }
 
 export const CryptoSavingsAccountScreen: React.FC<CryptoSavingsAccountScreenProps> = () => {
-  const { data, isLoading, isError, error } = trpc.crypto.getSavingsAccount.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
   const [depositAmount, setDepositAmount] = React.useState<string>('');
 
   const handleDeposit = () => {

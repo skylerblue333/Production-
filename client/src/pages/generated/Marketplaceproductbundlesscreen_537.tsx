@@ -1,10 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: MarketplaceProductBundlesScreen
 import React, { useState, useEffect } from 'react';
-import { Button } from './ui/button'; // Assuming shadcn/ui button
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // Assuming shadcn/ui card
-import { Switch } from './ui/switch'; // Assuming shadcn/ui switch for dark mode
-import { Label } from './ui/label'; // Assuming shadcn/ui label
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card
+import { Switch } from '@/components/ui/switch'; // Assuming shadcn/ui switch for dark mode
+import { Label } from '@/components/ui/label'; // Assuming shadcn/ui label
 import { Loader2 } from 'lucide-react'; // Assuming Lucide icons for loading spinner
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC hook for data fetching
 const trpc = {

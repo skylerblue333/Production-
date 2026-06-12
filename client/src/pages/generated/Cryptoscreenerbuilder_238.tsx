@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoScreenerBuilder
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SunIcon, MoonIcon } from '@radix-ui/react-icons';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ScreenerCriteria {
   priceRange: [number, number];
@@ -32,7 +43,7 @@ const CryptoScreenerBuilder: React.FC = () => {
   });
 
   // Placeholder for tRPC query
-  const { data, isLoading, error } = trpc.crypto.getFilteredCryptos.useQuery(criteria);
+  const { data, isLoading, error } = useStubQuery(criteria);
 
   useEffect(() => {
     if (isDarkMode) {

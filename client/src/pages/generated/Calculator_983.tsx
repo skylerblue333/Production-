@@ -1,6 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: Calculator
 import React, { useState, useEffect } from 'react';
-import { Button } from './components/ui/button';
+import { Button } from '@/components/ui/button';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration purposes
 const mockTrpcClient = {
@@ -56,7 +69,7 @@ const Calculator: React.FC = () => {
   const [history, setHistory] = useState<string[]>([]);
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
-  const { data, isLoading, isError, error, refetch } = trpc.calculate.useQuery(input, {
+  const { data, isLoading, isError, error, refetch } = useStubQuery(input, {
     enabled: false, // Only run query manually
     onSuccess: (data) => {
       setDisplay(data.result);

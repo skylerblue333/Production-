@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoMarginTradingScreen
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,9 +7,22 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { useTheme } from 'next-themes'; // For dark theme
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Mock tRPC hook for fetching margin trading data
 const useMarginTradingData = () => {
-  return useQuery({
+  return useStubQuery({
     queryKey: ['marginTradingData'],
     queryFn: async () => {
       // Simulate API call

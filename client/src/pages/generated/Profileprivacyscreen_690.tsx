@@ -6,6 +6,19 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Mock tRPC hook for fetching and updating privacy settings
 const usePrivacySettings = () => {
   const [settings, setSettings] = useState({
@@ -21,7 +34,7 @@ const usePrivacySettings = () => {
     const timer = setTimeout(() => {
       try {
         // In a real app, fetch from tRPC
-        // const data = await trpc.privacy.getSettings.useQuery();
+        // const data = await useStubQuery();
         setSettings({
           showProfile: true,
           allowMessages: false,
@@ -41,7 +54,7 @@ const usePrivacySettings = () => {
     setError(null);
     try {
       // In a real app, use tRPC mutation
-      // await trpc.privacy.updateSetting.useMutation({ key, value });
+      // await useStubMutation({ key, value });
       setSettings((prev) => ({ ...prev, [key]: value }));
       setIsLoading(false);
       return true;

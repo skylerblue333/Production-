@@ -9,7 +9,19 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { useTheme } from 'next-themes';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const twapOrderSchema = z.object({
   symbol: z.string().min(1, 'Symbol is required'),
@@ -24,7 +36,7 @@ type TwapOrderFormValues = z.infer<typeof twapOrderSchema>;
 export function CryptoTwapOrder() {
   const { theme, setTheme } = useTheme();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const createTwapOrder = trpc.order.createTwap.useMutation();
+  const createTwapOrder = useStubMutation();
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<TwapOrderFormValues>({
     resolver: zodResolver(twapOrderSchema),

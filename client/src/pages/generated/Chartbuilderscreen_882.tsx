@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: ChartBuilderScreen
 import React, { useState, useEffect, useCallback } from 'react';
-import { trpc } from './trpc';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // shadcn/ui components
@@ -9,6 +8,19 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ChartDataPoint {
   name: string;
@@ -32,7 +44,7 @@ const ChartBuilderScreen: React.FC<ChartBuilderProps> = ({ moduleId }) => {
     return false;
   });
 
-  const { data, isLoading, error, refetch } = trpc.chart.useQuery({
+  const { data, isLoading, error, refetch } = useStubQuery({
     moduleId,
     chartType,
     timeRange,

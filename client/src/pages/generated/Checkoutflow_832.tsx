@@ -4,7 +4,19 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { trpc } from './trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const CheckoutFlow: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +25,7 @@ const CheckoutFlow: React.FC = () => {
   const [cvc, setCvc] = useState('');
   const [nameOnCard, setNameOnCard] = useState('');
 
-  const checkoutMutation = trpc.checkout.useMutation({
+  const checkoutMutation = useStubMutation({
     onSuccess: (data) => {
       alert(data.message);
       // Clear form or redirect

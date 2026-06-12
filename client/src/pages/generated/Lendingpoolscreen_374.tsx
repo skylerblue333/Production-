@@ -8,8 +8,20 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Slider } from '@/components/ui/slider';
 import { useTheme } from 'next-themes';
-import { useMutation, useQuery } from '@tanstack/react-query'; // Simulate tRPC hooks
 import { AlertCircle, CheckCircle, Loader2 } from 'lucide-react'; // For icons
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface LendingPoolScreenProps {
   // Define props here if needed
@@ -18,8 +30,8 @@ interface LendingPoolScreenProps {
 // Simulate tRPC context and hooks
 const trpc = {
   loan: {
-    getPoolInfo: () => useQuery({ queryKey: ['poolInfo'], queryFn: async () => { /* Simulate API call */ await new Promise(resolve => setTimeout(resolve, 500)); return { totalAssets: 1000000, availableLiquidity: 750000, interestRate: 0.05 }; } }),
-    lend: () => useMutation({ mutationFn: async (amount: number) => { /* Simulate API call */ await new Promise((resolve, reject) => setTimeout(() => amount > 0 ? resolve({ success: true }) : reject(new Error('Invalid amount')), 1000)); } }),
+    getPoolInfo: () => useStubQuery({ queryKey: ['poolInfo'], queryFn: async () => { /* Simulate API call */ await new Promise(resolve => setTimeout(resolve, 500)); return { totalAssets: 1000000, availableLiquidity: 750000, interestRate: 0.05 }; } }),
+    lend: () => useStubMutation({ mutationFn: async (amount: number) => { /* Simulate API call */ await new Promise((resolve, reject) => setTimeout(() => amount > 0 ? resolve({ success: true }) : reject(new Error('Invalid amount')), 1000)); } }),
   },
 };
 

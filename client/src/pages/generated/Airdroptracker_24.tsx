@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: AirdropTracker
 
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming @tanstack/react-query for tRPC hooks
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // shadcn/ui Card component
-import { Skeleton } from './ui/skeleton'; // shadcn/ui Skeleton for loading states
-import { Switch } from './ui/switch'; // shadcn/ui Switch for dark mode toggle
-import { Label } from './ui/label'; // shadcn/ui Label
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card component
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton for loading states
+import { Switch } from '@/components/ui/switch'; // shadcn/ui Switch for dark mode toggle
+import { Label } from '@/components/ui/label'; // shadcn/ui Label
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define interfaces for airdrop data for better type safety
 interface Airdrop {
@@ -86,7 +98,7 @@ interface AirdropTrackerProps {
  */
 const AirdropTracker: React.FC<AirdropTrackerProps> = () => {
   // Fetch airdrop data using the mock tRPC hook
-  const { data, isLoading, isError } = trpc.airdrop.getTrackerData.useQuery();
+  const { data, isLoading, isError } = useStubQuery();
   // State to manage dark mode toggle
   const [isDarkMode, setIsDarkMode] = useState(false);
 

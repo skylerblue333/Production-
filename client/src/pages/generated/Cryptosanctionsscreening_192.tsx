@@ -1,14 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoSanctionsScreening
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card';
-import { Input } from './components/ui/input';
-import { Button } from './components/ui/button';
-import { Label } from './components/ui/label';
-import { Switch } from './components/ui/switch';
-import { Alert, AlertDescription, AlertTitle } from './components/ui/alert';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2 } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface SanctionedEntity {
   id: string;
@@ -25,7 +36,7 @@ const CryptoSanctionsScreening: React.FC = () => {
     document.documentElement.classList.toggle('dark', isDarkTheme);
   }, [isDarkTheme]);
 
-  const { data, isLoading, isError, error, refetch } = trpc.sanctions.checkWallet.useQuery(
+  const { data, isLoading, isError, error, refetch } = useStubQuery(
     { walletAddress },
     { enabled: false, retry: false }
   );

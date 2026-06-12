@@ -1,15 +1,27 @@
 // AUTO-GENERATED DRAFT SCREEN: SocialMessageArchive
 
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { cn } from '@/lib/utils'; // Assuming shadcn/ui utility for class merging
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card component
 import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton for loading states
 import { Switch } from '@/components/ui/switch'; // shadcn/ui Switch for dark mode toggle
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Placeholder for tRPC hook - replace with actual tRPC client setup
 // For example: const trpc = createTRPCReact<AppRouter>();
-// Then use: const { data, isLoading, isError, error } = trpc.message.getArchive.useQuery();
+// Then use: const { data, isLoading, isError, error } = useStubQuery();
 
 interface Message {
   id: string;

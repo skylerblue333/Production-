@@ -1,11 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: HelpVideos
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup for data fetching
-import { Button } from './components/ui/button'; // shadcn/ui button component
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'; // shadcn/ui card components
-import { Skeleton } from './components/ui/skeleton'; // shadcn/ui skeleton component for loading states
+import { Button } from '@/components/ui/button'; // shadcn/ui button component
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card components
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui skeleton component for loading states
 import { AlertCircle, Sun, Moon } from 'lucide-react'; // Icons for error and theme toggle
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the structure for a video object
 interface Video {
@@ -37,7 +48,7 @@ const HelpVideos: React.FC = () => {
   }, [isDarkMode]);
 
   // Fetch video data using tRPC and react-query
-  const { data: videos, isLoading, isError, error, refetch } = trpc.help.getVideos.useQuery();
+  const { data: videos, isLoading, isError, error, refetch } = useStubQuery();
 
   // Render loading state with multiple skeleton cards for better user experience
   if (isLoading) {

@@ -10,6 +10,19 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { toast } from 'sonner';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface PriceAlert {
   id: string;
   cryptoSymbol: string;
@@ -45,7 +58,7 @@ const CryptoPriceAlertsScreen: React.FC<CryptoPriceAlertsScreenProps> = ({ userI
   );
 
   // Simulate tRPC mutation for creating an alert
-  const createAlertMutation = useMutation(
+  const createAlertMutation = useStubMutation(
     async (alertData: Omit<PriceAlert, 'id' | 'createdAt'>) => {
       await new Promise(resolve => setTimeout(resolve, 700));
       if (Math.random() < 0.15) throw new Error('Failed to create alert');
@@ -67,7 +80,7 @@ const CryptoPriceAlertsScreen: React.FC<CryptoPriceAlertsScreenProps> = ({ userI
   );
 
   // Simulate tRPC mutation for toggling alert status
-  const toggleAlertMutation = useMutation(
+  const toggleAlertMutation = useStubMutation(
     async (alertId: string) => {
       await new Promise(resolve => setTimeout(resolve, 300));
       if (Math.random() < 0.05) throw new Error('Failed to toggle alert');

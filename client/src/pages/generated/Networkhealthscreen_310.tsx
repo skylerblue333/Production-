@@ -1,10 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: NetworkHealthScreen
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from './ui/card'; // Assuming shadcn/ui components are in './ui'
-import { Badge } from './ui/badge';
-import { Progress } from './ui/progress';
-import { Alert, AlertDescription, AlertTitle } from './ui/alert';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'; // Assuming shadcn/ui components are in './ui'
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { TriangleAlertIcon, Loader2 } from 'lucide-react'; // Assuming lucide-react for icons
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Simulate tRPC hook for network health data
 interface NetworkHealthData {

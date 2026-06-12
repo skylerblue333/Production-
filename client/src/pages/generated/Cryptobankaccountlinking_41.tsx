@@ -9,6 +9,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Switch } from '@/components/ui/switch';
 import { useTheme } from '@/components/theme-provider'; // Assuming a theme provider
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Define the form schema using Zod
 const formSchema = z.object({
   bankName: z.string().min(2, { message: 'Bank name must be at least 2 characters.' }),
@@ -55,7 +68,7 @@ export function CryptoBankAccountLinking() {
     },
   });
 
-  const { mutate, isLoading, isError, error } = trpc.crypto.linkBankAccount.useMutation();
+  const { mutate, isLoading, isError, error } = useStubMutation();
 
   const onSubmit = (values: FormValues) => {
     mutate(values);

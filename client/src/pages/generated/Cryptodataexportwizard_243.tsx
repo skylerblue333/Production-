@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoDataExportWizard
 import React, { useState } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ExportOptions {
   format: 'csv' | 'json';
@@ -22,7 +33,7 @@ const CryptoDataExportWizard: React.FC = () => {
     includeHistoricalData: false,
   });
 
-  const exportDataMutation = trpc.crypto.exportData.useMutation({
+  const exportDataMutation = useStubMutation({
     onSuccess: (data) => {
       toast.success('Data export initiated successfully!');
       // In a real app, 'data' would likely contain a download URL or job ID

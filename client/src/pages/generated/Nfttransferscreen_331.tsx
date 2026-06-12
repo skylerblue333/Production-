@@ -8,9 +8,20 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
-import { useMutation } from '@tanstack/react-query';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 // Assume tRPC client is configured and available
-// import { trpc } from '@/utils/trpc';
 
 const formSchema = z.object({
   recipientAddress: z.string().min(1, 'Recipient address is required').regex(/^0x[a-fA-F0-9]{40}$/, 'Invalid Ethereum address'),
@@ -41,7 +52,7 @@ const NFTTransferScreen: React.FC<NFTTransferScreenProps> = () => {
   const enableDarkTheme = watch('enableDarkTheme');
 
   // Mock tRPC mutation for NFT transfer
-  const transferNftMutation = useMutation({
+  const transferNftMutation = useStubMutation({
     mutationFn: async (data: FormData) => {
       // Simulate API call
       return new Promise((resolve) => setTimeout(() => {

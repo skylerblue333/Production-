@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: PaymentSettlementScreen
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup
-import { Button } from './components/ui/button'; // shadcn/ui button
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'; // shadcn/ui card
-import { Input } from './components/ui/input'; // shadcn/ui input
-import { Label } from './components/ui/label'; // shadcn/ui label
-import { Switch } from './components/ui/switch'; // shadcn/ui switch
-import { toast } from './components/ui/use-toast'; // shadcn/ui toast for notifications
+import { Button } from '@/components/ui/button'; // shadcn/ui button
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card
+import { Input } from '@/components/ui/input'; // shadcn/ui input
+import { Label } from '@/components/ui/label'; // shadcn/ui label
+import { Switch } from '@/components/ui/switch'; // shadcn/ui switch
+import { toast } from '@/components/ui/use-toast'; // shadcn/ui toast for notifications
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface PaymentSettlement {
   id: string;
@@ -26,11 +37,11 @@ const PaymentSettlementScreen: React.FC = () => {
     document.documentElement.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
 
-  const { data, isLoading, isError, error, refetch } = trpc.payments.getSettlements.useQuery({
+  const { data, isLoading, isError, error, refetch } = useStubQuery({
     status: filterStatus === 'all' ? undefined : filterStatus,
   });
 
-  const settlePaymentMutation = trpc.payments.settlePayment.useMutation({
+  const settlePaymentMutation = useStubMutation({
     onSuccess: () => {
       toast({
         title: 'Payment Settled',

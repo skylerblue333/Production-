@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoSentimentAnalysis
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Simulating tRPC hook usage
 import { cn } from '@/lib/utils'; // For shadcn/ui utility
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'; // Example shadcn/ui component
 import { Skeleton } from '@/components/ui/skeleton'; // For loading states
 import { Badge } from '@/components/ui/badge'; // For sentiment indicator
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // For error display
 import { Terminal } from 'lucide-react'; // Example icon for alert
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the expected data structure from tRPC
 interface SentimentData {

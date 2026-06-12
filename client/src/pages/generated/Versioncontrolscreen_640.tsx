@@ -1,15 +1,26 @@
 // AUTO-GENERATED DRAFT SCREEN: VersionControlScreen
 import React, { useState, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../trpc';
-import { Label } from './ui/label';
-import { Switch } from './ui/switch';
-import { Alert, AlertDescription, AlertTitle } from './ui/alert';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2, AlertCircle } from 'lucide-react';
 
 import AddRepositoryForm from './AddRepositoryForm';
 import ExistingRepositories from './ExistingRepositories';
 import RepositoryActions from './RepositoryActions';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 type Repository = {
   id: string;
@@ -28,11 +39,11 @@ const VersionControlScreen: React.FC = () => {
   const [pullRequestBranch, setPullRequestBranch] = useState('');
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
-  const { data: repositories, isLoading, isError, error, refetch } = trpc.getRepositories.useQuery();
-  const addRepositoryMutation = trpc.addRepository.useMutation();
-  const commitChangesMutation = trpc.commitChanges.useMutation();
-  const createPullRequestMutation = trpc.createPullRequest.useMutation();
-  const toggleRepoStatusMutation = trpc.toggleRepositoryStatus.useMutation();
+  const { data: repositories, isLoading, isError, error, refetch } = useStubQuery();
+  const addRepositoryMutation = useStubMutation();
+  const commitChangesMutation = useStubMutation();
+  const createPullRequestMutation = useStubMutation();
+  const toggleRepoStatusMutation = useStubMutation();
 
   const handleAddRepository = useCallback(async () => {
     if (newRepoName && newRepoUrl) {

@@ -3,12 +3,23 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useMutation } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { cn } from '@/lib/utils';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const emailSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
@@ -22,7 +33,7 @@ const EmailVerificationScreen: React.FC = () => {
     resolver: zodResolver(emailSchema),
   });
 
-  const { mutate, isLoading, isError, error, isSuccess } = trpc.auth.sendVerificationEmail.useMutation();
+  const { mutate, isLoading, isError, error, isSuccess } = useStubMutation();
 
   const onSubmit = (data: EmailFormValues) => {
     mutate({ email: data.email });

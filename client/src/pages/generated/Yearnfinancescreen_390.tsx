@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: YearnFinanceScreen
 import React, { useState } from 'react';
-import { trpc } from '@/utils/trpc';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -8,6 +7,19 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { ArrowRightLeft, TrendingUp, Wallet, AlertCircle, RefreshCw, Info } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Types
 interface Vault {
@@ -23,15 +35,15 @@ export default function YearnFinanceScreen() {
   const [activeTab, setActiveTab] = useState('vaults');
 
   // tRPC Hooks
-  const { data: vaultsData, isLoading: vaultsLoading, error: vaultsError, refetch: refetchVaults } = trpc.yearn.getVaults.useQuery(undefined, {
+  const { data: vaultsData, isLoading: vaultsLoading, error: vaultsError, refetch: refetchVaults } = useStubQuery(undefined, {
     retry: 2,
   });
 
-  const { data: portfolioData, isLoading: portfolioLoading, error: portfolioError } = trpc.yearn.getPortfolio.useQuery(undefined, {
+  const { data: portfolioData, isLoading: portfolioLoading, error: portfolioError } = useStubQuery(undefined, {
     retry: 2,
   });
 
-  const depositMutation = trpc.yearn.deposit.useMutation();
+  const depositMutation = useStubMutation();
 
   const handleDeposit = async (vaultId: string, amount: number) => {
     try {

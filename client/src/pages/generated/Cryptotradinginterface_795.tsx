@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoTradingInterface
 
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query'; // Placeholder for tRPC hooks
 import { Button } from '@/components/ui/button'; // shadcn/ui button
 import { Input } from '@/components/ui/input'; // shadcn/ui input
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CryptoTradingInterfaceProps {
   // Props can be added here if needed
@@ -19,7 +31,7 @@ const CryptoTradingInterface: React.FC<CryptoTradingInterfaceProps> = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
   // Placeholder for tRPC query (e.g., fetching market data)
-  const { data: marketData, isLoading: isLoadingMarketData, error: marketDataError } = useQuery({
+  const { data: marketData, isLoading: isLoadingMarketData, error: marketDataError } = useStubQuery({
     queryKey: ['marketData'],
     queryFn: async () => {
       // Simulate API call
@@ -28,7 +40,7 @@ const CryptoTradingInterface: React.FC<CryptoTradingInterfaceProps> = () => {
   });
 
   // Placeholder for tRPC mutation (e.g., placing an order)
-  const placeOrderMutation = useMutation({
+  const placeOrderMutation = useStubMutation({
     mutationFn: async (order: { type: 'buy' | 'sell'; amount: string; price: string }) => {
       // Simulate API call
       return new Promise(resolve => setTimeout(() => resolve({ success: true, orderId: '12345' }), 1500));

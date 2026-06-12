@@ -9,6 +9,19 @@ import { Loader2 } from 'lucide-react'; // Loading icon
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui alert for error handling
 import { Terminal } from 'lucide-react'; // Icon for alert
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Define props for the component
 interface TrezorConnectScreenProps {
   // Optional: Add a title prop for customization

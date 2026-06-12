@@ -1,11 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: EmissionSchedule
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC setup in '../utils/trpc'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // shadcn/ui Card
-import { Skeleton } from './ui/skeleton'; // shadcn/ui Skeleton for loading states
-import { Alert, AlertDescription, AlertTitle } from './ui/alert'; // shadcn/ui Alert for error handling
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton for loading states
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui Alert for error handling
 import { Terminal, Sun, Moon } from 'lucide-react'; // Lucide icons for Alert and dark mode toggle
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Interface for the emission schedule data structure
 interface EmissionScheduleData {
@@ -20,7 +31,7 @@ interface EmissionScheduleData {
  */
 const EmissionSchedule: React.FC = () => {
   // Fetch emission schedule data using tRPC hook
-  const { data, isLoading, isError, error } = trpc.crypto.getEmissionSchedule.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   // State for managing dark mode
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {

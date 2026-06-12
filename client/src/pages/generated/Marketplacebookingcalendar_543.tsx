@@ -5,11 +5,22 @@ import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc';
 import { format, addDays, isSameDay, isBefore, startOfDay } from 'date-fns';
 import { CalendarIcon, Loader2, AlertCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface BookingSlot {
   id: string;
@@ -38,12 +49,12 @@ const MarketplaceBookingCalendar: React.FC = () => {
     return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
-  const { data: availableSlots, isLoading: isLoadingSlots, error: slotsError } = trpc.booking.getAvailableSlots.useQuery(
+  const { data: availableSlots, isLoading: isLoadingSlots, error: slotsError } = useStubQuery(
     { date: selectedDate?.toISOString() },
     { enabled: !!selectedDate }
   );
 
-  const bookSlotMutation = trpc.booking.bookSlot.useMutation();
+  const bookSlotMutation = useStubMutation();
 
   const handleDateSelect = (date: Date | undefined) => {
     setSelectedDate(date);

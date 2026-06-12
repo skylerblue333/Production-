@@ -1,7 +1,6 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoSocialTradingFeed
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -9,6 +8,19 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration. In a real app, this would be imported.
 const trpc = {
@@ -65,7 +77,7 @@ interface FeedItem {
 }
 
 const CryptoSocialTradingFeed: React.FC = () => {
-  const { data: feed, isLoading, isError, error } = trpc.socialTrading.getFeed.useQuery();
+  const { data: feed, isLoading, isError, error } = useStubQuery();
 
   const formatTimestamp = (date: Date) => {
     const now = new Date();

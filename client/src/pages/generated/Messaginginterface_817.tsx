@@ -1,14 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: MessagingInterface
 import React, { useState, useEffect, useRef, FormEvent } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC client setup
-import { Input } from './ui/input';
-import { Button } from './ui/button';
-import { ScrollArea } from './ui/scroll-area';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from 'next-themes'; // For dark theme support
-import { cn } from '../lib/utils'; // Utility for conditional class names
+import { cn } from '@/lib/utils'; // Utility for conditional class names
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Message {
   id: string;
@@ -28,7 +39,7 @@ const MessagingInterface: React.FC<ChatProps> = ({ chatId, currentUserId }) => {
   const { theme } = useTheme();
 
   // Fetch messages using tRPC query
-  const { data: messages, isLoading, isError, error } = trpc.chat.getMessages.useQuery(
+  const { data: messages, isLoading, isError, error } = useStubQuery(
     { chatId },
     { 
       refetchInterval: 5000, // Poll for new messages every 5 seconds
@@ -37,7 +48,7 @@ const MessagingInterface: React.FC<ChatProps> = ({ chatId, currentUserId }) => {
   );
 
   // Send message using tRPC mutation
-  const sendMessageMutation = trpc.chat.sendMessage.useMutation({
+  const sendMessageMutation = useStubMutation({
     onSuccess: () => {
       setNewMessage('');
       // Invalidate messages query to refetch latest messages

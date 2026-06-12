@@ -1,9 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: ROICalculator
 import React, { useState } from 'react';
-import { Input } from './components/ui/input';
-import { Button } from './components/ui/button';
-import { Label } from './components/ui/label';
-import { Slider } from './components/ui/slider';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Slider } from '@/components/ui/slider';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const ROICalculator: React.FC = () => {
   const [initialInvestment, setInitialInvestment] = useState<number>(1000);

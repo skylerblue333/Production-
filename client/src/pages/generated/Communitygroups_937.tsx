@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: CommunityGroups
 import React from 'react';
-import { trpc } from './lib/trpc';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/mode-toggle';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 const CommunityGroups: React.FC = () => {
-  const { data, isLoading, error } = trpc.communityGroups.useQuery();
+  const { data, isLoading, error } = useStubQuery();
 
   if (isLoading) {
     return (

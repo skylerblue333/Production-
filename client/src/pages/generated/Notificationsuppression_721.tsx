@@ -1,11 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: NotificationSuppression
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup
-import { Switch } from './components/ui/switch'; // shadcn/ui Switch
-import { Label } from './components/ui/label'; // shadcn/ui Label
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card'; // shadcn/ui Card
-import { toast } from './components/ui/use-toast'; // shadcn/ui Toast
+import { Switch } from '@/components/ui/switch'; // shadcn/ui Switch
+import { Label } from '@/components/ui/label'; // shadcn/ui Label
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card
+import { toast } from '@/components/ui/use-toast'; // shadcn/ui Toast
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface NotificationSettings {
   suppressAll: boolean;
@@ -17,7 +28,7 @@ const NotificationSuppression: React.FC = () => {
   const [settings, setSettings] = useState<NotificationSettings | null>(null);
 
   // Fetch notification settings
-  const { data, isLoading, isError, error } = trpc.notification.getSettings.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   useEffect(() => {
     if (data) {
@@ -26,7 +37,7 @@ const NotificationSuppression: React.FC = () => {
   }, [data]);
 
   // Mutation to update notification settings
-  const updateSettingsMutation = trpc.notification.updateSettings.useMutation({
+  const updateSettingsMutation = useStubMutation({
     onSuccess: () => {
       toast({
         title: 'Settings updated!',

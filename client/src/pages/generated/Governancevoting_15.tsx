@@ -5,8 +5,20 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRightIcon, PlusIcon } from '@radix-ui/react-icons';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Placeholder for tRPC hooks
-// import { trpc } from '@/utils/trpc';
 
 interface Proposal {
   id: string;
@@ -49,7 +61,7 @@ const mockProposals: Proposal[] = [
 ];
 
 const GovernanceVoting: React.FC = () => {
-  // const { data: proposals, isLoading, error } = trpc.proposals.list.useQuery();
+  // const { data: proposals, isLoading, error } = useStubQuery();
   const isLoading = false; // Mock loading state
   const error = null; // Mock error state
   const proposals = mockProposals; // Using mock data for now

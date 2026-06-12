@@ -2,12 +2,23 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Star } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface DeliveryRating {
   id: string;
@@ -24,7 +35,7 @@ const SkycoinMarketplaceDeliveryRatingsScreen: React.FC = () => {
   const [filterDriver, setFilterDriver] = useState('');
   const [minRating, setMinRating] = useState<number | ''>('');
 
-  const { data, isLoading, isError, error } = trpc.delivery.getRatings.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   const filteredRatings = data?.filter(rating => {
     const matchesDriver = rating.driverName.toLowerCase().includes(filterDriver.toLowerCase());

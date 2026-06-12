@@ -2,6 +2,19 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // This component displays real-time price data from the Pyth Network.
 // It is built with React 19, fully typed with TypeScript, styled with Tailwind CSS 4,
 // and designed to integrate with shadcn/ui components and tRPC hooks.
@@ -33,7 +46,7 @@ const PythNetworkScreen: React.FC<PythNetworkScreenProps> = ({ assetId = 'crypto
       setLoading(true);
       setError(null);
       // In a production environment, this would be a tRPC call.
-      // Example: const response = await trpc.pyth.getData.useQuery({ assetId });
+      // Example: const response = await useStubQuery({ assetId });
       // For this example, we simulate an asynchronous API call.
       const response = await new Promise<PythNetworkData>((resolve) =>
         setTimeout(() => {

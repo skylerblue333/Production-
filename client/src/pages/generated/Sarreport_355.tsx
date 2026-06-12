@@ -1,7 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: SARReport
 import React, { useState, useEffect } from 'react';
-import { trpc } from './trpc';
-import { Button } from './components/ui/button';
+import { Button } from '@/components/ui/button';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the interface for a single SAR report item
 interface SARReportItem {
@@ -28,7 +40,7 @@ const SARReport: React.FC = () => {
   }, [isDarkMode]);
 
   // Fetch SAR report data using tRPC hook
-  const { data, isLoading, error } = trpc.sarReport.useQuery({ id: '123' });
+  const { data, isLoading, error } = useStubQuery({ id: '123' });
 
   // Display loading state
   if (isLoading) {

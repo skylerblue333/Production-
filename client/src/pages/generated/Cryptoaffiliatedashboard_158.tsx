@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoAffiliateDashboard
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // shadcn/ui Card
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table'; // shadcn/ui Table
-import { Separator } from './ui/separator'; // shadcn/ui Separator
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'; // shadcn/ui Table
+import { Separator } from '@/components/ui/separator'; // shadcn/ui Separator
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration. In a real app, this would be imported from your tRPC setup.
 const trpc = {
@@ -81,8 +93,8 @@ interface Referral {
 }
 
 const CryptoAffiliateDashboard: React.FC = () => {
-  const { data: commissions, isLoading: isLoadingCommissions, isError: isErrorCommissions, error: errorCommissions } = trpc.affiliate.getCommissions.useQuery();
-  const { data: referrals, isLoading: isLoadingReferrals, isError: isErrorReferrals, error: errorReferrals } = trpc.affiliate.getReferrals.useQuery();
+  const { data: commissions, isLoading: isLoadingCommissions, isError: isErrorCommissions, error: errorCommissions } = useStubQuery();
+  const { data: referrals, isLoading: isLoadingReferrals, isError: isErrorReferrals, error: errorReferrals } = useStubQuery();
 
   const isLoading = isLoadingCommissions || isLoadingReferrals;
   const isError = isErrorCommissions || isErrorReferrals;

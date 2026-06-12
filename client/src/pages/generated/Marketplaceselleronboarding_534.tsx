@@ -3,13 +3,25 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup
 
-import { Button } from './components/ui/button';
-import { Input } from './components/ui/input';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './components/ui/form';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react'; // Using Lucide-react for spinner
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const formSchema = z.object({
   businessName: z.string().min(2, { message: 'Business name must be at least 2 characters.' }),
@@ -41,8 +53,8 @@ export function MarketplaceSellerOnboarding() {
     },
   });
 
-  const { data: onboardingStatus, isLoading: isLoadingStatus, error: statusError } = trpc.seller.getOnboardingStatus.useQuery();
-  const { mutate: onboardSeller, isLoading: isSubmitting, error: submitError } = trpc.seller.onboard.useMutation({
+  const { data: onboardingStatus, isLoading: isLoadingStatus, error: statusError } = useStubQuery();
+  const { mutate: onboardSeller, isLoading: isSubmitting, error: submitError } = useStubMutation({
     onSuccess: () => {
       alert('Seller onboarding successful!');
       // In a real app, you might redirect or show a more sophisticated success message.

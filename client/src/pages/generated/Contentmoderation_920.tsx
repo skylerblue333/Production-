@@ -6,7 +6,19 @@ import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { Moon, Sun } from 'lucide-react';
 import { Label } from '@/components/ui/label';
-import { trpc } from './trpcClient';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ModerationItem {
   id: string;
@@ -32,8 +44,8 @@ const ContentModeration: React.FC = () => {
 
   const [filter, setFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('all');
 
-  const { data: items, isLoading, isError, error, refetch } = trpc.getModerationItems.useQuery({ filter: filter === 'all' ? undefined : filter });
-  const updateStatusMutation = trpc.updateModerationItemStatus.useMutation({
+  const { data: items, isLoading, isError, error, refetch } = useStubQuery({ filter: filter === 'all' ? undefined : filter });
+  const updateStatusMutation = useStubMutation({
     onSuccess: () => {
       refetch();
     },

@@ -7,8 +7,20 @@ import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Assume tRPC types are globally available or imported from a generated client
-// import { trpc } from '@/utils/trpc'; 
 
 interface Approval {
   id: string;
@@ -30,7 +42,7 @@ const CryptoTokenApprovalManager: React.FC<CryptoTokenApprovalManagerProps> = ({
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
   // Placeholder for tRPC hook
-  // const { data, isLoading: trpcLoading, error: trpcError } = trpc.crypto.getApprovals.useQuery({ walletAddress });
+  // const { data, isLoading: trpcLoading, error: trpcError } = useStubQuery({ walletAddress });
 
   useEffect(() => {
     // Simulate fetching data

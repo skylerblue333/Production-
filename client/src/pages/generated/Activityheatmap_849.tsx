@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: ActivityHeatmap
 import React from 'react';
-import { trpc } from '../lib/trpc';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Skeleton } from './ui/skeleton';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ActivityDay {
   date: string;
@@ -11,7 +23,7 @@ interface ActivityDay {
 }
 
 const ActivityHeatmap: React.FC = () => {
-  const { data, isLoading, isError, error } = trpc.activity.activity.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   if (isLoading) {
     return (

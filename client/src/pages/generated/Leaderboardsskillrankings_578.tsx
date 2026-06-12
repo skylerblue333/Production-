@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: LeaderboardsSkillRankings
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Simulating tRPC with react-query
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // For error display
 import { RocketIcon } from '@radix-ui/react-icons'; // Example icon for alert
 import { Skeleton } from '@/components/ui/skeleton'; // For loading states
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table'; // Assuming shadcn/ui components are in this path
 import { Switch } from '@/components/ui/switch'; // For dark mode toggle
 import { Label } from '@/components/ui/label'; // For dark mode toggle label
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface LeaderboardEntry {
   id: string;

@@ -1,8 +1,20 @@
 // AUTO-GENERATED DRAFT SCREEN: ProfileExportScreen
 import React, { useState } from 'react';
-import { Button } from './ui/button'; // Assuming shadcn/ui button
-import { useMutation } from '@tanstack/react-query'; // Simulating tRPC hook with react-query
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button
 import { toast } from 'sonner'; // Assuming shadcn/ui toast for notifications
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ProfileExportScreenProps {
   userId: string;
@@ -27,7 +39,7 @@ const trpc = {
 export const ProfileExportScreen: React.FC<ProfileExportScreenProps> = ({ userId }) => {
   const [exportFormat, setExportFormat] = useState<'json' | 'csv' | 'pdf'>('json');
 
-  const exportMutation = useMutation({
+  const exportMutation = useStubMutation({
     mutationFn: (format: 'json' | 'csv' | 'pdf') => trpc.profile.exportData(userId, format),
     onSuccess: (message) => {
       toast.success(message);

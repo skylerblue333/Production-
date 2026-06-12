@@ -2,9 +2,20 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
-import { trpc } from '@/utils/trpc'; // Assuming trpc client setup
 import { Loader2 } from 'lucide-react'; // For loading indicator
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ActionItem {
   id: string;
@@ -21,7 +32,7 @@ interface QuickActionsPanelProps {
 const QuickActionsPanel: React.FC<QuickActionsPanelProps> = ({ title = 'Quick Actions', actions }) => {
   // Example tRPC hook for fetching data (replace with actual tRPC call if needed)
   // For this component, we'll simulate a loading state for actions if they were to be fetched dynamically.
-  const { data: dynamicActions, isLoading, isError, error } = trpc.quickActions.getActions.useQuery();
+  const { data: dynamicActions, isLoading, isError, error } = useStubQuery();
 
   const displayedActions = dynamicActions || actions; // Use dynamic actions if available, otherwise use props
 

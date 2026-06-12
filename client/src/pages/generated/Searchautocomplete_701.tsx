@@ -5,9 +5,21 @@ import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { useDebounce } from 'use-debounce';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
 import { Loader2, XCircle, Info } from 'lucide-react'; // For loading, error, and info indicators
 import { cn } from '@/lib/utils'; // Utility for conditional class names
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface SearchAutocompleteProps {
   onSelect: (item: string) => void;
@@ -28,7 +40,7 @@ export const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
   const [displaySuggestions, setDisplaySuggestions] = useState<string[]>([]);
 
   // tRPC hook for fetching suggestions
-  const { data: suggestions, isLoading, error, isError } = trpc.search.getSuggestions.useQuery(
+  const { data: suggestions, isLoading, error, isError } = useStubQuery(
     { query: debouncedSearchTerm },
     { 
       enabled: debouncedSearchTerm.length > 2,

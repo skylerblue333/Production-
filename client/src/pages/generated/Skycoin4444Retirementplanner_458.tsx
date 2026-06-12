@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: SKYCOIN4444RetirementPlanner
 
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { z } from 'zod'; // For type validation
 import { useTheme } from 'next-themes'; // For dark theme
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Placeholder for tRPC client - replace with actual tRPC setup
 // const trpc = createTRPCReact<AppRouter>();

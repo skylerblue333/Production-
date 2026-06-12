@@ -4,8 +4,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useMutation } from '@tanstack/react-query'; // Placeholder for tRPC hook
 import { Loader2 } from 'lucide-react'; // Example icon for loading
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 type FaceRecognitionResult = 'success' | 'failure' | null;
 
@@ -17,7 +29,7 @@ export function CryptoFaceRecognition() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Mock tRPC mutation for face verification
-  const verifyFaceMutation = useMutation({
+  const verifyFaceMutation = useStubMutation({
     mutationFn: async (imageData: string) => {
       // Simulate API call
       return new Promise((resolve, reject) => {

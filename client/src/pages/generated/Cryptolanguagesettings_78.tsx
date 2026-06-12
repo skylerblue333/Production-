@@ -3,7 +3,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { trpc } from '@/utils/trpc';
 import { useTheme } from 'next-themes';
 
 import { Button } from '@/components/ui/button';
@@ -12,6 +11,19 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const languageSchema = z.object({
   language: z.string().min(1, { message: 'Please select a language.' }),
@@ -30,7 +42,7 @@ export function CryptoLanguageSettings() {
     },
   });
 
-  const { mutate: updateSettings, isLoading, isError, error } = trpc.user.updateLanguageSettings.useMutation();
+  const { mutate: updateSettings, isLoading, isError, error } = useStubMutation();
 
   const onSubmit = (values: LanguageFormValues) => {
     updateSettings(values);

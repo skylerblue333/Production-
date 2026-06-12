@@ -8,6 +8,19 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { format } from 'date-fns';
 import { ChevronLeft, ChevronRight, PlusCircle, Sun, Moon } from 'lucide-react'; // Icons
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Mock tRPC hooks for demonstration
 const trpc = {
   event: {
@@ -112,8 +125,8 @@ const EventCalendarScreen: React.FC = () => {
   const [newEventDescription, setNewEventDescription] = useState('');
   const { theme, setTheme } = useTheme();
 
-  const { data: events, isLoading, isError } = trpc.event.getEvents.useQuery(selectedDate || new Date());
-  const { mutate: addEvent, isLoading: isAddingEvent, isError: isAddEventError, isSuccess: isAddEventSuccess } = trpc.event.addEvent.useMutation();
+  const { data: events, isLoading, isError } = useStubQuery(selectedDate || new Date());
+  const { mutate: addEvent, isLoading: isAddingEvent, isError: isAddEventError, isSuccess: isAddEventSuccess } = useStubMutation();
 
   const handleAddEvent = async () => {
     if (selectedDate && newEventTitle) {

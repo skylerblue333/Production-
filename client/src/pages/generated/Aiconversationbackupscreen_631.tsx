@@ -1,14 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: AiConversationBackupScreen
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC setup
-import { Button } from './components/ui/button'; // shadcn/ui button
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card'; // shadcn/ui card
-import { Input } from './components/ui/input'; // shadcn/ui input
-import { Label } from './components/ui/label'; // shadcn/ui label
-import { Switch } from './components/ui/switch'; // shadcn/ui switch
-import { ScrollArea } from './components/ui/scroll-area'; // shadcn/ui scroll-area
+import { Button } from '@/components/ui/button'; // shadcn/ui button
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card
+import { Input } from '@/components/ui/input'; // shadcn/ui input
+import { Label } from '@/components/ui/label'; // shadcn/ui label
+import { Switch } from '@/components/ui/switch'; // shadcn/ui switch
+import { ScrollArea } from '@/components/ui/scroll-area'; // shadcn/ui scroll-area
 import { useTheme } from './context/theme-provider'; // Assuming a theme provider for dark mode
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Conversation {
   id: string;
@@ -21,8 +32,8 @@ const AiConversationBackupScreen: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const { theme, setTheme } = useTheme();
 
-  const { data: conversations, isLoading, isError, error } = trpc.conversation.list.useQuery();
-  const backupConversationMutation = trpc.conversation.backup.useMutation();
+  const { data: conversations, isLoading, isError, error } = useStubQuery();
+  const backupConversationMutation = useStubMutation();
 
   const handleBackup = (conversationId: string) => {
     backupConversationMutation.mutate({ conversationId });

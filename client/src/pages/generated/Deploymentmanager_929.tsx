@@ -6,8 +6,20 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Placeholder for tRPC client
-// import { trpc } from "../utils/trpc"; // Commented out for frontend-only task
 
 interface Deployment {
   id: string;
@@ -29,8 +41,8 @@ const DeploymentManager: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   // Placeholder for tRPC queries and mutations
-  // const { data: deployments, isLoading, error } = trpc.deployments.getAll.useQuery(); // Commented out for frontend-only task
-  // const deployMutation = trpc.deployments.deploy.useMutation(); // Commented out for frontend-only task
+  // const { data: deployments, isLoading, error } = useStubQuery(); // Commented out for frontend-only task
+  // const deployMutation = useStubMutation(); // Commented out for frontend-only task
 
   const handleViewDetails = (deployment: Deployment) => {
     setSelectedDeployment(deployment);

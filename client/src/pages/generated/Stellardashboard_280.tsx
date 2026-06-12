@@ -1,19 +1,30 @@
 // AUTO-GENERATED DRAFT SCREEN: StellarDashboard
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC setup
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { SunIcon, MoonIcon } from '@radix-ui/react-icons';
 import { Button } from '@/components/ui/button';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface StellarDashboardProps {
   userId: string;
 }
 
 const StellarDashboard: React.FC<StellarDashboardProps> = ({ userId }) => {
-  const { data, isLoading, isError, error } = trpc.stellar.getDashboardData.useQuery({ userId });
+  const { data, isLoading, isError, error } = useStubQuery({ userId });
 
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 

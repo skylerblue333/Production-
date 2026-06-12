@@ -3,12 +3,25 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card';
-import { Button } from './components/ui/button';
-import { Input } from './components/ui/input';
-import { Label } from './components/ui/label';
-import { Switch } from './components/ui/switch';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC hooks for demonstration. In a real app, these would come from your tRPC client setup.
 const api = {
@@ -61,10 +74,10 @@ type Webhook = z.infer<typeof webhookSchema> & { events: string[] }; // Adjust t
 const WebhookManagerScreen: React.FC = () => {
   const [editingWebhook, setEditingWebhook] = React.useState<Webhook | null>(null);
 
-  const { data: webhooks, isLoading, isError, error, refetch } = api.webhooks.list.useQuery();
-  const createWebhookMutation = api.webhooks.create.useMutation();
-  const updateWebhookMutation = api.webhooks.update.useMutation();
-  const deleteWebhookMutation = api.webhooks.delete.useMutation();
+  const { data: webhooks, isLoading, isError, error, refetch } = api.webhooks.list.useStubQuery();
+  const createWebhookMutation = api.webhooks.create.useStubMutation();
+  const updateWebhookMutation = api.webhooks.update.useStubMutation();
+  const deleteWebhookMutation = api.webhooks.delete.useStubMutation();
 
   const form = useForm<z.infer<typeof webhookSchema>>({
     resolver: zodResolver(webhookSchema),

@@ -1,8 +1,6 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoPartnerPortal
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC client setup
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -10,6 +8,19 @@ import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Utility for dark mode toggle (simplified for component)
 const useDarkMode = () => {
@@ -38,7 +49,7 @@ const CryptoPartnerPortal: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   // Example tRPC hook (replace with actual tRPC query)
-  const { data, isLoading, isError, error } = trpc.partner.getPartners.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   if (isLoading) {
     return (

@@ -2,11 +2,24 @@
 import React, { useReducer, createContext, useContext, ReactNode, useEffect } from 'react';
 import { CartItem, CartState, UseCartResult } from './types';
 
-import { Button } from "./components/ui/button";
-import { Input } from "./components/ui/input";
-import { Card, CardHeader, CardTitle, CardContent } from "./components/ui/card";
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "./components/ui/table";
-import { Alert, AlertTitle, AlertDescription } from "./components/ui/alert";
+import { Button } from '@/components/ui/button";
+import { Input } from '@/components/ui/input";
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card";
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table";
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert";
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // --- State Management ---
 type Action = 

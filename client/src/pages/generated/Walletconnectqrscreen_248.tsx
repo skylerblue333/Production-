@@ -7,7 +7,19 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
-import { trpc } from '@/utils/trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface WalletConnectQRScreenProps {
   onBack?: () => void;
@@ -29,12 +41,12 @@ export const WalletConnectQRScreen: React.FC<WalletConnectQRScreenProps> = ({
     isError, 
     error, 
     refetch 
-  } = trpc.wallet.createSession.useQuery(undefined, {
+  } = useStubQuery(undefined, {
     refetchOnWindowFocus: false,
     retry: 1,
   });
 
-  const { mutate: checkStatus } = trpc.wallet.checkSessionStatus.useMutation({
+  const { mutate: checkStatus } = useStubMutation({
     onSuccess: (data) => {
       if (data.status === 'connected' && onConnect) {
         onConnect(data);

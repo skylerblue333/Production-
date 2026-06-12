@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: UserAnalytics
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { createTRPCReact } from '@trpc/react-query';
 import type { AppRouter } from '../trpc/appRouter';
-import { cn } from '../lib/utils';
+import { cn } from '@/lib/utils';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Placeholder for shadcn/ui components if they are not fully initialized
 // In a real scenario, these would be imported from '@/components/ui'
@@ -23,7 +35,7 @@ const CardContent = ({ children, className }: { children: React.ReactNode; class
 const trpc = createTRPCReact<AppRouter>();
 
 const UserAnalytics: React.FC = () => {
-  const { data, isLoading, isError, error } = trpc.userAnalytics.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   if (isLoading) {
     return (

@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: AddressBookScreen
 import React, { useState, useEffect } from 'react';
-import { trpc } from '../trpc';
-import { cn } from '../lib/utils';
-import { Input } from './ui/input'; // Assuming shadcn/ui input component
-import { Button } from './ui/button'; // Assuming shadcn/ui button component
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // Assuming shadcn/ui card components
+import { cn } from '@/lib/utils';
+import { Input } from '@/components/ui/input'; // Assuming shadcn/ui input component
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button component
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card components
 import { Sun, Moon, PlusCircle, Search, Loader2 } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Address {
   id: string;
@@ -19,7 +31,7 @@ const AddressBookScreen: React.FC = () => {
   const [addresses, setAddresses] = useState<Address>([]);
 
   // Mock tRPC hook for fetching addresses
-  const { data, isLoading, error } = trpc.addressBook.useQuery({ text: searchTerm });
+  const { data, isLoading, error } = useStubQuery({ text: searchTerm });
 
   useEffect(() => {
     if (data) {

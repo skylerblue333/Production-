@@ -3,6 +3,19 @@ import React from 'react';
 // Assuming shadcn/ui Progress component path. In a real project, this would be configured via `tsconfig.json` paths.
 import { Progress } from '@/components/ui/progress'; 
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 /**
  * @interface XpProgressBarProps
  * @description Defines the props for the XpProgressBar component.
@@ -49,7 +62,7 @@ const XpProgressBar: React.FC<XpProgressBarProps> = ({
   // expected to be passed via props from a parent component that handles fetching.
   // This keeps the component focused on UI rendering and within the line limit.
   // Example placeholder for a tRPC hook:
-  // const { data: xpData, isLoading: trpcLoading, isError: trpcError, error: trpcErrorObj } = trpc.xp.getProgressBarData.useQuery(
+  // const { data: xpData, isLoading: trpcLoading, isError: trpcError, error: trpcErrorObj } = useStubQuery(
   //   { userId: 'current_user_id' }, // Example query parameter
   //   { enabled: false } // Disable by default as data is passed via props
   // );

@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: SettingsPushPreferences
 import React, { useState } from 'react';
-import { Switch } from './components/ui/switch';
-import { Label } from './components/ui/label';
-import { Button } from './components/ui/button';
-import { useQuery, useMutation, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 import { createTRPCProxyClient, httpBatchLink } from '@trpc/client';
 import { z } from 'zod';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // --- tRPC Setup (Mock) ---
 // In a real application, this would be a separate file and connected to a backend.
@@ -51,12 +63,12 @@ const queryClient = new QueryClient();
 
 // --- PushPreferences Component ---
 const SettingsPushPreferences: React.FC = () => {
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error } = useStubQuery({
     queryKey: ['pushPreferences'],
     queryFn: () => trpc.getPreferences.query(),
   });
 
-  const mutation = useMutation({
+  const mutation = useStubMutation({
     mutationFn: (newPreferences: PushPreferences) => trpc.updatePreferences.mutate(newPreferences),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['pushPreferences'] });

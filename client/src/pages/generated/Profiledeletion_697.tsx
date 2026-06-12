@@ -5,7 +5,19 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
-import { useMutation } from '@tanstack/react-query';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ProfileDeletionProps {
   onDeletionSuccess: () => void;
@@ -17,7 +29,7 @@ const ProfileDeletion: React.FC<ProfileDeletionProps> = ({ onDeletionSuccess, on
   const [acknowledgeDataLoss, setAcknowledgeDataLoss] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const deleteProfileMutation = useMutation({
+  const deleteProfileMutation = useStubMutation({
     mutationFn: async () => {
       // Simulate API call for profile deletion
       return new Promise((resolve, reject) => {

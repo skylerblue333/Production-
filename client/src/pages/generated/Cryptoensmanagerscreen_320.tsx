@@ -10,8 +10,20 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2 } from 'lucide-react';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Assume tRPC client and types are set up elsewhere
-// import { trpc } from '@/utils/trpc';
 
 type EnsName = {
   name: string;
@@ -56,10 +68,10 @@ export function CryptoEnsManagerScreen() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-    const { data: ensNames, isLoading, isError, error: queryError, refetch } = trpc.ens.getEnsNames.useQuery(searchAddress, { enabled: !!searchAddress });
-  const setPrimaryMutation = trpc.ens.setPrimaryEns.useMutation();
-  const transferMutation = trpc.ens.transferEns.useMutation();
-  const renewMutation = trpc.ens.renewEns.useMutation();
+    const { data: ensNames, isLoading, isError, error: queryError, refetch } = useStubQuery(searchAddress, { enabled: !!searchAddress });
+  const setPrimaryMutation = useStubMutation();
+  const transferMutation = useStubMutation();
+  const renewMutation = useStubMutation();
 
   useEffect(() => {
     if (isError && queryError) {

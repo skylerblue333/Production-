@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: FlashLoanBuilderScreen
 import React, { useState, useCallback } from 'react';
-import { trpc } from '@/utils/trpc';
 import { 
   Card, 
   CardContent, 
@@ -23,6 +22,19 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2, Plus, Trash2, Zap, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 type OperationType = 'SWAP' | 'ARBITRAGE' | 'LIQUIDATE';
 
 interface Operation {
@@ -37,9 +49,9 @@ export default function FlashLoanBuilderScreen() {
   const [amount, setAmount] = useState<string>('');
   const [operations, setOperations] = useState<Operation[]>([]);
   
-  const { data: assets, isLoading: isLoadingAssets } = trpc.crypto.getSupportedAssets.useQuery();
-  const { data: protocols, isLoading: isLoadingProtocols } = trpc.crypto.getProtocols.useQuery();
-  const executeFlashLoan = trpc.crypto.executeFlashLoan.useMutation();
+  const { data: assets, isLoading: isLoadingAssets } = useStubQuery();
+  const { data: protocols, isLoading: isLoadingProtocols } = useStubQuery();
+  const executeFlashLoan = useStubMutation();
 
   const handleAddOperation = useCallback(() => {
     const newOp: Operation = {

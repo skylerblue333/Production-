@@ -1,7 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: RiskAssessor
 import React, { useState, useEffect, useCallback } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
-import { trpc } from '../utils/trpc'; // Adjust path as per your tRPC setup
 import { z } from 'zod'; // For schema validation
 
 // shadcn/ui components (placeholder imports)
@@ -12,6 +10,19 @@ import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/components/ui/use-toast';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define input schema for risk assessment
 const riskAssessmentSchema = z.object({
@@ -50,7 +61,7 @@ const RiskAssessor: React.FC = () => {
   }, [isDarkTheme]);
 
   // tRPC hook for fetching risk assessment (e.g., initial data or recalculation)
-  const { data, isLoading, error, refetch } = trpc.risk.assess.useQuery(input, {
+  const { data, isLoading, error, refetch } = useStubQuery(input, {
     enabled: false, // Only run on demand
     onError: (err) => {
       toast({
@@ -62,7 +73,7 @@ const RiskAssessor: React.FC = () => {
   });
 
   // tRPC hook for performing risk assessment mutation
-  const { mutate, isLoading: isMutating } = trpc.risk.performAssessment.useMutation({
+  const { mutate, isLoading: isMutating } = useStubMutation({
     onSuccess: (result) => {
       toast({
         title: 'Success',

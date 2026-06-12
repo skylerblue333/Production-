@@ -4,8 +4,20 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { trpc } from '../trpc';
 import { Task } from '../types/task';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const AITaskManager: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -19,10 +31,10 @@ const AITaskManager: React.FC = () => {
     }
   }, [darkMode]);
 
-  const { data: tasks, isLoading, isError, error } = trpc.task.list.useQuery();
-  const createTaskMutation = trpc.task.create.useMutation();
-  const updateTaskMutation = trpc.task.update.useMutation();
-  const deleteTaskMutation = trpc.task.delete.useMutation();
+  const { data: tasks, isLoading, isError, error } = useStubQuery();
+  const createTaskMutation = useStubMutation();
+  const updateTaskMutation = useStubMutation();
+  const deleteTaskMutation = useStubMutation();
 
   const handleCreateTask = () => {
     createTaskMutation.mutate({

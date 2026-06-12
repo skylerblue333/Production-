@@ -3,6 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid, CandlestickChart, Candlestick, ReferenceLine } from 'recharts';
 import { format } from 'date-fns';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface CandlestickData {
   timestamp: number;
   open: number;
@@ -42,7 +55,7 @@ const CandlestickChartComponent: React.FC<CandlestickChartProps> = ({ symbol }) 
       try {
         setLoading(true);
         // In a real application, this would be a tRPC hook call:
-        // const result = await trpc.crypto.getCandlestickData.useQuery({ symbol });
+        // const result = await useStubQuery({ symbol });
         const result = await mockFetchData(symbol);
         setData(result);
       } catch (err) {

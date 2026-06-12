@@ -1,14 +1,26 @@
 // AUTO-GENERATED DRAFT SCREEN: GrowthCharts
 import React from 'react';
-import { trpc } from '../trpc';
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card";
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const GrowthCharts: React.FC = () => {
   const [period, setPeriod] = React.useState("7d");
-  const { data, isLoading, error } = trpc.growthData.useQuery({ period });
+  const { data, isLoading, error } = useStubQuery({ period });
 
   if (isLoading) return <div className="p-4 text-center">Loading growth data...</div>;
   if (error) return <div className="p-4 text-center text-red-500">Error: {error.message}</div>;

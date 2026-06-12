@@ -1,6 +1,18 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoInflationRate
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock shadcn/ui components for demonstration purposes
 // In a real application, these would be imported from your shadcn/ui setup
@@ -104,7 +116,7 @@ interface CryptoInflationRateProps {
 }
 
 const CryptoInflationRate: React.FC<CryptoInflationRateProps> = ({ currency }) => {
-  const { data, isLoading, error } = trpc.crypto.getInflationRate.useQuery({ currency });
+  const { data, isLoading, error } = useStubQuery({ currency });
 
   if (isLoading) {
     return (

@@ -1,12 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: ArcadeTournamentStandings
 import React, { useEffect } from 'react'; // Removed useState as it's not used
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
-import { trpc } from '@/utils/trpc'; // Adjust path as per your tRPC setup
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface PlayerStanding {
   id: string;
@@ -23,7 +34,7 @@ const ArcadeTournamentStandings: React.FC = () => {
     document.title = 'SKYCOIN4444 - Arcade Tournament Standings';
   }, []);
 
-  const { data, isLoading, isError, error } = trpc.arcade.getTournamentStandings.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   if (isLoading) {
     return (

@@ -1,12 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoWillAndTestament
 import React, { useState } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming trpc client is configured
-import { Button } from './components/ui/button'; // shadcn/ui button
-import { Input } from './components/ui/input'; // shadcn/ui input
-import { Label } from './components/ui/label'; // shadcn/ui label
-import { Switch } from './components/ui/switch'; // shadcn/ui switch
+import { Button } from '@/components/ui/button'; // shadcn/ui button
+import { Input } from '@/components/ui/input'; // shadcn/ui input
+import { Label } from '@/components/ui/label'; // shadcn/ui label
+import { Switch } from '@/components/ui/switch'; // shadcn/ui switch
 import { useTheme } from './context/theme-provider'; // Assuming a theme provider for dark mode
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Beneficiary {
   id: string;
@@ -33,13 +44,13 @@ const CryptoWillAndTestament: React.FC = () => {
 
   const { theme, setTheme } = useTheme();
 
-  const { data, isLoading, isError, error, refetch } = trpc.will.getWill.useQuery(
+  const { data, isLoading, isError, error, refetch } = useStubQuery(
     { ownerAddress },
     { enabled: !!ownerAddress }
   );
 
-  const createWillMutation = trpc.will.createWill.useMutation();
-  const updateWillMutation = trpc.will.updateWill.useMutation();
+  const createWillMutation = useStubMutation();
+  const updateWillMutation = useStubMutation();
 
   const handleAddBeneficiary = () => {
     if (newBeneficiaryName && newBeneficiaryAddress && newBeneficiaryPercentage > 0) {

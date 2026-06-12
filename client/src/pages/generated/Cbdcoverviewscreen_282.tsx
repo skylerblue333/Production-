@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: CbdcOverviewScreen
 import React from 'react';
-import { trpc } from '../trpc';
 import { useTheme } from './ThemeProvider';
-import { Button } from './ui/button'; // Assuming shadcn/ui button component
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button component
 import { Sun, Moon } from 'lucide-react'; // Assuming lucide-react for icons
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const CbdcOverviewScreen: React.FC = () => {
   const { data, isLoading, error } = trpc.cbdc.query();

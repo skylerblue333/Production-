@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: SkycoinCrossBorderPayment
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
-import { trpc } from './utils/trpc'; // Adjust path as needed
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'; // shadcn/ui card
-import { Button } from './components/ui/button'; // shadcn/ui button
-import { Input } from './components/ui/input'; // shadcn/ui input
-import { Label } from './components/ui/label'; // shadcn/ui label
-import { Switch } from './components/ui/switch'; // shadcn/ui switch for dark mode toggle
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card
+import { Button } from '@/components/ui/button'; // shadcn/ui button
+import { Input } from '@/components/ui/input'; // shadcn/ui input
+import { Label } from '@/components/ui/label'; // shadcn/ui label
+import { Switch } from '@/components/ui/switch'; // shadcn/ui switch for dark mode toggle
 import { useTheme } from './context/theme-provider'; // Assuming a theme context for dark mode
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CrossBorderPaymentProps {
   // Define any props for the component here
@@ -26,10 +37,10 @@ const SkycoinCrossBorderPayment: React.FC<CrossBorderPaymentProps> = () => {
   const [recipient, setRecipient] = React.useState<string>('');
 
   // Example tRPC hook for fetching payment history
-  const { data, isLoading, error } = trpc.payment.getPaymentHistory.useQuery();
+  const { data, isLoading, error } = useStubQuery();
 
   // Example tRPC hook for initiating a payment
-  const initiatePayment = trpc.payment.initiatePayment.useMutation({
+  const initiatePayment = useStubMutation({
     onSuccess: () => {
       alert('Payment initiated successfully!');
       // Invalidate query to refetch payment history

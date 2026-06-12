@@ -1,12 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoFamilyOffice
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC client setup
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card
 import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton for loading states
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui Alert for error handling
 import { SunIcon, MoonIcon } from '@radix-ui/react-icons'; // Example icons for theme toggle
 import { Button } from '@/components/ui/button'; // shadcn/ui Button
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface FamilyOfficeData {
   id: string;
@@ -16,7 +27,7 @@ interface FamilyOfficeData {
 }
 
 const CryptoFamilyOffice: React.FC = () => {
-  const { data, isLoading, error } = trpc.familyOffice.getFamilyOfficeData.useQuery();
+  const { data, isLoading, error } = useStubQuery();
 
   const [isDarkMode, setIsDarkMode] = React.useState(false);
 

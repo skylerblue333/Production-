@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoSlotViewer
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Placeholder for tRPC hook, assuming tRPC integrates with react-query
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // Assuming shadcn/ui card component
-import { Skeleton } from './ui/skeleton'; // Assuming shadcn/ui skeleton for loading states
-import { Alert, AlertDescription, AlertTitle } from './ui/alert'; // Assuming shadcn/ui alert for error handling
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card component
+import { Skeleton } from '@/components/ui/skeleton'; // Assuming shadcn/ui skeleton for loading states
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // Assuming shadcn/ui alert for error handling
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the interface for the data structure expected from the API.
 // This ensures type safety throughout the component.
@@ -17,13 +29,12 @@ interface SlotData {
 // --- tRPC Integration Placeholder ---
 // In a real application, you would typically have a tRPC client setup in a separate file (e.g., `utils/trpc.ts`).
 // This client would be used to create type-safe hooks for your API endpoints.
-// For this example, we are simulating the tRPC `useQuery` behavior using `@tanstack/react-query` directly.
 //
 // Example of how tRPC might be integrated:
 // import { createTRPCReact } from '@trpc/react-query';
 // import type { AppRouter } from '../server/routers/_app'; // Your backend tRPC router types
 // const trpc = createTRPCReact<AppRouter>();
-// const { data, isLoading, isError, error } = trpc.crypto.getSlotData.useQuery();
+// const { data, isLoading, isError, error } = useStubQuery();
 // ------------------------------------
 
 // Mock data fetching function to simulate an asynchronous API call.

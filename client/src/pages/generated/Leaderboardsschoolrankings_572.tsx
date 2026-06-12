@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: LeaderboardsSchoolRankings
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC setup
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from './components/ui/card'; // shadcn/ui card
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from './components/ui/table'; // shadcn/ui table
-import { Skeleton } from './components/ui/skeleton'; // shadcn/ui skeleton for loading states
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card'; // shadcn/ui card
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table'; // shadcn/ui table
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui skeleton for loading states
 import { AlertCircle, Loader2 } from 'lucide-react'; // Icons for error and loading
-import { Alert, AlertDescription, AlertTitle } from './components/ui/alert'; // shadcn/ui alert
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui alert
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 /**
  * @interface SchoolRanking
@@ -28,8 +39,7 @@ interface SchoolRanking {
  * @returns {JSX.Element} The LeaderboardsSchoolRankings component.
  */
 const LeaderboardsSchoolRankings: React.FC = () => {
-  // Fetch school ranking data using tRPC. The useQuery hook from @tanstack/react-query manages caching, loading, and error states.
-  const { data, isLoading, isError, error } = trpc.leaderboards.getSchoolRankings.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   // --- Loading State ---
   if (isLoading) {

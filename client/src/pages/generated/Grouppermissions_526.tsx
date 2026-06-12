@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: GroupPermissions
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { Switch } from '@/components/ui/switch'; // shadcn/ui Switch component
 import { Label } from '@/components/ui/label'; // shadcn/ui Label component
 import { Button } from '@/components/ui/button'; // shadcn/ui Button component
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card components
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Placeholder for tRPC client - in a real app, this would be imported from a tRPC client setup file
 const trpc = {
@@ -34,7 +46,7 @@ const GroupPermissions: React.FC<GroupPermissionsProps> = ({ groupId }) => {
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const { data, isLoading, isError, error: queryError } = useQuery({
+  const { data, isLoading, isError, error: queryError } = useStubQuery({
     queryKey: ['groupPermissions', groupId],
     queryFn: () => trpc.group.getPermissions(groupId),
   });

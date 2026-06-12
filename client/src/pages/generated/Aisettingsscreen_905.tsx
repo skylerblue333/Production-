@@ -6,8 +6,20 @@ import { Switch } from '@/components/ui/switch';
 import { Input } from '@/components/ui/input';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { trpc } from './trpc';
 import { toast } from 'react-hot-toast';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Interfaces/Types
 interface AISettings {
@@ -21,7 +33,7 @@ interface AISettings {
 const AISettingsScreenContent = ({ initialSettings }: { initialSettings: AISettings }) => {
   const [settings, setSettings] = useState<AISettings>(initialSettings);
 
-  const saveSettingsMutation = trpc.aiSettings.useMutation({
+  const saveSettingsMutation = useStubMutation({
     onSuccess: () => {
       toast.success('AI Settings saved successfully!');
     },
@@ -125,7 +137,7 @@ const AISettingsScreenContent = ({ initialSettings }: { initialSettings: AISetti
 };
 
 const AISettingsScreen = () => {
-  const { data, isLoading, error } = trpc.getAISettings.useQuery();
+  const { data, isLoading, error } = useStubQuery();
 
   if (isLoading) {
     return <div className="flex justify-center items-center h-screen text-xl">Loading AI Settings...</div>;

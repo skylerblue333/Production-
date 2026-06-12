@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: MigrationToolsScreen
 import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC client setup
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { useTheme } from 'next-themes'; // For dark theme toggle
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface MigrationData {
   id: string;
@@ -23,7 +34,7 @@ const MigrationToolsScreen: React.FC = () => {
   const { setTheme, theme } = useTheme(); // Assuming next-themes for dark mode
 
   // Simulate fetching migration data with tRPC
-  const { data, isLoading, isError, error } = trpc.migration.getMigrations.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   const handleMigrate = () => {
     // Implement migration logic here

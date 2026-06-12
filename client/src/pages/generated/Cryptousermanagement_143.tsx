@@ -1,14 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoUserManagement
 
 import React from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup
-import { Button } from './components/ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table';
-import { Skeleton } from './components/ui/skeleton';
-import { Switch } from './components/ui/switch';
-import { Label } from './components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import { toast } from 'sonner'; // Assuming sonner for toasts
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface User {
   id: string;
@@ -19,8 +30,8 @@ interface User {
 }
 
 const CryptoUserManagement: React.FC = () => {
-  const { data: users, isLoading, isError, error } = trpc.users.list.useQuery();
-  const deleteUserMutation = trpc.users.delete.useMutation({
+  const { data: users, isLoading, isError, error } = useStubQuery();
+  const deleteUserMutation = useStubMutation({
     onSuccess: () => {
       toast.success('User deleted successfully.');
       // Invalidate queries to refetch user list
@@ -31,7 +42,7 @@ const CryptoUserManagement: React.FC = () => {
     },
   });
 
-  const toggleUserStatusMutation = trpc.users.toggleStatus.useMutation({
+  const toggleUserStatusMutation = useStubMutation({
     onSuccess: () => {
       toast.success('User status updated successfully.');
       trpc.users.list.invalidate();

@@ -3,8 +3,20 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { ArrowUpRight, ArrowDownLeft, RefreshCcw, Info, ChevronLeft, Star } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CoinData {
   id: string;
@@ -24,7 +36,7 @@ interface CoinData {
 
 // Mock tRPC hook for fetching coin data. In a real application, this would connect to a tRPC client.
 // Example: import { trpc } from "@/utils/trpc";
-// const { data, isLoading, isError, error, refetch } = trpc.coin.getCoinData.useQuery({ coinId });
+// const { data, isLoading, isError, error, refetch } = useStubQuery({ coinId });
 const useCoinData = (coinId: string) => {
   return useQuery<CoinData, Error>({
     queryKey: ['coinData', coinId],

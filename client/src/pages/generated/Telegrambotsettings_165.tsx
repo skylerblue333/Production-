@@ -8,7 +8,19 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { useMutation, useQuery } from '@tanstack/react-query'; // Simulating tRPC hooks
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const formSchema = z.object({
   apiToken: z.string().min(1, { message: 'API Token is required.' }),
@@ -36,7 +48,7 @@ const TelegramBotSettings: React.FC<TelegramBotSettingsProps> = () => {
   });
 
   // Simulate tRPC mutation for saving settings
-  const { mutate: saveSettings, isLoading: isSavingSettings, error: saveError } = useMutation({
+  const { mutate: saveSettings, isLoading: isSavingSettings, error: saveError } = useStubMutation({
     mutationFn: async (data: FormValues) => {
       // Replace with actual tRPC call
       await new Promise(resolve => setTimeout(resolve, 1000));

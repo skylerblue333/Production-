@@ -1,11 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: GMXInterface
 import React, { useState, useEffect } from 'react';
-import { Button } from './ui/button'; // Assumed shadcn/ui button component
-import { Card, CardHeader, CardTitle, CardContent } from './ui/card'; // Assumed shadcn/ui card components
-import { Switch } from './ui/switch'; // Assumed shadcn/ui switch component for dark mode toggle
-import { Label } from './ui/label'; // Assumed shadcn/ui label component
-import { Alert, AlertDescription, AlertTitle } from './ui/alert'; // Assumed shadcn/ui alert component
+import { Button } from '@/components/ui/button'; // Assumed shadcn/ui button component
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'; // Assumed shadcn/ui card components
+import { Switch } from '@/components/ui/switch'; // Assumed shadcn/ui switch component for dark mode toggle
+import { Label } from '@/components/ui/label'; // Assumed shadcn/ui label component
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // Assumed shadcn/ui alert component
 import { Terminal } from 'lucide-react'; // Assumed Lucide icons are available
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Ensure Tailwind CSS is configured with dark mode support and shadcn/ui components are installed.
 
@@ -55,8 +68,8 @@ const GMXInterface: React.FC<GMXInterfaceProps> = () => {
   const chartErrorMessage: string | null = null;
 
   // Example of how tRPC might be integrated (conceptual):
-  // const { data: tradingData, isLoading: tradingLoading, error: tradingError } = trpc.gmx.getTradingStatus.useQuery();
-  // const { data: chartData, isLoading: chartLoading, error: chartError } = trpc.gmx.getChartData.useQuery();
+  // const { data: tradingData, isLoading: tradingLoading, error: tradingError } = useStubQuery();
+  // const { data: chartData, isLoading: chartLoading, error: chartError } = useStubQuery();
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans" aria-label="GMX Trading Interface">

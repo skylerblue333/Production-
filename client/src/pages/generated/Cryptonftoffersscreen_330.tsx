@@ -7,6 +7,19 @@ import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui Alert
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'; // Example icon for error
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Define types for NFT Offer
 interface NftOffer {
   id: string;
@@ -61,8 +74,8 @@ const trpc = {
 };
 
 export function CryptoNftOffersScreen() {
-  // In a real application, you would use: const { data, isLoading, error } = trpc.nft.getOffers.useQuery();
-  const { data: offers, isLoading, error } = trpc.nft.getOffers.useQuery();
+  // In a real application, you would use: const { data, isLoading, error } = useStubQuery();
+  const { data: offers, isLoading, error } = useStubQuery();
 
   if (isLoading) {
     return (

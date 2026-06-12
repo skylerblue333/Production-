@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoClearingHouse
 import React from 'react';
-import { trpc } from '../trpc';
-import { Button } from './ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Skeleton } from './ui/skeleton';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the React functional component for the Crypto Clearing House screen.
 // This component displays real-time or simulated data related to crypto clearing operations.
@@ -12,7 +24,7 @@ const CryptoClearingHouse: React.FC = () => {
   // Use tRPC hook to fetch clearing house data.
   // The `useQuery` hook provides data, loading state, error state, and a refetch function.
   // The `id` parameter is passed to the tRPC query to specify the clearing house (e.g., 'SKYCOIN4444').
-  const { data, isLoading, isError, error, refetch } = trpc.getClearingHouseData.useQuery({ id: 'SKYCOIN4444' });
+  const { data, isLoading, isError, error, refetch } = useStubQuery({ id: 'SKYCOIN4444' });
 
   // Render a loading state using shadcn/ui Skeleton components while data is being fetched.
   // This provides a better user experience by showing content placeholders.

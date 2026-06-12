@@ -1,14 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoBackupRecoveryScreen
 import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming trpc client setup
-import { Button } from './components/ui/button';
-import { Input } from './components/ui/input';
-import { Label } from './components/ui/label';
-import { Switch } from './components/ui/switch';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './components/ui/card';
-import { Alert, AlertDescription, AlertTitle } from './components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 type BackupRecoveryData = {
   recoveryPhrase: string;
@@ -23,7 +34,7 @@ const CryptoBackupRecoveryScreen: React.FC<CryptoBackupRecoveryScreenProps> = ({
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [showRecoveryPhrase, setShowRecoveryPhrase] = useState(false);
 
-  const { data, isLoading, isError, error } = trpc.crypto.getBackupRecoveryData.useQuery(
+  const { data, isLoading, isError, error } = useStubQuery(
     { userId },
     { 
       enabled: !!userId, 

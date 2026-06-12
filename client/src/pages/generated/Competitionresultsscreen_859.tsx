@@ -5,6 +5,19 @@ import { Skeleton } from '@/components/ui/skeleton'; // Assuming Skeleton is ava
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // Assuming Alert is available or will be added
 import { Terminal } from 'lucide-react'; // Assuming Lucide icons are available or will be added
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface CompetitionResult {
   id: string;
   rank: number;

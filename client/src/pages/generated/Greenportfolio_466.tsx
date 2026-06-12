@@ -1,13 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: GreenPortfolio
 import React, { useState, useMemo } from 'react';
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from './components/ui/card'; // shadcn/ui
-import { Skeleton } from './components/ui/skeleton'; // shadcn/ui
-import { Alert, AlertDescription, AlertTitle } from './components/ui/alert'; // shadcn/ui
-import { Badge } from './components/ui/badge'; // shadcn/ui
-import { Button } from './components/ui/button'; // shadcn/ui
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'; // shadcn/ui
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui
+import { Badge } from '@/components/ui/badge'; // shadcn/ui
+import { Button } from '@/components/ui/button'; // shadcn/ui
 import { Terminal, TrendingUp, TrendingDown, RefreshCw, Leaf, DollarSign, Activity, Wallet } from 'lucide-react'; // Lucide icons
-import { Progress } from './components/ui/progress'; // shadcn/ui
+import { Progress } from '@/components/ui/progress'; // shadcn/ui
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the shape of our portfolio item
 interface PortfolioItem {
@@ -26,7 +38,7 @@ const GreenPortfolio: React.FC = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   // Fetch data using tRPC hook
-  const { data, isLoading, isError, error, refetch } = trpc.portfolio.getGreenPortfolio.useQuery(undefined, {
+  const { data, isLoading, isError, error, refetch } = useStubQuery(undefined, {
     staleTime: 60000, // 1 minute
     refetchInterval: 300000, // 5 minutes
   });

@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: WrappedTokenManager
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Simulating tRPC with react-query
-import { Button } from './ui/button'; // Assuming shadcn/ui button
-import { Input } from './ui/input'; // Assuming shadcn/ui input
-import { Label } from './ui/label'; // Assuming shadcn/ui label
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'; // Assuming shadcn/ui card
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button
+import { Input } from '@/components/ui/input'; // Assuming shadcn/ui input
+import { Label } from '@/components/ui/label'; // Assuming shadcn/ui label
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface WrappedToken {
   id: string;

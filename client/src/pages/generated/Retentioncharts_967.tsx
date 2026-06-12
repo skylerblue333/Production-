@@ -1,8 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: RetentionCharts
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const RetentionCharts: React.FC = () => {
   const { data, isLoading, error } = trpc.retention.query({

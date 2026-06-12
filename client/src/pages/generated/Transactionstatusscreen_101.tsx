@@ -6,6 +6,19 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RocketIcon } from '@radix-ui/react-icons';
 import { cn } from '@/lib/utils';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Assume tRPC types and hooks are generated and available
 // import { api } from '@/utils/api';
 
@@ -16,7 +29,7 @@ interface TransactionStatusProps {
 // Placeholder for tRPC hook - replace with actual implementation
 const useTransactionStatus = (transactionId: string) => {
   // In a real application, this would be a tRPC query
-  // const { data, isLoading, error } = api.transaction.getStatus.useQuery({ transactionId });
+  // const { data, isLoading, error } = api.transaction.getStatus.useStubQuery({ transactionId });
   // For demonstration, we'll simulate loading and data
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<Error | null>(null);

@@ -1,15 +1,27 @@
 // AUTO-GENERATED DRAFT SCREEN: OracleDashboard
 import React, { useState, useEffect } from 'react';
-import { mockTrpcClient } from '../trpc';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming Card component from shadcn/ui
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface OracleDashboardProps {
   // Define props here if needed
 }
 
 const OracleDashboard: React.FC<OracleDashboardProps> = () => {
-  const { data, isLoading, isError } = mockTrpcClient.oracle.getDashboardData.useQuery();
+  const { data, isLoading, isError } = mockTrpcClient.oracle.getDashboardData.useStubQuery();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {

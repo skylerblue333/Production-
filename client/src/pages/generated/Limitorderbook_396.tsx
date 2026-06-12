@@ -1,16 +1,28 @@
 // AUTO-GENERATED DRAFT SCREEN: LimitOrderBook
 import React, { useState } from 'react';
-import { trpc } from '../trpc';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface LimitOrderBookProps {
   // Define props here if needed
 }
 
 const LimitOrderBook: React.FC<LimitOrderBookProps> = () => {
-  const { data, isLoading, error } = trpc.orderBook.useQuery({ pair: 'BTC/USD' });
+  const { data, isLoading, error } = useStubQuery({ pair: 'BTC/USD' });
   const [orderType, setOrderType] = useState<'buy' | 'sell'>('buy');
   const [price, setPrice] = useState<string>('');
   const [amount, setAmount] = useState<string>('');

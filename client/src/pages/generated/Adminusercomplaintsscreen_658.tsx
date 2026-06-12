@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: AdminUserComplaintsScreen
 import React, { useState, useEffect } from 'react';
-import { Button } from './ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Skeleton } from './ui/skeleton';
+import { Button } from '@/components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Assuming tRPC types are globally available or imported from a generated client
-// import { trpc } from '../utils/trpc'; // Example tRPC client import
 
 interface Complaint {
   id: string;
@@ -23,7 +35,7 @@ const AdminUserComplaintsScreen: React.FC = () => {
   const [isError, setIsError] = useState<boolean>(false);
 
   // In a real application, this would be replaced by a tRPC query hook:
-  // const { data: complaints, isLoading, isError } = trpc.admin.getComplaints.useQuery();
+  // const { data: complaints, isLoading, isError } = useStubQuery();
   useEffect(() => {
     const fetchComplaints = async () => {
       setIsLoading(true);

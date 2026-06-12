@@ -6,6 +6,19 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 // Assuming tRPC setup is external and trpc client is available
 // import { trpc } from '@/trpc'; 
 
@@ -61,7 +74,7 @@ const RewardAnalytics: React.FC = () => {
   const [timeframe, setTimeframe] = useState<string>('7d');
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
-  // Replace with actual tRPC hook: const { data, isLoading, isError, error } = trpc.getRewardAnalytics.useQuery({ timeframe });
+  // Replace with actual tRPC hook: const { data, isLoading, isError, error } = useStubQuery({ timeframe });
   const { data, isLoading, isError, error } = useRewardAnalyticsQuery(timeframe);
 
   if (isLoading) {

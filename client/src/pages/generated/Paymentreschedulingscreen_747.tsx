@@ -13,8 +13,20 @@ import { toast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
 import { CalendarIcon, Loader2 } from 'lucide-react';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Assume tRPC hooks are available, e.g., from a generated client
-// import { trpc } from '@/utils/trpc';
 
 const reschedulingSchema = z.object({
   paymentId: z.string().min(1, { message: 'Payment ID is required.' }),
@@ -47,7 +59,7 @@ const PaymentReschedulingScreen: React.FC<PaymentReschedulingScreenProps> = ({ i
   const newDate = watch('newDate');
 
   // Simulate tRPC mutation
-  // const reschedulePaymentMutation = trpc.payments.reschedule.useMutation();
+  // const reschedulePaymentMutation = useStubMutation();
 
   const onSubmit = useCallback(async (data: ReschedulingFormValues) => {
     setIsLoading(true);

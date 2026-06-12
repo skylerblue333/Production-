@@ -1,19 +1,31 @@
 // AUTO-GENERATED DRAFT SCREEN: FeatureFlagAdmin
 
 import React, { useState } from 'react';
-import { useQuery, useMutation, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createTRPCClient, httpBatchLink } from '@trpc/client';
 import { z } from 'zod';
 
 // shadcn/ui components
-import { Button } from './components/ui/button';
-import { Switch } from './components/ui/switch';
-import { Input } from './components/ui/input';
-import { Label } from './components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table';
-import { Toaster } from './components/ui/sonner';
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the feature flag schema
 const featureFlagSchema = z.object({
@@ -63,12 +75,12 @@ const FeatureFlagAdmin: React.FC = () => {
   
   const [searchQuery, setSearchQuery] = useState('');
 
-  const { data: featureFlags, isLoading, isError, error } = useQuery({
+  const { data: featureFlags, isLoading, isError, error } = useStubQuery({
     queryKey: ['featureFlags'],
     queryFn: () => trpc.featureFlags.list(),
   });
 
-  const updateFlagMutation = useMutation({
+  const updateFlagMutation = useStubMutation({
     mutationFn: trpc.featureFlags.update,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['featureFlags'] });

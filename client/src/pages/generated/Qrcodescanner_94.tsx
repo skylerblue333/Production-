@@ -2,12 +2,24 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useQRCodeScanner } from './hooks/useQRCodeScanner'; // Assuming a custom hook for scanner logic
-import { Button } from './ui/button'; // shadcn/ui button
-import { Input } from './ui/input'; // shadcn/ui input
-import { Label } from './ui/label'; // shadcn/ui label
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // shadcn/ui card
+import { Button } from '@/components/ui/button'; // shadcn/ui button
+import { Input } from '@/components/ui/input'; // shadcn/ui input
+import { Label } from '@/components/ui/label'; // shadcn/ui label
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card
 import { MoonIcon, SunIcon, QrCodeIcon, Loader2 } from 'lucide-react'; // Icons for dark mode toggle and loading
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface QrCodeScannerProps {
   onScan: (data: string) => void;
@@ -21,7 +33,7 @@ const QrCodeScanner: React.FC<QrCodeScannerProps> = ({ onScan, onError }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Simulate tRPC hook for a hypothetical backend scan validation
-  const { mutate: validateScan, isLoading: isValidating } = trpc.qr.validate.useMutation({
+  const { mutate: validateScan, isLoading: isValidating } = useStubMutation({
     onSuccess: (data) => {
       if (data.isValid) {
         onScan(scannedData!); // Use non-null assertion as it's validated in logic

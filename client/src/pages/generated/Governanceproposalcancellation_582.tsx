@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: GovernanceProposalCancellation
 import React, { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC client setup
 import { Button } from '@/components/ui/button'; // shadcn/ui button
 import { Input } from '@/components/ui/input'; // shadcn/ui input
 import { Label } from '@/components/ui/label'; // shadcn/ui label
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card
 import { Switch } from '@/components/ui/switch'; // shadcn/ui switch for dark mode toggle
 import { useTheme } from 'next-themes'; // Assuming next-themes for dark mode
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ProposalCancellationForm {
   proposalId: string;
@@ -21,7 +32,7 @@ const GovernanceProposalCancellation: React.FC = () => {
   });
   const { theme, setTheme } = useTheme();
 
-  const cancelProposalMutation = trpc.governance.cancelProposal.useMutation();
+  const cancelProposalMutation = useStubMutation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

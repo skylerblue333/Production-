@@ -1,11 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: ProfileBackup
 import React from 'react';
 import { useQuery, useMutation, trpc } from '../lib/trpc';
-import { Button } from './ui/button'; // Assuming shadcn/ui button is available
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'; // Assuming shadcn/ui card is available
-import { Switch } from './ui/switch'; // Assuming shadcn/ui switch is available
-import { Label } from './ui/label'; // Assuming shadcn/ui label is available
-import { useToast } from './ui/use-toast'; // Assuming shadcn/ui toast is available
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button is available
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card is available
+import { Switch } from '@/components/ui/switch'; // Assuming shadcn/ui switch is available
+import { Label } from '@/components/ui/label'; // Assuming shadcn/ui label is available
+import { useToast } from '@/components/ui/use-toast'; // Assuming shadcn/ui toast is available
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ProfileBackupProps {
   // No props needed for this specific screen based on the request
@@ -14,11 +27,11 @@ interface ProfileBackupProps {
 const ProfileBackup: React.FC<ProfileBackupProps> = () => {
   const { toast } = useToast();
 
-  const { data: backupStatus, isLoading: isLoadingStatus, isError: isErrorStatus, error: errorStatus } = useQuery(
+  const { data: backupStatus, isLoading: isLoadingStatus, isError: isErrorStatus, error: errorStatus } = useStubQuery(
     trpc.profile.getBackupStatus
   );
 
-  const { mutate: initiateBackup, isLoading: isInitiatingBackup, isError: isErrorInitiatingBackup, error: errorInitiatingBackup } = useMutation(
+  const { mutate: initiateBackup, isLoading: isInitiatingBackup, isError: isErrorInitiatingBackup, error: errorInitiatingBackup } = useStubMutation(
     trpc.profile.initiateBackup
   );
 

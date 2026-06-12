@@ -9,8 +9,20 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Placeholder for tRPC client and hooks
-// import { trpc } from '@/utils/trpc';
 
 type MixerSettings = {
   amount: number;
@@ -42,7 +54,7 @@ const CryptoPrivacyMixer: React.FC = () => {
   });
 
   // Placeholder for tRPC mutation
-  // const mixFundsMutation = trpc.mixer.mixFunds.useMutation();
+  // const mixFundsMutation = useStubMutation();
 
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);

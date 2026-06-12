@@ -2,10 +2,23 @@
 
 import React from 'react';
 import { useQuery } from '@trpc/react-query';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // Assuming shadcn/ui card component
-import { Skeleton } from './ui/skeleton'; // Assuming shadcn/ui skeleton component
-import { Alert, AlertDescription, AlertTitle } from './ui/alert'; // Assuming shadcn/ui alert component
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card component
+import { Skeleton } from '@/components/ui/skeleton'; // Assuming shadcn/ui skeleton component
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // Assuming shadcn/ui alert component
 import { Terminal } from 'lucide-react'; // Assuming lucide-react for icons
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the type for a single story
 interface Story {
@@ -60,7 +73,7 @@ const StoryCard: React.FC<{ story: Story }> = ({ story }) => (
 );
 
 const StoriesFeed: React.FC = () => {
-  const { data: stories, isLoading, isError, error } = trpc.stories.getStories.useQuery();
+  const { data: stories, isLoading, isError, error } = useStubQuery();
 
   if (isLoading) {
     return (

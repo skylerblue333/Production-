@@ -7,7 +7,19 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { CopyIcon } from '@radix-ui/react-icons';
 import { useToast } from '@/components/ui/use-toast';
-import { trpc } from '@/utils/trpc'; // Placeholder for tRPC hooks
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CryptoDepositScreenProps {}
 
@@ -16,7 +28,7 @@ const CryptoDepositScreen: React.FC<CryptoDepositScreenProps> = () => {
   const { toast } = useToast();
 
   // Placeholder tRPC query for deposit address
-  const { data: depositAddressData, isLoading, error } = trpc.crypto.getDepositAddress.useQuery(
+  const { data: depositAddressData, isLoading, error } = useStubQuery(
     { currency: selectedCrypto },
     { enabled: !!selectedCrypto }
   );

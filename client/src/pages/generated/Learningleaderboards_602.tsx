@@ -1,12 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: LearningLeaderboards
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RocketIcon } from '@radix-ui/react-icons';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface LeaderboardEntry {
   id: string;
@@ -19,7 +30,7 @@ interface LeaderboardEntry {
 const LearningLeaderboards: React.FC = () => {
   // In a real application, theme would be managed by a context provider or similar.
   // For demonstration, we assume a dark class can be applied at a higher level.
-  const { data, isLoading, isError, error } = trpc.learning.getLeaderboard.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   if (isLoading) {
     return (

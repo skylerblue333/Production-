@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: LearningAchievements
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Placeholder for tRPC/react-query
-import { Card, CardHeader, CardTitle, CardContent } from './ui/card'; // Placeholder for shadcn/ui Card
-import { Button } from './ui/button'; // Placeholder for shadcn/ui Button
-import { Switch } from './ui/switch'; // Placeholder for shadcn/ui Switch
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'; // Placeholder for shadcn/ui Card
+import { Button } from '@/components/ui/button'; // Placeholder for shadcn/ui Button
+import { Switch } from '@/components/ui/switch'; // Placeholder for shadcn/ui Switch
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock API call for demonstration. In a real app, this would be a tRPC call.
 const fetchAchievements = async (): Promise<string[]> => {

@@ -5,10 +5,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useQuery, useMutation, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
 import { createTRPCReact } from '@trpc/react-query';
 import type { AppRouter } from './server/router'; // Assuming a tRPC server setup
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Initialize tRPC client
 const trpc = createTRPCReact<AppRouter>();
@@ -16,10 +28,10 @@ const trpc = createTRPCReact<AppRouter>();
 const queryClient = new QueryClient();
 
 // Dummy tRPC hooks (replace with actual tRPC client calls)
-const useProducts = () => trpc.getProducts.useQuery();
-const useCreateProduct = () => trpc.createProduct.useMutation();
-const useUpdateProduct = () => trpc.updateProduct.useMutation();
-const useDeleteProduct = () => trpc.deleteProduct.useMutation();
+const useProducts = () => useStubQuery();
+const useCreateProduct = () => useStubMutation();
+const useUpdateProduct = () => useStubMutation();
+const useDeleteProduct = () => useStubMutation();
 
 interface Product {
   id: string;

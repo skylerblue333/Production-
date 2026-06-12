@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoAssetOverview
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card
 import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui skeleton for loading states
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui alert for error handling
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'; // Example icon for error
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Assuming tRPC client setup
-// import { trpc } from '@/utils/trpc'; 
 
 interface AssetData {
   id: string;
@@ -49,7 +60,7 @@ const fetchAssetOverview = async (): Promise<AssetData[]> => {
 
 const CryptoAssetOverview: React.FC = () => {
   // In a real application, you would use tRPC hooks like:
-  // const { data, isLoading, isError, error } = trpc.crypto.getAssetOverview.useQuery();
+  // const { data, isLoading, isError, error } = useStubQuery();
   const { data, isLoading, isError, error } = useQuery<AssetData[], Error>({
     queryKey: ['assetOverview'],
     queryFn: fetchAssetOverview,

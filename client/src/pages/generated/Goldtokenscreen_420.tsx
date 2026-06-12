@@ -5,6 +5,19 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useGoldTokenData } from '@/hooks/useGoldTokenData'; // Placeholder for tRPC hook
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'; // For chart placeholder
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface GoldTokenScreenProps {}
 
 const GoldTokenScreen: React.FC<GoldTokenScreenProps> = () => {

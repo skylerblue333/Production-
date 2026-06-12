@@ -5,7 +5,19 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { trpc } from '@/utils/trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface FileWithPreview extends File {
   preview?: string;
@@ -21,7 +33,7 @@ export default function ProfileImportScreen() {
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const importMutation = trpc.profile.importProfile.useMutation({
+  const importMutation = useStubMutation({
     onSuccess: () => {
       setUploadState(prev => ({ ...prev, success: true, progress: 100 }));
     },

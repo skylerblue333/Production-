@@ -1,9 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: RipplePaymentsScreen
 import React, { useState, useEffect } from 'react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 // import { useQuery, useMutation } from './trpc/react'; // Placeholder for tRPC hooks
-// import { Button } from './components/ui/button'; // Placeholder for shadcn/ui button
-// import { Input } from './components/ui/input'; // Placeholder for shadcn/ui input
-// import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './components/ui/card'; // Placeholder for shadcn/ui card
+// import { Button } from '@/components/ui/button'; // Placeholder for shadcn/ui button
+// import { Input } from '@/components/ui/input'; // Placeholder for shadcn/ui input
+// import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'; // Placeholder for shadcn/ui card
 
 interface RipplePayment {
   id: string;
@@ -28,7 +41,7 @@ const RipplePaymentsScreen: React.FC<RipplePaymentsScreenProps> = ({ userId }) =
       try {
         setLoading(true);
         setError(null);
-        // const data = await useQuery.ripple.getPayments.useQuery({ userId }); // Placeholder
+        // const data = await useQuery.ripple.getPayments.useStubQuery({ userId }); // Placeholder
         // setPayments(data.payments);
         // Simulate API call
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -49,7 +62,7 @@ const RipplePaymentsScreen: React.FC<RipplePaymentsScreenProps> = ({ userId }) =
   // Simulate tRPC mutation for making a new payment
   const handleMakePayment = async (amount: number, currency: string) => {
     try {
-      // await useMutation.ripple.makePayment.useMutation(); // Placeholder
+      // await useMutation.ripple.makePayment.useStubMutation(); // Placeholder
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 500));
       setPayments(prev => [...prev, { id: String(prev.length + 1), amount, currency, status: 'pending' }]);

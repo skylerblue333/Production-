@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: LearningMilestones
 import React, { useState, useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { trpc } from "@/utils/trpc"; // Assuming tRPC client setup
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CheckCircle2, XCircle, Filter, Search } from "lucide-react";
 import { Input } from "@/components/ui/input"; // Assuming shadcn/ui Input component
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"; // Assuming shadcn/ui Select component
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the interface for a Milestone to ensure type safety throughout the component.
 interface Milestone {
@@ -26,7 +37,7 @@ interface Milestone {
 const LearningMilestones: React.FC = () => {
   // Fetch learning milestones using tRPC's useQuery hook.
   // This hook automatically manages loading, error, and data states.
-  const { data, isLoading, isError, error } = trpc.milestones.getMilestones.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   // State for filtering milestones
   const [filterStatus, setFilterStatus] = useState<"all" | "completed" | "pending">("all");

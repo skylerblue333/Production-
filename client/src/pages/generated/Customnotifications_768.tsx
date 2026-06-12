@@ -5,8 +5,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { useQuery, useMutation, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react'; // For loading spinner
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface NotificationSetting {
   id: string;
@@ -23,7 +35,7 @@ const CustomNotificationsContent: React.FC = () => {
   const [newNotificationWebhook, setNewNotificationWebhook] = useState('');
 
   // Placeholder for actual tRPC query to fetch settings
-  // const { data, isLoading, isError, error, refetch } = trpc.customNotifications.getSettings.useQuery();
+  // const { data, isLoading, isError, error, refetch } = useStubQuery();
   const { data, isLoading, isError, error, refetch } = useQuery<NotificationSetting[]>({ 
     queryKey: ['customNotifications'],
     queryFn: async () => { /* Simulate API call */ return []; }, // Replace with actual tRPC call
@@ -34,14 +46,14 @@ const CustomNotificationsContent: React.FC = () => {
   });
 
   // Placeholder for actual tRPC mutation to add a new setting
-  // const { mutate: addNotificationMutate, isPending: addNotificationIsPending, isError: addNotificationIsError, error: addNotificationError } = trpc.customNotifications.addSetting.useMutation();
-  const { mutate: addNotificationMutate, isPending: addNotificationIsPending, isError: addNotificationIsError, error: addNotificationError } = useMutation({
+  // const { mutate: addNotificationMutate, isPending: addNotificationIsPending, isError: addNotificationIsError, error: addNotificationError } = useStubMutation();
+  const { mutate: addNotificationMutate, isPending: addNotificationIsPending, isError: addNotificationIsError, error: addNotificationError } = useStubMutation({
     mutationFn: async (newSetting: Omit<NotificationSetting, 'id'>) => { /* Simulate API call */ return { id: Math.random().toString(36).substring(7), ...newSetting }; }, // Replace with actual tRPC call
   });
 
   // Placeholder for actual tRPC mutation to update a setting
-  // const { mutate: updateNotificationMutate, isPending: updateNotificationIsPending, isError: updateNotificationIsError, error: updateNotificationError } = trpc.customNotifications.updateSetting.useMutation();
-  const { mutate: updateNotificationMutate, isPending: updateNotificationIsPending, isError: updateNotificationIsError, error: updateNotificationError } = useMutation({
+  // const { mutate: updateNotificationMutate, isPending: updateNotificationIsPending, isError: updateNotificationIsError, error: updateNotificationError } = useStubMutation();
+  const { mutate: updateNotificationMutate, isPending: updateNotificationIsPending, isError: updateNotificationIsError, error: updateNotificationError } = useStubMutation({
     mutationFn: async (updatedSetting: NotificationSetting) => { /* Simulate API call */ return updatedSetting; }, // Replace with actual tRPC call
   });
 

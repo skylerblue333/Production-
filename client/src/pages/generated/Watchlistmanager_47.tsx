@@ -1,14 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: WatchlistManager
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC setup
-import { cn } from '../lib/utils'; // Assuming shadcn/ui utils
-import { Switch } from '../components/ui/switch'; // Assuming shadcn/ui switch
-import { Label } from '../components/ui/label'; // Assuming shadcn/ui label
-import { Input } from '../components/ui/input'; // Assuming shadcn/ui input
-import { Button } from '../components/ui/button'; // Assuming shadcn/ui button
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'; // Assuming shadcn/ui card
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table'; // Assuming shadcn/ui table
+import { cn } from '@/lib/utils'; // Assuming shadcn/ui utils
+import { Switch } from '@/components/ui/switch'; // Assuming shadcn/ui switch
+import { Label } from '@/components/ui/label'; // Assuming shadcn/ui label
+import { Input } from '@/components/ui/input'; // Assuming shadcn/ui input
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'; // Assuming shadcn/ui table
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface WatchlistItem {
   id: string;
@@ -22,9 +33,9 @@ const WatchlistManager: React.FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [newSymbol, setNewSymbol] = useState('');
 
-  const { data: watchlist, isLoading, isError, error } = trpc.watchlist.getWatchlist.useQuery();
-  const addMutation = trpc.watchlist.addWatchlistItem.useMutation();
-  const removeMutation = trpc.watchlist.removeWatchlistItem.useMutation();
+  const { data: watchlist, isLoading, isError, error } = useStubQuery();
+  const addMutation = useStubMutation();
+  const removeMutation = useStubMutation();
 
   useEffect(() => {
     if (isDarkTheme) {

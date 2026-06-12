@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: RewardCenter
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal } from 'lucide-react'; // Example icon for Alert
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // --- Types --- //
 interface Reward {
@@ -43,7 +55,7 @@ const trpc = {
 
 // --- RewardCenter Component --- //
 const RewardCenter: React.FC = () => {
-  const { data: rewards, isLoading, isError, error } = trpc.rewards.getRewards.useQuery();
+  const { data: rewards, isLoading, isError, error } = useStubQuery();
 
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8 bg-background text-foreground min-h-screen">

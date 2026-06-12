@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: GasTracker
 import React, { useState, useEffect, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { cn } from '@/lib/utils'; // shadcn/ui utility for conditional classes
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'; // shadcn/ui Card component
 import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton component
@@ -9,9 +8,22 @@ import { Switch } from '@/components/ui/switch'; // shadcn/ui Switch component
 import { Label } from '@/components/ui/label'; // shadcn/ui Label component
 import { AlertCircle, Sun, Moon } from 'lucide-react'; // Icons
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Mock tRPC hook for gas price data
 const useGasPriceQuery = () => {
-  return useQuery({
+  return useStubQuery({
     queryKey: ['gasPrice'],
     queryFn: async () => {
       // Simulate API call

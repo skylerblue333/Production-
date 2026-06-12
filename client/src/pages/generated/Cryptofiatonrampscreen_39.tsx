@@ -9,7 +9,19 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC client setup
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const formSchema = z.object({
   amount: z.number().min(1, { message: 'Amount must be at least 1' }),
@@ -25,7 +37,7 @@ const CryptoFiatOnRampScreen: React.FC = () => {
     resolver: zodResolver(formSchema),
   });
 
-  const onRampMutation = trpc.fiat.onRamp.useMutation({
+  const onRampMutation = useStubMutation({
     onSuccess: () => {
       toast.success('Fiat on-ramp successful!');
     },

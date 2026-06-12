@@ -1,18 +1,30 @@
 // AUTO-GENERATED DRAFT SCREEN: RolePermissionsScreen
 
 import React, { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 // Assume these are imported from a shadcn/ui-like component library
-import { Button } from './components/ui/button';
-import { Input } from './components/ui/input';
-import { Label } from './components/ui/label';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from './components/ui/dialog';
-import { Checkbox } from './components/ui/checkbox';
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from './components/ui/table';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client and types (simplified for line count)
 const trpc = {
@@ -47,16 +59,16 @@ type RoleFormValues = z.infer<typeof roleSchema>;
 
 const RolePermissionsScreen: React.FC = () => {
   const queryClient = useQueryClient();
-  const { data: roles = [], isLoading: isLoadingRoles, isError: isErrorRoles, error: rolesError } = trpc.role.list.useQuery();
-  const { data: allPermissions = [], isLoading: isLoadingPermissions, isError: isErrorPermissions, error: permissionsError } = trpc.permission.list.useQuery();
+  const { data: roles = [], isLoading: isLoadingRoles, isError: isErrorRoles, error: rolesError } = useStubQuery();
+  const { data: allPermissions = [], isLoading: isLoadingPermissions, isError: isErrorPermissions, error: permissionsError } = useStubQuery();
 
-  const createRoleMutation = trpc.role.create.useMutation({
+  const createRoleMutation = useStubMutation({
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['role.list'] }); setOpenAddRoleDialog(false); },
   });
-  const updateRoleMutation = trpc.role.update.useMutation({
+  const updateRoleMutation = useStubMutation({
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['role.list'] }); setOpenEditRoleDialog(false); setSelectedRole(null); },
   });
-  const deleteRoleMutation = trpc.role.delete.useMutation({
+  const deleteRoleMutation = useStubMutation({
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['role.list'] }); setOpenConfirmDeleteDialog(false); setSelectedRole(null); },
   });
 

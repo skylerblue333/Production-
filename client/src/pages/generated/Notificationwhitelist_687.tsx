@@ -1,13 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: NotificationWhitelist
 
 import React, { useState } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 type WhitelistEntry = {
   id: string;
@@ -54,9 +66,9 @@ const deleteWhitelistEntry = async (id: string): Promise<void> => {
 
 export function NotificationWhitelist() {
   const { data: whitelist, isLoading, error, refetch } = useQuery<WhitelistEntry[]>({ queryKey: ['whitelist'], queryFn: fetchWhitelist });
-  const addMutation = useMutation({ mutationFn: addWhitelistEntry, onSuccess: () => { toast.success('Address added to whitelist'); refetch(); } });
-  const updateMutation = useMutation({ mutationFn: updateWhitelistEntry, onSuccess: () => { toast.success('Whitelist updated'); refetch(); } });
-  const deleteMutation = useMutation({ mutationFn: deleteWhitelistEntry, onSuccess: () => { toast.success('Address removed from whitelist'); refetch(); } });
+  const addMutation = useStubMutation({ mutationFn: addWhitelistEntry, onSuccess: () => { toast.success('Address added to whitelist'); refetch(); } });
+  const updateMutation = useStubMutation({ mutationFn: updateWhitelistEntry, onSuccess: () => { toast.success('Whitelist updated'); refetch(); } });
+  const deleteMutation = useStubMutation({ mutationFn: deleteWhitelistEntry, onSuccess: () => { toast.success('Address removed from whitelist'); refetch(); } });
 
   const [newAddress, setNewAddress] = useState('');
 

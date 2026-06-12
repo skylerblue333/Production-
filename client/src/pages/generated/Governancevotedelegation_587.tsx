@@ -9,7 +9,19 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/components/ui/use-toast';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const formSchema = z.object({
   delegateAddress: z.string().min(42, 'Invalid address').max(42, 'Invalid address'),
@@ -33,7 +45,7 @@ export function GovernanceVoteDelegation() {
   });
 
   // Example tRPC mutation hook
-  const delegateVoteMutation = trpc.governance.delegateVote.useMutation({
+  const delegateVoteMutation = useStubMutation({
     onSuccess: () => {
       toast({
         title: 'Delegation Successful',

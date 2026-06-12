@@ -1,17 +1,29 @@
 // AUTO-GENERATED DRAFT SCREEN: GameHistoryScreen
 import React, { useState } from 'react';
 import ThemeToggle from './components/theme-toggle';
-import { Input } from './components/ui/input';
-import { Button } from './components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import {
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from './components/ui/table';
-import { trpc } from './trpc';
+} from '@/components/ui/table';
 
 interface GameRecord {
   id: string;
@@ -23,7 +35,7 @@ interface GameRecord {
 
 const GameHistoryScreen: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { data: gameHistory, isLoading, isError, error } = trpc.game.getHistory.useQuery({
+  const { data: gameHistory, isLoading, isError, error } = useStubQuery({
     search: searchTerm,
   });
 

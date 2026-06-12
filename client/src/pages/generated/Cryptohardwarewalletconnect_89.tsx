@@ -4,9 +4,20 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useMutation } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc';
 import { Loader2 } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CryptoHardwareWalletConnectProps {
   onConnectSuccess: (walletAddress: string) => void;
@@ -21,7 +32,7 @@ const CryptoHardwareWalletConnect: React.FC<CryptoHardwareWalletConnectProps> = 
   const [pin, setPin] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  const connectWalletMutation = trpc.crypto.connectHardwareWallet.useMutation();
+  const connectWalletMutation = useStubMutation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

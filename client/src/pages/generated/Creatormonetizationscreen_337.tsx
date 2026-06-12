@@ -1,14 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: CreatorMonetizationScreen
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC setup
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Input } from '../components/ui/input';
-import { Label } from '../components/ui/label';
-import { Switch } from '../components/ui/switch';
-import { Separator } from '../components/ui/separator';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Separator } from '@/components/ui/separator';
 import { MoonIcon, SunIcon, Loader2 } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CreatorSettings {
   id: string;
@@ -21,10 +32,10 @@ const CreatorMonetizationScreen: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Fetch creator settings
-  const { data: settings, isLoading, isError, error } = trpc.creator.getSettings.useQuery();
+  const { data: settings, isLoading, isError, error } = useStubQuery();
 
   // Update creator settings
-  const updateSettingsMutation = trpc.creator.updateSettings.useMutation();
+  const updateSettingsMutation = useStubMutation();
 
   useEffect(() => {
     if (settings?.darkMode !== undefined) {

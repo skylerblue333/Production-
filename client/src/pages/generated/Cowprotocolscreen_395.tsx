@@ -1,7 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: CoWProtocolScreen
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -9,6 +7,19 @@ import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the interface for the data fetched from the tRPC API.
 // This ensures type safety and better code readability.
@@ -29,7 +40,7 @@ interface CoWProtocolData {
  */
 const CoWProtocolScreen: React.FC = () => {
   // Fetch data using tRPC hook. This handles loading, error, and data states.
-  const { data, isLoading, isError, error } = trpc.cowProtocol.getData.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   // Display skeleton loaders while data is being fetched.
   if (isLoading) {

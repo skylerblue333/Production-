@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: HelpCertificationScreen
 
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { Sun, Moon, AlertCircle, Loader2 } from 'lucide-react';
 import { Button } from '../../components/ui/button'; // Assuming shadcn/ui button component
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card'; // Assuming shadcn/ui card components
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration. In a real app, this would be imported from your tRPC setup.
 const trpc = {
@@ -37,7 +49,7 @@ const HelpCertificationScreen: React.FC<HelpCertificationScreenProps> = () => {
     }
   }, [isDarkMode]);
 
-  const { data, isLoading, isError, error, refetch } = useQuery({
+  const { data, isLoading, isError, error, refetch } = useStubQuery({
     queryKey: ['certificationStatus'],
     queryFn: () => trpc.help.getCertificationStatus(),
   });

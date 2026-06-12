@@ -8,7 +8,19 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Loader2, Sun, Moon } from "lucide-react"; // Assuming lucide-react is installed
-import { trpc } from "@/lib/api";
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface FixedDepositData {
   id: string;
@@ -22,7 +34,7 @@ interface FixedDepositData {
 interface FixedDepositScreenProps {}
 
 const FixedDepositScreen: React.FC<FixedDepositScreenProps> = () => {
-  const { data, isLoading, isError, refetch } = trpc.fixedDeposit.getData.useQuery();
+  const { data, isLoading, isError, refetch } = useStubQuery();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [depositAmount, setDepositAmount] = useState<string>('');
   const [fixedDeposits, setFixedDeposits] = useState<FixedDepositData[]>([]);

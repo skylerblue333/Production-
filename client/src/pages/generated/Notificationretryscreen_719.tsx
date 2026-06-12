@@ -4,7 +4,19 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 import { ReloadIcon, ExclamationTriangleIcon, CheckCircledIcon } from '@radix-ui/react-icons';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC client setup
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface NotificationRetryScreenProps {
   notificationId: string;
@@ -14,7 +26,7 @@ const NotificationRetryScreen: React.FC<NotificationRetryScreenProps> = ({ notif
   const { toast } = useToast();
 
   // tRPC hook for retrying notification
-  const retryNotificationMutation = trpc.notification.retry.useMutation({
+  const retryNotificationMutation = useStubMutation({
     onSuccess: () => {
       toast({
         title: 'Notification Retried',

@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoSubscriptionPlans
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Simulating tRPC hook usage
 import { Button } from '@/components/ui/button'; // Simulating shadcn/ui button
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'; // Simulating shadcn/ui card
 import { Switch } from '@/components/ui/switch'; // Simulating shadcn/ui switch
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface SubscriptionPlan {
   id: string;

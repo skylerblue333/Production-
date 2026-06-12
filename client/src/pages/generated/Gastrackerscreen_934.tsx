@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: GasTrackerScreen
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Simulating tRPC hook
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // Assuming shadcn/ui path
-import { Button } from './ui/button';
-import { Skeleton } from './ui/skeleton';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui path
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface GasData {
   fast: number;

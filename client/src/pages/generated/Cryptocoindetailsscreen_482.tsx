@@ -3,7 +3,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC hooks are integrated with react-query
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card
 import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton for loading states
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui Alert for error handling
@@ -11,8 +10,20 @@ import { ExclamationTriangleIcon } from '@radix-ui/react-icons'; // Icon for err
 import { Switch } from '@/components/ui/switch'; // shadcn/ui Switch for dark mode toggle
 import { Label } from '@/components/ui/label'; // shadcn/ui Label
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Assuming a tRPC client setup like this:
-// import { trpc } from '../utils/trpc';
 
 interface CoinDetails {
   id: string;

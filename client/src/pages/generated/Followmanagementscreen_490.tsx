@@ -1,9 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: FollowManagementScreen
 
 import React, { useState, useEffect } from 'react';
-import { Button } from './ui/button'; // Assuming shadcn/ui button
-import { Input } from './ui/input';   // Assuming shadcn/ui input
-import { Switch } from './ui/switch'; // Assuming shadcn/ui switch for dark mode
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button
+import { Input } from '@/components/ui/input';   // Assuming shadcn/ui input
+import { Switch } from '@/components/ui/switch'; // Assuming shadcn/ui switch for dark mode
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface User {
   id: string;

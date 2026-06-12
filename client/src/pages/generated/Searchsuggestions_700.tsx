@@ -7,8 +7,20 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTheme } from 'next-themes';
 import { SearchIcon, Loader2, XCircle } from 'lucide-react';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Assume tRPC client is set up and available
-// import { trpc } from '@/utils/trpc';
 
 interface SearchSuggestion {
   id: string;
@@ -27,7 +39,7 @@ const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ onSelectSuggestio
   const { theme } = useTheme();
 
   // Mock tRPC hook for fetching suggestions
-  // In a real app, this would be: const { data, isLoading, error } = trpc.search.getSuggestions.useQuery({ query: searchTerm });
+  // In a real app, this would be: const { data, isLoading, error } = useStubQuery({ query: searchTerm });
   const fetchSuggestions = useCallback(async (query: string) => {
     if (!query.trim()) {
       setSuggestions([]);

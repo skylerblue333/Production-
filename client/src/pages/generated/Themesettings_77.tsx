@@ -9,6 +9,19 @@ import { Slider } from '@/components/ui/slider'; // shadcn/ui Slider for range i
 import { useQuery, useMutation } from '@trpc/react-query'; // tRPC hooks for data fetching and mutations
 import { type AppRouter } from '@/server/api/root'; // Assuming tRPC app router type for strong typing
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Define the props interface for the ThemeSettings component for better type safety
 interface ThemeSettingsProps {
   userId: string; // Unique identifier for the user whose settings are being managed

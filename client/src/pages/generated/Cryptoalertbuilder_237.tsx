@@ -13,6 +13,19 @@ import { toast } from '@/components/ui/use-toast'; // Assuming shadcn/ui toast c
 import { useCreateAlert } from '@/lib/trpc/hooks'; // Assuming tRPC hook for creating alerts
 import { useCryptoSymbols } from '@/lib/trpc/hooks'; // Assuming tRPC hook for fetching crypto symbols
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Zod schema for form validation
 const alertSchema = z.object({
   cryptoSymbol: z.string().min(1, { message: 'Crypto symbol is required.' }),

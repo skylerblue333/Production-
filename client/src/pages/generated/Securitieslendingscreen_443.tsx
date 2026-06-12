@@ -6,6 +6,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Mock tRPC client and hooks for demonstration
 const trpc = {
   useQuery: (key: string) => {
@@ -29,7 +42,7 @@ const trpc = {
 };
 
 const SecuritiesLendingScreen: React.FC = () => {
-  const { data, isLoading, isError } = trpc.useQuery('securitiesData');
+  const { data, isLoading, isError } = trpc.useStubQuery('securitiesData');
 
   if (isLoading) {
     return <div className="flex items-center justify-center h-screen">Loading...</div>;

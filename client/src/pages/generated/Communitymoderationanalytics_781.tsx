@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: CommunityModerationAnalytics
 
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC hooks integrate with react-query
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // shadcn/ui Card component
-import { Button } from './ui/button'; // shadcn/ui Button component
-import { Skeleton } from './ui/skeleton'; // shadcn/ui Skeleton component for loading states
-import { Switch } from './ui/switch'; // shadcn/ui Switch for dark theme toggle
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card component
+import { Button } from '@/components/ui/button'; // shadcn/ui Button component
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton component for loading states
+import { Switch } from '@/components/ui/switch'; // shadcn/ui Switch for dark theme toggle
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration purposes
 const trpc = {

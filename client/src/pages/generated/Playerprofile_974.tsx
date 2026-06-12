@@ -1,18 +1,30 @@
 // AUTO-GENERATED DRAFT SCREEN: PlayerProfile
 import React from 'react';
-import { trpc } from '../utils/trpc';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Badge } from './ui/badge';
-import { Progress } from './ui/progress';
-import { Separator } from './ui/separator';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Separator } from '@/components/ui/separator';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface PlayerProfileProps {
   playerId: string;
 }
 
 const PlayerProfile: React.FC<PlayerProfileProps> = ({ playerId }) => {
-  const { data: player, isLoading, isError, error } = trpc.player.getProfile.useQuery({ playerId });
+  const { data: player, isLoading, isError, error } = useStubQuery({ playerId });
 
   if (isLoading) {
     return <div className="flex justify-center items-center h-screen">Loading player profile...</div>;

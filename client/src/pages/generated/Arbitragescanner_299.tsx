@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: ArbitrageScanner
 import React, { useState, useEffect } from 'react';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Input } from '../components/ui/input';
-import { Label } from '../components/ui/label';
-import { Switch } from '../components/ui/switch';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
-import { trpc } from '../trpc';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ArbitrageOpportunity {
   exchange1: string;
@@ -22,7 +34,7 @@ const ArbitrageScanner: React.FC = () => {
   const [minProfit, setMinProfit] = useState<number | undefined>(0.1);
   const [refreshInterval, setRefreshInterval] = useState<number | undefined>(30);
 
-  const { data, isLoading, isError, refetch } = trpc.arbitrage.useQuery({
+  const { data, isLoading, isError, refetch } = useStubQuery({
     minProfit,
     refreshInterval,
   });

@@ -1,9 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoProtocolRevenueScreen
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'; // Assuming shadcn/ui card component
-import { Skeleton } from './components/ui/skeleton'; // Assuming shadcn/ui skeleton component for loading states
-import { Alert, AlertDescription, AlertTitle } from './components/ui/alert'; // Assuming shadcn/ui alert component for error handling
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card component
+import { Skeleton } from '@/components/ui/skeleton'; // Assuming shadcn/ui skeleton component for loading states
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // Assuming shadcn/ui alert component for error handling
 import { Sun, Moon, AlertCircle } from 'lucide-react'; // Icons for theme toggle and error
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Simulate tRPC hook for fetching protocol revenue data
 interface ProtocolRevenueData {

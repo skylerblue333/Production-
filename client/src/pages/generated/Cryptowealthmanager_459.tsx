@@ -5,9 +5,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-import { trpc } from '@/lib/trpc';
-import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@/lib/trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CryptoWealthManagerProps {
   // Define props here if needed
@@ -21,7 +32,7 @@ const CryptoWealthManager: React.FC<CryptoWealthManagerProps> = () => {
   const [connectionSuccess, setConnectionSuccess] = useState<boolean>(false);
 
   // Mock tRPC mutation for connecting wallet
-  const connectWalletMutation = trpc.wallet.connect.useMutation({
+  const connectWalletMutation = useStubMutation({
     onMutate: () => {
       setIsConnecting(true);
       setConnectionError(null);

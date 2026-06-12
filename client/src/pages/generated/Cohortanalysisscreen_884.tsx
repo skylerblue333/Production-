@@ -1,17 +1,29 @@
 // AUTO-GENERATED DRAFT SCREEN: CohortAnalysisScreen
 import React, { useState } from 'react';
-import { trpc } from '../utils/trpc';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
-import { Calendar } from './ui/calendar';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import { format } from 'date-fns';
 import { CalendarIcon } from '@radix-ui/react-icons';
-import { cn } from '../lib/utils';
+import { cn } from '@/lib/utils';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CohortData {
   cohortName: string;
@@ -25,7 +37,7 @@ const CohortAnalysisScreen: React.FC = () => {
   const [cohorts, setCohorts] = useState<CohortData[]>([]);
 
   // Mock tRPC query for fetching cohort data
-  const { data, isLoading, error } = trpc.hello.useQuery({ text: 'cohort data' });
+  const { data, isLoading, error } = useStubQuery({ text: 'cohort data' });
 
   const handleAddCohort = () => {
     if (cohortName && startDate) {

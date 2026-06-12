@@ -1,13 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: UserStats
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card';
-import { trpc } from './trpc';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from 'next-themes';
 import { Sun, Moon } from 'lucide-react';
-import { Button } from './components/ui/button';
+import { Button } from '@/components/ui/button';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const UserStats: React.FC = () => {
-  const { data, isLoading, error } = trpc.user.getStats.useQuery();
+  const { data, isLoading, error } = useStubQuery();
   const { theme, setTheme } = useTheme();
 
   if (isLoading) {

@@ -5,10 +5,22 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 // import { Toast } from '@/components/ui/toast';
 // import { Skeleton } from '@/components/ui/skeleton';
 
-import { trpc } from "@/trpc";
 
 interface Expense {
   id: string;
@@ -19,14 +31,14 @@ interface Expense {
 }
 
 const SkycoinExpenseTrackerScreen: React.FC = () => {
-  const { data: expenses, isLoading, isError, error, refetch } = trpc.expenses.get.useQuery();
+  const { data: expenses, isLoading, isError, error, refetch } = useStubQuery();
   const [newExpense, setNewExpense] = useState<Omit<Expense, 'id'>>({
     description: '',
     amount: 0,
     date: '',
     category: '',
   });
-  const addExpenseMutation = trpc.expenses.add.useMutation({
+  const addExpenseMutation = useStubMutation({
     onSuccess: () => {
       refetch();
       setNewExpense({ description: '', amount: 0, date: '', category: '' });

@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: Web3InboxScreen
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // shadcn/ui Card
-import { Button } from './ui/button'; // shadcn/ui Button
-import { ScrollArea } from './ui/scroll-area'; // shadcn/ui ScrollArea
-import { Alert, AlertDescription, AlertTitle } from './ui/alert'; // shadcn/ui Alert
-import { Skeleton } from './ui/skeleton'; // shadcn/ui Skeleton
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card
+import { Button } from '@/components/ui/button'; // shadcn/ui Button
+import { ScrollArea } from '@/components/ui/scroll-area'; // shadcn/ui ScrollArea
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui Alert
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton
 import { InboxIcon, Loader2 } from 'lucide-react'; // Icons
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration. In a real app, this would be imported.
 const trpc = {
@@ -41,7 +53,7 @@ interface Web3InboxMessage {
 }
 
 const Web3InboxScreen: React.FC = () => {
-  const { data: messages, isLoading, isError, error } = trpc.web3Inbox.getMessages.useQuery();
+  const { data: messages, isLoading, isError, error } = useStubQuery();
 
   if (isLoading) {
     return (

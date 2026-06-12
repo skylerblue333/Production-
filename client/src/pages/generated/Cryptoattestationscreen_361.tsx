@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoAttestationScreen
 import React, { useState } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'; // shadcn/ui components
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useTheme } from 'next-themes'; // For dark theme, assuming next-themes or similar
 import { Loader2 } from 'lucide-react'; // Example loading icon
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define types for tRPC hooks (simplified for example)
 interface AttestationData {

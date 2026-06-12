@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoStakingRewards
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming @tanstack/react-query for tRPC
 import { cn } from '@/lib/utils'; // Utility for Tailwind classes
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal, Wallet } from 'lucide-react'; // Icons
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the shape of a staking reward
 interface StakingReward {
@@ -59,7 +71,7 @@ const trpc = {
 
 const CryptoStakingRewards: React.FC<CryptoStakingRewardsProps> = () => {
   // Use tRPC hook to fetch staking rewards
-  const { data: stakingRewards, isLoading, isError, error } = trpc.staking.getRewards.useQuery();
+  const { data: stakingRewards, isLoading, isError, error } = useStubQuery();
 
   // Loading State
   if (isLoading) {

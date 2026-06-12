@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: TradingTerminalScreen
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC client setup
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CryptoPrice {
   symbol: string;
@@ -39,7 +50,7 @@ export function TradingTerminalScreen() {
     { refetchInterval: 5000 } // Refetch every 5 seconds
   );
 
-  const placeOrder = trpc.trading.placeOrder.useMutation({
+  const placeOrder = useStubMutation({
     onSuccess: () => {
       toast.success('Order placed successfully!');
       setAmount('');

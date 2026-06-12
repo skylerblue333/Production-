@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoBlacklistManager
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC setup
-import { Button } from './components/ui/button';
-import { Input } from './components/ui/input';
-import { Switch } from './components/ui/switch';
-import { Label } from './components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from './components/theme-provider'; // Assuming dark theme provider
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface BlacklistItem {
   id: string;
@@ -21,9 +32,9 @@ const CryptoBlacklistManager: React.FC = () => {
   const [newReason, setNewReason] = useState('');
   const { theme } = useTheme();
 
-  const { data: blacklist, isLoading, isError, error, refetch } = trpc.blacklist.getAll.useQuery();
+  const { data: blacklist, isLoading, isError, error, refetch } = useStubQuery();
 
-  const addMutation = trpc.blacklist.add.useMutation({
+  const addMutation = useStubMutation({
     onSuccess: () => {
       setNewAddress('');
       setNewReason('');
@@ -31,13 +42,13 @@ const CryptoBlacklistManager: React.FC = () => {
     },
   });
 
-  const toggleMutation = trpc.blacklist.toggleActive.useMutation({
+  const toggleMutation = useStubMutation({
     onSuccess: () => {
       refetch();
     },
   });
 
-  const handleDelete = trpc.blacklist.delete.useMutation({
+  const handleDelete = useStubMutation({
     onSuccess: () => {
       refetch();
     },

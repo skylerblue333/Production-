@@ -1,8 +1,20 @@
 // AUTO-GENERATED DRAFT SCREEN: KPICards
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { trpc } from '@/lib/trpc';
 import { ModeToggle } from '@/components/mode-toggle';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface KPICardProps {
   title: string;
@@ -30,7 +42,7 @@ const KPICard: React.FC<KPICardProps> = ({ title, value, description }) => {
 };
 
 const KPICards: React.FC = () => {
-  const { data, isLoading, error } = trpc.kpi.useQuery();
+  const { data, isLoading, error } = useStubQuery();
 
   if (isLoading) {
     return <div className="p-4">Loading KPI data...</div>;

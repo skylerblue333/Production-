@@ -1,7 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoFailedTransactions
 import React, { useState } from 'react';
-import { trpc } from '../utils/trpc';
-import { Button } from './ui/button'; // Assuming shadcn/ui button is installed
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button is installed
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface FailedTransaction {
   id: string;
@@ -85,7 +97,7 @@ const mockFailedTransactions: FailedTransaction[] = [
 ];
 
 const CryptoFailedTransactions: React.FC = () => {
-  const { data, isLoading, isError, error } = trpc.failedTransactions.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
   const [currentPage, setCurrentPage] = useState(1);
   const [transactionsPerPage] = useState(5);
 

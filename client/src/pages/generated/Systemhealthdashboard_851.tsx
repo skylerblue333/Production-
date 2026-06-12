@@ -1,15 +1,26 @@
 // AUTO-GENERATED DRAFT SCREEN: SystemHealthDashboard
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC hooks integrate with react-query
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // shadcn/ui card component
-import { Switch } from './ui/switch'; // shadcn/ui switch component for dark mode
-import { Label } from './ui/label'; // shadcn/ui label component
-import { Progress } from './ui/progress'; // shadcn/ui progress component
-import { Alert, AlertDescription, AlertTitle } from './ui/alert'; // shadcn/ui alert component
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card component
+import { Switch } from '@/components/ui/switch'; // shadcn/ui switch component for dark mode
+import { Label } from '@/components/ui/label'; // shadcn/ui label component
+import { Progress } from '@/components/ui/progress'; // shadcn/ui progress component
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui alert component
 import { Terminal } from 'lucide-react'; // Lucide icon for alerts
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Assuming tRPC client setup and types are available globally or imported
-// import { trpc } from '../utils/trpc';
 
 interface SystemHealthData {
   cpuUsage: number;
@@ -46,7 +57,7 @@ const SystemHealthDashboard: React.FC<SystemHealthDashboardProps> = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   // Simulate tRPC hook for fetching data
-  // In a real application, this would be: const { data, isLoading, error } = trpc.system.getHealth.useQuery();
+  // In a real application, this would be: const { data, isLoading, error } = useStubQuery();
   const { data, isLoading, error } = useQuery<SystemHealthData, Error>({
     queryKey: ['systemHealth'],
     queryFn: fetchSystemHealth,

@@ -1,6 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: Skycoin4444SocialRecordingScreen
 import React, { useState, useEffect } from 'react';
-import { cn } from './lib/utils'; // Assuming cn utility is available
+import { cn } from '@/lib/utils'; // Assuming cn utility is available
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Placeholder for shadcn/ui components and tRPC hooks
 // In a real application, these would be installed and imported from their respective packages.
@@ -25,7 +38,7 @@ const Skycoin4444SocialRecordingScreen: React.FC<Skycoin4444SocialRecordingScree
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
   // Simulate tRPC hook for fetching data
-  // const { data, isLoading: trpcLoading, error: trpcError } = useQuery(['recordings.list', { userId }]);
+  // const { data, isLoading: trpcLoading, error: trpcError } = useStubQuery(['recordings.list', { userId }]);
 
   useEffect(() => {
     // Simulate API call or tRPC query

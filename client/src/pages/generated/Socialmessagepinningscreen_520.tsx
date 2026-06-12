@@ -6,6 +6,19 @@ import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn/ui card
 import { ScrollArea } from '@/components/ui/scroll-area'; // Assuming shadcn/ui scroll area
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface PinnedMessage {
   id: string;
   content: string;
@@ -41,7 +54,7 @@ const SocialMessagePinningScreen: React.FC<SocialMessagePinningScreenProps> = ({
   );
 
   // Simulate tRPC mutation for unpinning a message
-  const unpinMessageMutation = useMutation(
+  const unpinMessageMutation = useStubMutation(
     async (messageId: string) => {
       // Simulate API call
       return new Promise((resolve) => {

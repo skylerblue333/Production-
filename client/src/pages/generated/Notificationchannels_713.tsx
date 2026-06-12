@@ -4,12 +4,23 @@ import React, { useState, useEffect } from 'react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC client setup
 import { toast } from 'sonner'; // Assuming sonner for toasts
 import { Skeleton } from '@/components/ui/skeleton'; // Assuming shadcn/ui Skeleton
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // Assuming shadcn/ui Alert
 import { Terminal } from 'lucide-react'; // Assuming Lucide icons
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 /**
  * @typedef {Object} NotificationChannel
@@ -44,13 +55,13 @@ const NotificationChannels: React.FC = () => {
   const [globalEnableAll, setGlobalEnableAll] = useState<boolean | undefined>(undefined);
 
   // Fetch notification channels
-  const { data: channels, isLoading, isError, error, refetch } = trpc.notifications.getChannels.useQuery();
+  const { data: channels, isLoading, isError, error, refetch } = useStubQuery();
 
   // Fetch global notification settings
-  const { data: globalSettings, isLoading: isLoadingGlobal, isError: isErrorGlobal, error: errorGlobal } = trpc.notifications.getGlobalSettings.useQuery();
+  const { data: globalSettings, isLoading: isLoadingGlobal, isError: isErrorGlobal, error: errorGlobal } = useStubQuery();
 
   // Mutation for updating a single channel
-  const updateChannelMutation = trpc.notifications.updateChannel.useMutation({
+  const updateChannelMutation = useStubMutation({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications', 'getChannels'] });
       toast.success('Notification channel updated successfully.');
@@ -62,7 +73,7 @@ const NotificationChannels: React.FC = () => {
   });
 
   // Mutation for updating global settings
-  const updateGlobalSettingsMutation = trpc.notifications.updateGlobalSettings.useMutation({
+  const updateGlobalSettingsMutation = useStubMutation({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications', 'getGlobalSettings'] });
       toast.success('Global notification settings updated successfully.');

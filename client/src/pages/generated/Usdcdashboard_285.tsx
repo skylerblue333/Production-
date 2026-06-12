@@ -1,16 +1,28 @@
 // AUTO-GENERATED DRAFT SCREEN: UsdcDashboard
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button'; // Assuming a button component is available
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration. In a real app, this would be imported from your tRPC setup.
 const trpc = {
   usdc: {
     getDashboardData: {
       useQuery: () => {
-        const { data, isLoading, isError, error } = useQuery({
+        const { data, isLoading, isError, error } = useStubQuery({
           queryKey: ['usdcDashboardData'],
           queryFn: async () => {
             return new Promise(resolve => setTimeout(() => resolve({
@@ -41,7 +53,7 @@ const UsdcDashboard: React.FC<UsdcDashboardProps> = () => {
     }
   }, [isDarkTheme]);
 
-  const { data, isLoading, isError, error } = trpc.usdc.getDashboardData.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   if (isLoading) {
     return (

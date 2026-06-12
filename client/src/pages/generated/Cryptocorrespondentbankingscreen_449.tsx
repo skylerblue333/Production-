@@ -1,7 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoCorrespondentBankingScreen
 import React, { useState, useEffect, useMemo } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC setup
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -9,6 +7,19 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CorrespondentBankingData {
   id: string;
@@ -31,7 +42,7 @@ const CryptoCorrespondentBankingScreen: React.FC = () => {
     }
   }, [isDarkMode]);
 
-  const { data, isLoading, isError, error } = trpc.crypto.getCorrespondentBankingData.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);

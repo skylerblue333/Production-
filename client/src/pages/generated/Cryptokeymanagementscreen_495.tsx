@@ -9,6 +9,19 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from 'next-themes'; // For dark theme
 import { Loader2 } from 'lucide-react'; // Example loading icon
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface Key {
   id: string;
   name: string;
@@ -22,12 +35,12 @@ const CryptoKeyManagementScreen: React.FC = () => {
   const [selectedKey, setSelectedKey] = useState<Key | null>(null);
 
   // tRPC query to fetch keys
-  const { data: keys, isLoading, error, refetch } = useQuery(['key.getAll'], {
+  const { data: keys, isLoading, error, refetch } = useStubQuery(['key.getAll'], {
     onError: (err) => console.error('Failed to fetch keys:', err.message),
   });
 
   // tRPC mutation to create a new key
-  const createKeyMutation = useMutation(['key.create'], {
+  const createKeyMutation = useStubMutation(['key.create'], {
     onSuccess: () => {
       setNewKeyName('');
       refetch();
@@ -36,7 +49,7 @@ const CryptoKeyManagementScreen: React.FC = () => {
   });
 
   // tRPC mutation to delete a key
-  const deleteKeyMutation = useMutation(['key.delete'], {
+  const deleteKeyMutation = useStubMutation(['key.delete'], {
     onSuccess: () => {
       setSelectedKey(null);
       refetch();

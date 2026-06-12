@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: NetworkStatsScreen
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // Placeholder for shadcn/ui Card
-import { Button } from './ui/button'; // Placeholder for shadcn/ui Button
-import { Switch } from './ui/switch'; // Placeholder for shadcn/ui Switch
-import { Label } from './ui/label'; // Placeholder for shadcn/ui Label
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Placeholder for shadcn/ui Card
+import { Button } from '@/components/ui/button'; // Placeholder for shadcn/ui Button
+import { Switch } from '@/components/ui/switch'; // Placeholder for shadcn/ui Switch
+import { Label } from '@/components/ui/label'; // Placeholder for shadcn/ui Label
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC client for demonstration purposes
 // In a real application, this would be imported from your tRPC setup
@@ -42,7 +54,7 @@ const trpc = {
 };
 
 const NetworkStatsScreen: React.FC = () => {
-  const { data, isLoading, isError, error, refetch } = trpc.network.getStats.useQuery();
+  const { data, isLoading, isError, error, refetch } = useStubQuery();
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
   React.useEffect(() => {

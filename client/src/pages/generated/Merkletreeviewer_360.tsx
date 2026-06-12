@@ -1,6 +1,18 @@
 // AUTO-GENERATED DRAFT SCREEN: MerkleTreeViewer
 import React, { useState, useEffect, useMemo } from 'react';
-import { trpc } from './trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 /**
  * Props for the MerkleTreeViewer component.
@@ -23,7 +35,7 @@ const MerkleTreeViewer: React.FC<MerkleTreeViewerProps> = ({ data }) => {
 
   // tRPC hook to fetch Merkle tree data asynchronously.
   // The `data` prop is passed as input to the tRPC procedure.
-  const { data: merkleData, isLoading, isError, error } = trpc.getMerkleData.useQuery({ data });
+  const { data: merkleData, isLoading, isError, error } = useStubQuery({ data });
 
   /**
    * Effect hook to detect and manage dark theme preference.

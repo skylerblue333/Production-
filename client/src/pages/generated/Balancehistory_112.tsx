@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: BalanceHistory
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC client setup
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'; // shadcn/ui
-import { Skeleton } from './components/ui/skeleton'; // shadcn/ui
-import { Alert, AlertDescription, AlertTitle } from './components/ui/alert'; // shadcn/ui
-import { Button } from './components/ui/button'; // shadcn/ui for retry
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table'; // shadcn/ui
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui
+import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui
+import { Button } from '@/components/ui/button'; // shadcn/ui for retry
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'; // shadcn/ui
 import { ExclamationTriangleIcon, ReloadIcon } from '@radix-ui/react-icons'; // For error and loading icons
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface BalanceHistoryItem {
   id: string;
@@ -19,7 +30,7 @@ interface BalanceHistoryItem {
 }
 
 const BalanceHistory: React.FC = () => {
-  const { data, isLoading, isError, error, refetch } = trpc.balance.getHistory.useQuery();
+  const { data, isLoading, isError, error, refetch } = useStubQuery();
 
   // Enhanced Loading State with Skeleton Table
   if (isLoading) {

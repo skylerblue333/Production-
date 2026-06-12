@@ -1,12 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: AnalyticsCurrentBrowsers
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 import { MoonIcon, SunIcon, Loader2 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Skeleton } from '@/components/ui/skeleton';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface BrowserData {
   name: string;
@@ -17,7 +28,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28DFF', '#FF69B4'
 
 const AnalyticsCurrentBrowsers: React.FC = () => {
   const { theme, setTheme } = useTheme();
-  const { data, isLoading, isError, error } = trpc.analytics.getCurrentBrowsers.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');

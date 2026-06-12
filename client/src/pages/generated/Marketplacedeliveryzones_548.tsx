@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: MarketplaceDeliveryZones
 import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC client setup
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Switch } from '../components/ui/switch';
-import { Label } from '../components/ui/label';
-import { Skeleton } from '../components/ui/skeleton';
-import { Input } from '../components/ui/input'; // Assuming shadcn/ui Input component
-import { Button } from '../components/ui/button'; // Assuming shadcn/ui Button component
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Input } from '@/components/ui/input'; // Assuming shadcn/ui Input component
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui Button component
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface DeliveryZone {
   id: string;
@@ -21,9 +32,9 @@ const MarketplaceDeliveryZones: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   // tRPC query to fetch delivery zones
-  const { data, isLoading, isError, error } = trpc.deliveryZones.list.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
   // tRPC mutation to update a delivery zone's status
-  const updateZoneStatus = trpc.deliveryZones.updateStatus.useMutation();
+  const updateZoneStatus = useStubMutation();
 
   // Handle loading state with skeleton loaders for better UX
   if (isLoading) {

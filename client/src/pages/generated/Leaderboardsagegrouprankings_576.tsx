@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: LeaderboardsAgeGroupRankings
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming trpc client is set up
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'; // shadcn/ui Card
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'; // shadcn/ui Table
 import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton for loading states
 import { AlertCircle } from 'lucide-react'; // For error icon
 import { cn } from '@/lib/utils'; // Utility for conditional class names
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the interface for an individual age group ranking entry
 interface AgeGroupRanking {
@@ -31,7 +42,7 @@ const mockRankings: AgeGroupRanking[] = [
 const LeaderboardsAgeGroupRankings: React.FC = () => {
   // Fetch age group rankings using tRPC. The query is typed to expect AgeGroupRanking[].
   // For a real app, replace mockRankings with data from the actual tRPC call.
-  const { data, isLoading, isError, error } = trpc.leaderboards.getAgeGroupRankings.useQuery();
+  const { data, isLoading, isError, error } = useStubQuery();
 
   // Display loading state with multiple skeleton components for a better user experience
   if (isLoading) {

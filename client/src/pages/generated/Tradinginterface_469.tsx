@@ -1,12 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: TradingInterface
 import React, { useState } from 'react';
-import { trpc } from './trpc';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/components/ui/use-toast';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Order {
   id: string;
@@ -21,7 +33,7 @@ const TradingInterface: React.FC = () => {
   const [orderPrice, setOrderPrice] = useState<number>(0);
   const [orders, setOrders] = useState<Order[]>([]);
   const { toast } = useToast();
-  const { data: greetingMessage, isLoading: loading, error } = trpc.greeting.useQuery({ name: 'SKYCOIN4444' });
+  const { data: greetingMessage, isLoading: loading, error } = useStubQuery({ name: 'SKYCOIN4444' });
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
   useEffect(() => {

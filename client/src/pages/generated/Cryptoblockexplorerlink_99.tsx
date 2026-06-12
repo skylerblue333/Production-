@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoBlockExplorerLink
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Placeholder for tRPC/react-query integration
 import { cn } from '@/lib/utils'; // Utility for conditional class names, typically from shadcn/ui
 import { Button } from '@/components/ui/button'; // shadcn/ui Button component
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui Alert for error display
 import { Terminal, ExternalLink } from 'lucide-react'; // Icons for better UX and accessibility
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface CryptoBlockExplorerLinkProps {
   /**
@@ -69,7 +81,7 @@ const CryptoBlockExplorerLink: React.FC<CryptoBlockExplorerLinkProps> = ({
 }) => {
   // useQuery hook for data fetching, simulating tRPC integration.
   // The query key ensures that the data is re-fetched only when address or explorerUrl changes.
-  const { data: blockExplorerLink, isLoading, isError, error, refetch } = useQuery(
+  const { data: blockExplorerLink, isLoading, isError, error, refetch } = useStubQuery(
     ['blockExplorerLink', address, explorerUrl], // Unique query key
     () => fetchBlockExplorerLink(address, explorerUrl), // Query function
     {

@@ -1,5 +1,18 @@
 // AUTO-GENERATED DRAFT SCREEN: EventAnalytics
 import React, { useState, useEffect } from 'react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 // Assuming shadcn/ui components are imported and configured globally or via a utility
 // import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 // import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
@@ -24,7 +37,7 @@ const EventAnalytics: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Simulate data fetching with tRPC hook
-  // const { data, isLoading, error } = useQuery('event.getAnalytics');
+  // const { data, isLoading, error } = useStubQuery('event.getAnalytics');
 
   useEffect(() => {
     const fetchAnalyticsData = async () => {

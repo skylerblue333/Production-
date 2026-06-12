@@ -1,11 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: HelpWebinarsScreen
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { Button } from './components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card';
-import { trpc } from './utils/trpc';
-import { Switch } from './components/ui/switch'; // Assuming shadcn/ui Switch component
-import { Label } from './components/ui/label'; // Assuming shadcn/ui Label component
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Switch } from '@/components/ui/switch'; // Assuming shadcn/ui Switch component
+import { Label } from '@/components/ui/label'; // Assuming shadcn/ui Label component
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define tRPC types (example - these would typically come from a shared tRPC definition)
 interface Webinar {
@@ -43,7 +54,7 @@ const HelpWebinarsScreen: React.FC<HelpWebinarsScreenProps> = () => {
   }, [isDarkMode]);
 
   // tRPC query to fetch webinars
-  const { data, isLoading, error } = trpc.webinars.list.useQuery();
+  const { data, isLoading, error } = useStubQuery();
 
   // Loading state
   if (isLoading) {

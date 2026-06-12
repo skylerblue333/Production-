@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: AiConversationPreferencesScreen
 import React, { useState, useEffect } from 'react';
-import { Switch } from './ui/switch'; // Placeholder for shadcn/ui Switch
-import { Label } from './ui/label';   // Placeholder for shadcn/ui Label
-import { Button } from './ui/button'; // Placeholder for shadcn/ui Button
-import { useTRPCQuery, useTRPCMutation } from './utils/trpc'; // Simulated tRPC hooks
+import { Switch } from '@/components/ui/switch'; // Placeholder for shadcn/ui Switch
+import { Label } from '@/components/ui/label';   // Placeholder for shadcn/ui Label
+import { Button } from '@/components/ui/button'; // Placeholder for shadcn/ui Button
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ConversationPreferences {
   enableAutoSave: boolean;

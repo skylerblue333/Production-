@@ -1,10 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: SocialNotifications
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC client setup for data fetching
 import { cn } from '@/lib/utils'; // Utility for merging Tailwind CSS classes
 import { BellRing, Loader2 } from 'lucide-react'; // Icons for notifications and loading states
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the structure for a single notification object.
 // This interface ensures type safety and clarity for notification data.
@@ -35,7 +46,7 @@ interface Notification {
 export function SocialNotifications() {
   // Use tRPC's `useQuery` hook to fetch notifications.
   // This hook automatically manages loading, error, and data states.
-  const { data: notifications, isLoading, isError, error } = trpc.notifications.getNotifications.useQuery();
+  const { data: notifications, isLoading, isError, error } = useStubQuery();
 
   // Render a loading state while notifications are being fetched.
   // This provides immediate feedback to the user.

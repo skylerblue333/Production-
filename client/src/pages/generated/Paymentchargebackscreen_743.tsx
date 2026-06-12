@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: PaymentChargebackScreen
 import React, { useState } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC client setup
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/components/ui/use-toast';
 import { Loader2 } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ChargebackDetails {
   id: string;
@@ -21,12 +32,12 @@ interface ChargebackDetails {
 const PaymentChargebackScreen: React.FC = () => {
   const [chargebackId, setChargebackId] = useState('');
 
-  const { data, isLoading, isError, error, refetch } = trpc.chargeback.getChargebackDetails.useQuery(
+  const { data, isLoading, isError, error, refetch } = useStubQuery(
     { id: chargebackId },
     { enabled: !!chargebackId }
   );
 
-  const approveChargebackMutation = trpc.chargeback.approveChargeback.useMutation({
+  const approveChargebackMutation = useStubMutation({
     onSuccess: () => {
       toast({
         title: 'Chargeback Approved',
@@ -43,7 +54,7 @@ const PaymentChargebackScreen: React.FC = () => {
     },
   });
 
-  const rejectChargebackMutation = trpc.chargeback.rejectChargeback.useMutation({
+  const rejectChargebackMutation = useStubMutation({
     onSuccess: () => {
       toast({
         title: 'Chargeback Rejected',

@@ -1,8 +1,6 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoRolePermissions
 
 import React from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC client setup
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,6 +10,19 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Zod schema for form validation
 const rolePermissionsSchema = z.object({
@@ -28,7 +39,7 @@ interface CryptoRolePermissionsProps {
 }
 
 const CryptoRolePermissions: React.FC<CryptoRolePermissionsProps> = ({ roleId }) => {
-  const { data, isLoading, error } = trpc.roles.getRolePermissions.useQuery({ roleId }, { enabled: !!roleId });
+  const { data, isLoading, error } = useStubQuery({ roleId }, { enabled: !!roleId });
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<RolePermissionsFormValues>({
     resolver: zodResolver(rolePermissionsSchema),
@@ -51,7 +62,7 @@ const CryptoRolePermissions: React.FC<CryptoRolePermissionsProps> = ({ roleId })
     }
   }, [data, reset]);
 
-  const createRoleMutation = trpc.roles.createRole.useMutation({
+  const createRoleMutation = useStubMutation({
     onSuccess: () => {
       toast.success('Role created successfully!');
       reset();
@@ -61,7 +72,7 @@ const CryptoRolePermissions: React.FC<CryptoRolePermissionsProps> = ({ roleId })
     },
   });
 
-  const updateRoleMutation = trpc.roles.updateRole.useMutation({
+  const updateRoleMutation = useStubMutation({
     onSuccess: () => {
       toast.success('Role updated successfully!');
     },

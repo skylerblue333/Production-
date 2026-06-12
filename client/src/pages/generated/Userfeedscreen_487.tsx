@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: UserFeedScreen
 import React, { useState } from 'react';
-import { trpc } from '@/utils/trpc';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
@@ -9,6 +8,19 @@ import { AlertCircle, Heart, MessageCircle, Share2, MoreHorizontal, Loader2 } fr
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { formatDistanceToNow } from 'date-fns';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Types
 export interface User {
@@ -48,7 +60,7 @@ export function UserFeedScreen() {
 
   const utils = trpc.useUtils();
 
-  const likePostMutation = trpc.social.likePost.useMutation({
+  const likePostMutation = useStubMutation({
     onMutate: async ({ postId }) => {
       await utils.social.getFeed.cancel();
       const previousFeed = utils.social.getFeed.getInfiniteData();
@@ -77,7 +89,7 @@ export function UserFeedScreen() {
     },
   });
 
-  const unlikePostMutation = trpc.social.unlikePost.useMutation({
+  const unlikePostMutation = useStubMutation({
     onMutate: async ({ postId }) => {
       await utils.social.getFeed.cancel();
       const previousFeed = utils.social.getFeed.getInfiniteData();
@@ -106,7 +118,7 @@ export function UserFeedScreen() {
     },
   });
 
-  const createPostMutation = trpc.social.createPost.useMutation({
+  const createPostMutation = useStubMutation({
     onSuccess: () => {
       setPostContent('');
       refetch();

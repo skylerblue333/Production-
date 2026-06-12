@@ -9,7 +9,19 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/components/ui/use-toast';
-import { useTRPC } from '@/utils/trpc'; // Assuming tRPC context is set up
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const remittanceSchema = z.object({
   amount: z.number().min(0.01, 'Amount must be positive'),
@@ -22,7 +34,7 @@ type RemittanceFormValues = z.infer<typeof remittanceSchema>;
 
 const RemittanceScreen: React.FC = () => {
   const { toast } = useToast();
-  const { mutate: sendRemittance, isLoading, isError, error } = useTRPC().remittance.send.useMutation();
+  const { mutate: sendRemittance, isLoading, isError, error } = useTRPC().remittance.send.useStubMutation();
 
   const { register, handleSubmit, formState: { errors }, watch } = useForm<RemittanceFormValues>({
     resolver: zodResolver(remittanceSchema),

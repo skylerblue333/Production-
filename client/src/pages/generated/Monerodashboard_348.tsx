@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: MoneroDashboard
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from './components/ui/card';
-import { Button } from './components/ui/button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { ModeToggle } from './components/mode-toggle';
-import { trpc } from './lib/trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const MoneroDashboard: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -33,8 +45,8 @@ const MoneroDashboard: React.FC = () => {
   };
 
   // Using a mock tRPC hook for now, as the actual tRPC server is not set up.
-  // In a real application, this would be `trpc.monero.useQuery({ text: 'monero' });`
-  const { data, isLoading, error } = trpc.monero.useQuery({ text: 'monero' });
+  // In a real application, this would be `useStubQuery({ text: 'monero' });`
+  const { data, isLoading, error } = useStubQuery({ text: 'monero' });
 
   if (isLoading) {
     return (

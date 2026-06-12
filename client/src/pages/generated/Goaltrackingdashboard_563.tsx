@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: GoalTrackingDashboard
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC hooks integrate with react-query
 import { Sun, Moon, CheckCircle, XCircle, Loader2 } from 'lucide-react'; // For icons
-import { Switch } from '../components/ui/switch'; // shadcn/ui Switch component
-import { Label } from '../components/ui/label'; // shadcn/ui Label component
-import { Progress } from '../components/ui/progress'; // shadcn/ui Progress component
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'; // shadcn/ui Card components
+import { Switch } from '@/components/ui/switch'; // shadcn/ui Switch component
+import { Label } from '@/components/ui/label'; // shadcn/ui Label component
+import { Progress } from '@/components/ui/progress'; // shadcn/ui Progress component
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card components
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Goal {
   id: string;

@@ -3,7 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Sun, Moon } from 'lucide-react';
-import { trpc } from './trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const CourseCatalog: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -17,7 +29,7 @@ const CourseCatalog: React.FC = () => {
     }
   }, [darkMode]);
 
-  const { data: courses, isLoading, isError, error } = trpc.course.list.useQuery({ category: selectedCategory });
+  const { data: courses, isLoading, isError, error } = useStubQuery({ category: selectedCategory });
 
   const categories = ['All', 'Frontend', 'Backend']; // Categories are still hardcoded for filter display
 

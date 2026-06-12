@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: DcaScreen
 import React, { useState, useEffect } from 'react';
-import { cn } from './lib/utils';
-import { useQuery } from '@tanstack/react-query';
+import { cn } from '@/lib/utils';
 import { createTRPCReact } from '@trpc/react-query';
 import { httpBatchLink } from '@trpc/client';
 import { z } from 'zod';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define your tRPC app router schema (simplified for client-side)
 const appRouter = {
@@ -65,7 +77,7 @@ const DcaScreen: React.FC<DcaScreenProps> = ({ currency, investmentAmount, inves
     }
   }, [isDarkTheme]);
 
-  const { data, isLoading, isError, error } = trpc.crypto.getDcaData.useQuery({
+  const { data, isLoading, isError, error } = useStubQuery({
     currency,
     investment: investmentAmount,
     frequency: investmentFrequency,
@@ -88,7 +100,6 @@ const DcaScreen: React.FC<DcaScreenProps> = ({ currency, investmentAmount, inves
   }
 
   return (
-    <trpc.Provider client={client} queryClient={new (require('@tanstack/react-query').QueryClient)()}>
       <div className={cn(
         "min-h-screen p-8",
         "bg-background text-foreground",

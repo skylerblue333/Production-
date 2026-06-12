@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: SkycoinPredictiveAnalyticsDashboard
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { cn } from '@/lib/utils'; // shadcn/ui utility for conditional classes
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Example shadcn/ui component
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Placeholder for tRPC client and types
-// import { trpc } from '@/utils/trpc';
 // type PredictiveAnalyticsData = { /* ... data structure ... */ };
 
 interface SkycoinPredictiveAnalyticsDashboardProps {
@@ -36,7 +47,7 @@ export const SkycoinPredictiveAnalyticsDashboard: React.FC<SkycoinPredictiveAnal
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   // Simulate tRPC hook usage with react-query
-  const { data, isLoading, isError, error, refetch } = useQuery({
+  const { data, isLoading, isError, error, refetch } = useStubQuery({
     queryKey: ['predictiveAnalytics'],
     queryFn: fetchPredictiveData,
     staleTime: 5 * 60 * 1000, // 5 minutes

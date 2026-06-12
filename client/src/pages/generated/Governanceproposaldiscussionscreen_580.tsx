@@ -1,14 +1,26 @@
 // AUTO-GENERATED DRAFT SCREEN: GovernanceProposalDiscussionScreen
 
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
 import { ArrowLeft, MessageCircle, ThumbsUp, ThumbsDown, Loader2 } from 'lucide-react';
-import { Button } from './ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Separator } from './ui/separator';
-import { Textarea } from './ui/textarea';
-import { Label } from './ui/label';
-import { Switch } from './ui/switch';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC-like hooks for demonstration
 const trpc = {
@@ -68,13 +80,13 @@ export const GovernanceProposalDiscussionScreen: React.FC<GovernanceProposalDisc
   }, [isDarkTheme]);
 
   const { data: proposal, isLoading, isError, error, refetch } = useQuery<Proposal, Error>(trpc.proposal.getById(proposalId));
-  const postCommentMutation = useMutation(trpc.proposal.postComment(), {
+  const postCommentMutation = useStubMutation(trpc.proposal.postComment(), {
     onSuccess: () => {
       setCommentText('');
       refetch(); // Refresh comments after posting
     },
   });
-  const castVoteMutation = useMutation(trpc.proposal.castVote(), {
+  const castVoteMutation = useStubMutation(trpc.proposal.castVote(), {
     onSuccess: () => {
       refetch(); // Refresh votes after casting
     },

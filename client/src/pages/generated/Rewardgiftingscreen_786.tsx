@@ -1,23 +1,35 @@
 // AUTO-GENERATED DRAFT SCREEN: RewardGiftingScreen
 import React, { useState } from 'react';
-import { trpc } from '../utils/trpc';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { Label } from '../components/ui/label';
-import { Textarea } from '../components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Alert, AlertDescription, AlertTitle } from '../components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2 } from 'lucide-react';
 import { ModeToggle } from '../components/mode-toggle';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const RewardGiftingScreen: React.FC = () => {
   const [recipientId, setRecipientId] = useState('');
   const [selectedGift, setSelectedGift] = useState<string | undefined>(undefined);
   const [message, setMessage] = useState('');
 
-  const { data: giftOptions, isLoading: isLoadingGiftOptions, error: giftOptionsError } = trpc.gifting.getGiftOptions.useQuery();
-  const sendGiftMutation = trpc.gifting.sendGift.useMutation();
+  const { data: giftOptions, isLoading: isLoadingGiftOptions, error: giftOptionsError } = useStubQuery();
+  const sendGiftMutation = useStubMutation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,13 +1,25 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoEstatePlanning
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Example for tRPC hooks
 import { cn } from '@/lib/utils'; // For shadcn/ui and Tailwind
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 interface CryptoEstatePlanningProps {
   // Define props here if any
 }
 const CryptoEstatePlanning: React.FC<CryptoEstatePlanningProps> = () => {
   // --- tRPC hooks example (placeholder) ---
-  // const { data, isLoading, isError, error } = useQuery(['cryptoestateplanningData'], fetchData);
+  // const { data, isLoading, isError, error } = useStubQuery(['cryptoestateplanningData'], fetchData);
   // --- Loading State ---
   // if (isLoading) {
   //   return <div className="flex items-center justify-center h-screen">Loading...</div>;

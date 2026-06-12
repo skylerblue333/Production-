@@ -1,7 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: Announcements
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { trpc } from '@/lib/trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Announcement {
   id: string;
@@ -15,7 +27,7 @@ interface AnnouncementsProps {
 }
 
 const Announcements: React.FC<AnnouncementsProps> = () => {
-  const { data: announcements, isLoading, isError, error } = trpc.announcements.list.useQuery();
+  const { data: announcements, isLoading, isError, error } = useStubQuery();
 
   if (isLoading) {
     return <div className="p-4 text-center">Loading announcements...</div>;

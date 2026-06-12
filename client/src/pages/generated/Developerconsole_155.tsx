@@ -12,7 +12,6 @@ import {
   Shield,
   Terminal
 } from 'lucide-react';
-import { trpc } from '@/utils/trpc';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -21,19 +20,32 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 export default function DeveloperConsole() {
   const [activeTab, setActiveTab] = useState('api-keys');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   // tRPC hooks for fetching data
-  const { data: apiKeys, isLoading: isLoadingKeys, error: keysError, refetch: refetchKeys } = trpc.developer.getApiKeys.useQuery();
-  const { data: webhooks, isLoading: isLoadingWebhooks, error: webhooksError } = trpc.developer.getWebhooks.useQuery();
-  const { data: systemStatus, isLoading: isLoadingStatus } = trpc.system.getStatus.useQuery(undefined, {
+  const { data: apiKeys, isLoading: isLoadingKeys, error: keysError, refetch: refetchKeys } = useStubQuery();
+  const { data: webhooks, isLoading: isLoadingWebhooks, error: webhooksError } = useStubQuery();
+  const { data: systemStatus, isLoading: isLoadingStatus } = useStubQuery(undefined, {
     refetchInterval: 30000, // Refetch every 30 seconds
   });
 
   // tRPC mutations
-  const generateKeyMutation = trpc.developer.generateApiKey.useMutation({
+  const generateKeyMutation = useStubMutation({
     onSuccess: () => refetchKeys(),
   });
 

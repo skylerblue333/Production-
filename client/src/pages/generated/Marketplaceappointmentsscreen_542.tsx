@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: MarketplaceAppointmentsScreen
 import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from './utils/trpc'; // Assuming tRPC setup
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card';
-import { Button } from './components/ui/button';
-import { Calendar } from './components/ui/calendar';
-import { Label } from './components/ui/label';
-import { Switch } from './components/ui/switch';
-import { cn } from './lib/utils'; // Utility for conditional classnames
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { cn } from '@/lib/utils'; // Utility for conditional classnames
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Appointment {
   id: string;
@@ -20,7 +31,7 @@ const MarketplaceAppointmentsScreen: React.FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
 
-  const { data: appointments, isLoading, isError, error } = trpc.appointments.getAppointments.useQuery(
+  const { data: appointments, isLoading, isError, error } = useStubQuery(
     { date: selectedDate?.toISOString() },
     { enabled: !!selectedDate }
   );

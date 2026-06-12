@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: RecentlyViewed
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Placeholder for tRPC hook integration
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui Card component
 import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui Skeleton component for loading states
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui Alert for error display
 import { Terminal } from 'lucide-react'; // Icon for error alert
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 /**
  * @interface CryptoItem
@@ -28,7 +40,7 @@ interface CryptoItem {
 // import { createTRPCReact } from '@trpc/react-query';
 // import type { AppRouter } from 'path/to/your/server/router'; // Adjust path as needed
 // const trpc = createTRPCReact<AppRouter>();
-// Then, use trpc.yourProcedure.useQuery() instead of useQuery directly.
+// Then, use useStubQuery() instead of useQuery directly.
 
 /**
  * @function fetchRecentlyViewedCrypto
@@ -60,7 +72,7 @@ const fetchRecentlyViewedCrypto = async (): Promise<CryptoItem[]> => {
  */
 export function RecentlyViewed(): JSX.Element {
   // Use react-query for data fetching, managing loading, error, and data states.
-  // In a tRPC setup, this would be `trpc.crypto.getRecentlyViewed.useQuery()`
+  // In a tRPC setup, this would be `useStubQuery()`
   const { data, isLoading, isError, error } = useQuery<CryptoItem[], Error>({
     queryKey: ['recentlyViewedCrypto'],
     queryFn: fetchRecentlyViewedCrypto,

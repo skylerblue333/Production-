@@ -1,7 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: TournamentBracket
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { trpc } from '../trpc';
 import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button is added
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Participant {
   id: string;
@@ -60,8 +72,8 @@ const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
 const TournamentBracket: React.FC = () => {
   const { darkMode, toggleDarkMode } = useTheme();
-  const { data: rounds, isLoading, isError, error, refetch } = trpc.tournament.getRounds.useQuery();
-  const updateMatchWinnerMutation = trpc.tournament.updateMatchWinner.useMutation();
+  const { data: rounds, isLoading, isError, error, refetch } = useStubQuery();
+  const updateMatchWinnerMutation = useStubMutation();
 
   const handleWinnerSelect = async (roundId: string, matchId: string, winnerId: string) => {
     try {

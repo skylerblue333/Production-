@@ -1,5 +1,18 @@
 // AUTO-GENERATED DRAFT SCREEN: PaymentAppeal
 import React, { useState, useEffect } from 'react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 // Assuming shadcn/ui components are available and imported from a central location
 // import { Button } from '@/components/ui/button';
 // import { Input } from '@/components/ui/input';
@@ -24,8 +37,8 @@ const PaymentAppeal: React.FC<PaymentAppealProps> = ({ appealId }) => {
   const [appealReason, setAppealReason] = useState('');
 
   // Placeholder for tRPC query
-  // const { data, isLoading: queryLoading, error: queryError } = useQuery(['paymentAppeal.get', { appealId }]);
-  // const { mutate, isLoading: mutationLoading, error: mutationError } = useMutation(['paymentAppeal.submit']);
+  // const { data, isLoading: queryLoading, error: queryError } = useStubQuery(['paymentAppeal.get', { appealId }]);
+  // const { mutate, isLoading: mutationLoading, error: mutationError } = useStubMutation(['paymentAppeal.submit']);
 
   useEffect(() => {
     // Simulate data fetching

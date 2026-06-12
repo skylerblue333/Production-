@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: BiometricAuthScreen
 import React, { useState } from 'react';
-import { trpc } from '../utils/trpc';
-import { Button } from './ui/button'; // Assuming shadcn/ui button component
-import { Input } from './ui/input'; // Assuming shadcn/ui input component
-import { Label } from './ui/label'; // Assuming shadcn/ui label component
+import { Button } from '@/components/ui/button'; // Assuming shadcn/ui button component
+import { Input } from '@/components/ui/input'; // Assuming shadcn/ui input component
+import { Label } from '@/components/ui/label'; // Assuming shadcn/ui label component
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface BiometricAuthScreenProps {
   onAuthSuccess: () => void;
@@ -15,7 +27,7 @@ const BiometricAuthScreen: React.FC<BiometricAuthScreenProps> = ({ onAuthSuccess
   const [error, setError] = useState<string | null>(null);
   const [username, setUsername] = useState<string>('');
 
-  const biometricAuthMutation = trpc.auth.biometricLogin.useMutation({
+  const biometricAuthMutation = useStubMutation({
     onMutate: () => {
       setIsLoading(true);
       setError(null);

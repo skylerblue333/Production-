@@ -6,13 +6,24 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC client setup
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Moon, Sun, Send } from 'lucide-react';
 import { useTheme } from 'next-themes';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define types for a Post and User
 interface User {
@@ -40,8 +51,8 @@ type NewPostFormValues = z.infer<typeof newPostSchema>;
 const UserFeedScreen: React.FC = () => {
   const { theme, setTheme } = useTheme();
 
-  const { data: posts, isLoading, isError, error } = trpc.post.getFeed.useQuery();
-  const createPostMutation = trpc.post.create.useMutation();
+  const { data: posts, isLoading, isError, error } = useStubQuery();
+  const createPostMutation = useStubMutation();
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<NewPostFormValues>({
     resolver: zodResolver(newPostSchema),

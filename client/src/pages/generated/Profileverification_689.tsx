@@ -1,8 +1,20 @@
 // AUTO-GENERATED DRAFT SCREEN: ProfileVerification
 import React, { useState } from 'react';
-import { cn } from '../lib/utils';
+import { cn } from '@/lib/utils';
 import { Button } from "@/components/ui/button"; // Import shadcn/ui Button
-import { trpc } from '../trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface VerificationStepProps {
   title: string;
@@ -66,7 +78,7 @@ const ProfileVerification: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Example tRPC hook usage (assuming a 'verification' router with 'submit' procedure)
-  const submitVerification = trpc.hello.useMutation({
+  const submitVerification = useStubMutation({
     onMutate: () => {
       setIsSubmitting(true);
       setError(null);

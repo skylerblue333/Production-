@@ -1,7 +1,20 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoBinaryOption
 import React, { useState, useEffect } from 'react';
 import { ArrowUpCircle, ArrowDownCircle, Clock, TrendingUp, TrendingDown, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { cn } from '../lib/utils';
+import { cn } from '@/lib/utils';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 const trpc = {
   market: {
@@ -55,8 +68,8 @@ export default function CryptoBinaryOption() {
   const [duration, setDuration] = useState<number>(60); 
   const [direction, setDirection] = useState<'up' | 'down' | null>(null);
   
-  const { data: marketData, isLoading: isMarketLoading, error: marketError } = trpc.market.getPrice.useQuery('BTC/USD');
-  const placeTrade = trpc.trade.placeOption.useMutation();
+  const { data: marketData, isLoading: isMarketLoading, error: marketError } = useStubQuery('BTC/USD');
+  const placeTrade = useStubMutation();
   const handleTrade = async () => {
     if (!direction || !amount || isNaN(Number(amount)) || Number(amount) <= 0) return;
     

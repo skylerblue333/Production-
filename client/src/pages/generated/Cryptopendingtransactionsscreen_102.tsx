@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoPendingTransactionsScreen
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Mocking tRPC's useQuery
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // Mocking shadcn/ui Card
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table'; // Mocking shadcn/ui Table
-import { Alert, AlertDescription, AlertTitle } from './ui/alert'; // Mocking shadcn/ui Alert
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Mocking shadcn/ui Card
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'; // Mocking shadcn/ui Table
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // Mocking shadcn/ui Alert
 import { TriangleAlert, Loader2 } from 'lucide-react'; // Mocking lucide-react icons
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock data for pending transactions
 interface Transaction {
@@ -36,7 +48,7 @@ const usePendingTransactions = () => {
   return useQuery<Transaction[], Error>({
     queryKey: ['pendingTransactions'],
     queryFn: mockFetchPendingTransactions,
-    // In a real tRPC setup, this would be `trpc.crypto.getPendingTransactions.useQuery()`
+    // In a real tRPC setup, this would be `useStubQuery()`
   });
 };
 

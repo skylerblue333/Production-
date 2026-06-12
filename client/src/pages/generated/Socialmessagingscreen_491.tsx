@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: SocialMessagingScreen
 import React, { useState, useEffect, useRef } from 'react';
-import { trpc } from '@/utils/trpc';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,6 +8,19 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle, Send, Search } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { formatDistanceToNow } from 'date-fns';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Simplified Types
 interface Message { id: string; content: string; senderId: string; createdAt: Date; }
@@ -20,18 +32,18 @@ export default function SocialMessagingScreen() {
   const [messageInput, setMessageInput] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const { data: currentUser } = trpc.user.getCurrent.useQuery();
-  const { data: chats, isLoading: isLoadingChats, error: chatsError } = trpc.chat.getRecentChats.useQuery();
+  const { data: currentUser } = useStubQuery();
+  const { data: chats, isLoading: isLoadingChats, error: chatsError } = useStubQuery();
   const { 
     data: messages, 
     isLoading: isLoadingMessages,
     error: messagesError
-  } = trpc.chat.getMessages.useQuery(
+  } = useStubQuery(
     { chatId: activeChatId! },
     { enabled: !!activeChatId }
   );
 
-  const sendMessage = trpc.chat.sendMessage.useMutation({
+  const sendMessage = useStubMutation({
     onSuccess: () => { setMessageInput(''); }
   });
 

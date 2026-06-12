@@ -1,8 +1,20 @@
 // AUTO-GENERATED DRAFT SCREEN: LeaderboardsCategoryRankings
 import React, { useState, useEffect } from 'react';
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table';
-import { Button } from './components/ui/button';
-import { trpc } from './trpc';
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface RankingData {
   rank: number;
@@ -12,7 +24,7 @@ interface RankingData {
 }
 
 const LeaderboardsCategoryRankings: React.FC = () => {
-  const { data, isLoading, error } = trpc.categoryRankings.useQuery();
+  const { data, isLoading, error } = useStubQuery();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {

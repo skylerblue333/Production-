@@ -5,8 +5,20 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { useMutation, useQuery } from '@tanstack/react-query'; // Placeholder for tRPC hooks
 import { Loader2 } from 'lucide-react'; // Placeholder for loading states
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Conversation { 
   id: string;
@@ -43,7 +55,7 @@ const ConversationSharing: React.FC<ShareConversationProps> = ({ conversationId 
     queryFn: () => trpc.conversation.get(conversationId) 
   });
 
-  const shareMutation = useMutation({
+  const shareMutation = useStubMutation({
     mutationFn: trpc.conversation.share,
     onSuccess: () => {
       alert('Conversation sharing updated successfully!');

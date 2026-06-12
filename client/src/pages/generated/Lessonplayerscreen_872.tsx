@@ -1,8 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: LessonPlayerScreen
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '../lib/trpc'; // Assuming tRPC client setup
-import { cn } from '../lib/utils'; // For shadcn/ui utility
+import { cn } from '@/lib/utils'; // For shadcn/ui utility
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // shadcn/ui components (placeholders, actual imports would be from '@/components/ui/*')
 const Button = ({ children, className, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) => <button className={cn('px-4 py-2 rounded-md', className)} {...props}>{children}</button>;
@@ -166,20 +177,20 @@ const LessonPlayerScreen: React.FC<LessonPlayerScreenProps> = ({ initialLessonId
   const [currentLessonId, setCurrentLessonId] = useState(initialLessonId);
 
   // Fetch lesson data
-  const { data: lesson, isLoading: isLessonLoading, error: lessonError } = trpc.lesson.getById.useQuery(currentLessonId);
+  const { data: lesson, isLoading: isLessonLoading, error: lessonError } = useStubQuery(currentLessonId);
 
   // Fetch user progress
-  const { data: progress, isLoading: isProgressLoading, error: progressError, refetch: refetchProgress } = trpc.user.getProgress.useQuery(currentLessonId);
+  const { data: progress, isLoading: isProgressLoading, error: progressError, refetch: refetchProgress } = useStubQuery(currentLessonId);
 
   // Mutation for updating progress
-  const updateProgressMutation = trpc.user.updateProgress.useMutation({
+  const updateProgressMutation = useStubMutation({
     onSuccess: () => {
       refetchProgress();
     },
   });
 
   // Mutation for submitting quiz answers
-  const submitQuizMutation = trpc.quiz.submitAnswer.useMutation({
+  const submitQuizMutation = useStubMutation({
     onSuccess: () => {
       refetchProgress();
     },

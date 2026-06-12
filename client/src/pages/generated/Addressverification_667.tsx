@@ -4,7 +4,19 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Simulate tRPC client and types
 type Address = {
@@ -52,7 +64,7 @@ export function AddressVerification() {
   const [errors, setErrors] = useState<Partial<Address>>({});
   const queryClient = useQueryClient(); // This would be used for invalidating queries after mutation
 
-  const { mutate, isLoading, isError, error, data } = trpc.onboarding.verifyAddress.useMutation();
+  const { mutate, isLoading, isError, error, data } = useStubMutation();
 
   const validate = () => {
     const newErrors: Partial<Address> = {};

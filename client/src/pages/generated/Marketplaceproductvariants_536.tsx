@@ -6,8 +6,20 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input'; // Added for search
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'; // Added for edit modal
-import { useQuery, useMutation } from '@tanstack/react-query'; // Placeholder for tRPC hooks
 import { Loader2, Search, Edit, Save, XCircle } from 'lucide-react'; // Icons for loading, search, edit, save, error
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 interface ProductVariant {
   id: string;
   name: string;
@@ -74,7 +86,7 @@ export function MarketplaceProductVariants() {
     queryFn: () => fetchProductVariants(searchTerm),
   });
 
-  const statusMutation = useMutation({
+  const statusMutation = useStubMutation({
     mutationFn: ({ id, isActive }: { id: string; isActive: boolean }) => updateProductVariantStatus(id, isActive),
     onSuccess: () => {
       refetch();
@@ -85,7 +97,7 @@ export function MarketplaceProductVariants() {
     },
   });
 
-  const detailsMutation = useMutation({
+  const detailsMutation = useStubMutation({
     mutationFn: (variant: ProductVariant) => updateProductVariantDetails(variant),
     onSuccess: () => {
       refetch();

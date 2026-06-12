@@ -1,7 +1,19 @@
 // AUTO-GENERATED DRAFT SCREEN: CertificateGallery
 import React from 'react';
-import { cn } from './lib/utils';
-import { trpc } from './trpc';
+import { cn } from '@/lib/utils';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Certificate {
   id: string;
@@ -12,7 +24,7 @@ interface Certificate {
 }
 
 const CertificateGallery: React.FC = () => {
-  const { data: certificates, isLoading, error } = trpc.certificates.useQuery();
+  const { data: certificates, isLoading, error } = useStubQuery();
 
   if (isLoading) {
     return <div className="flex justify-center items-center h-screen text-lg font-medium">Loading certificates...</div>;

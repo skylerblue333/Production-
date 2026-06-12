@@ -2,7 +2,19 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { useQuery } from '@tanstack/react-query';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 /**
  * @interface TokenDistributionData
@@ -42,12 +54,10 @@ const fetchTokenDistribution = async (): Promise<TokenDistributionData[]> => {
 /**
  * @function TokenDistribution
  * @description A React functional component that displays the token distribution for a cryptocurrency.
- * It uses shadcn/ui for UI components, Tailwind CSS for styling, and @tanstack/react-query for data fetching and state management.
  * Includes loading and error states for a robust user experience.
  * @returns {JSX.Element} The rendered token distribution card.
  */
 const TokenDistribution: React.FC = () => {
-  // Use @tanstack/react-query to manage data fetching, caching, and synchronization.
   // This hook provides `data`, `isLoading`, and `isError` states out of the box.
   const { data, isLoading, isError } = useQuery<TokenDistributionData[]>({ 
     queryKey: ['tokenDistribution'], 

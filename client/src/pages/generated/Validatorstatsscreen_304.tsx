@@ -6,7 +6,19 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Activity, AlertCircle, CheckCircle2, Server, Shield, Zap } from 'lucide-react';
-import { trpc } from '@/utils/trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Types
 interface ValidatorData {
@@ -25,7 +37,7 @@ const formatCurrency = (value: number) => new Intl.NumberFormat('en-US', { style
 const formatPercent = (value: number) => new Intl.NumberFormat('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value / 100);
 
 export default function ValidatorStatsScreen() {
-  const { data, isLoading, error, refetch } = trpc.validators.getStats.useQuery(
+  const { data, isLoading, error, refetch } = useStubQuery(
     { validatorId: 'skycoin-val-1' },
     { retry: 2, refetchInterval: 30000 }
   );

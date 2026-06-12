@@ -1,7 +1,6 @@
 // AUTO-GENERATED DRAFT SCREEN: ComplianceReports
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@trpc/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC client setup
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -9,6 +8,19 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ComplianceReport {
   id: string;
@@ -29,7 +41,7 @@ const ComplianceReports: React.FC = () => {
     }
   }, [isDarkTheme]);
 
-  const { data: reports, isLoading, isError, error } = trpc.getComplianceReports.useQuery();
+  const { data: reports, isLoading, isError, error } = useStubQuery();
 
   if (isLoading) {
     return (

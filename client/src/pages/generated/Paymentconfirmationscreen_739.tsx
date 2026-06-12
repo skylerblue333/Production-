@@ -3,7 +3,19 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircleIcon, XCircleIcon } from 'lucide-react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface PaymentConfirmationScreenProps {
   paymentId: string;
@@ -11,7 +23,7 @@ interface PaymentConfirmationScreenProps {
 
 const PaymentConfirmationScreen: React.FC<PaymentConfirmationScreenProps> = ({ paymentId }) => {
   // Simulate fetching payment status with tRPC hook (using react-query for demonstration)
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error } = useStubQuery({
     queryKey: ['paymentStatus', paymentId],
     queryFn: async () => {
       // Replace with actual tRPC call

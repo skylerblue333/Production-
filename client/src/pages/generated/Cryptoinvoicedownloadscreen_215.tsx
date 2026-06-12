@@ -7,6 +7,19 @@ import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui skeleton for l
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'; // shadcn/ui alert for errors
 import { DownloadIcon } from '@radix-ui/react-icons'; // Example icon
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface Invoice {
   id: string;
   amount: number;
@@ -21,9 +34,9 @@ interface CryptoInvoiceDownloadScreenProps {
 }
 
 const CryptoInvoiceDownloadScreen: React.FC<CryptoInvoiceDownloadScreenProps> = ({ invoiceId }) => {
-  const { data: invoice, isLoading, isError, error } = useQuery(['invoice', invoiceId], async () => {
+  const { data: invoice, isLoading, isError, error } = useStubQuery(['invoice', invoiceId], async () => {
     // Simulate tRPC call to fetch invoice details
-    // In a real app, this would be `trpc.invoice.get.useQuery({ id: invoiceId })`
+    // In a real app, this would be `useStubQuery({ id: invoiceId })`
     return new Promise<Invoice>((resolve, reject) => {
       setTimeout(() => {
         if (invoiceId === 'valid-invoice-123') {

@@ -5,10 +5,21 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc'; // Assuming tRPC setup
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2 } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface TransactionLimitsData {
   dailyLimit: number;
@@ -26,9 +37,9 @@ const TransactionLimits: React.FC = () => {
   const [dailyLimitInput, setDailyLimitInput] = useState<string>('');
   const [monthlyLimitInput, setMonthlyLimitInput] = useState<string>('');
 
-  const { data, isLoading, isError, error, refetch } = trpc.crypto.getTransactionLimits.useQuery();
+  const { data, isLoading, isError, error, refetch } = useStubQuery();
 
-  const updateLimitsMutation = trpc.crypto.updateTransactionLimits.useMutation({
+  const updateLimitsMutation = useStubMutation({
     onSuccess: () => {
       refetch();
       alert('Transaction limits updated successfully!');

@@ -3,8 +3,20 @@
 // src/components/CryptoTreasuryDashboard.tsx
 import React, { useState, useEffect, useMemo } from 'react';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Assuming tRPC types are globally available or imported from a generated client
-// import { trpc } from '../utils/trpc'; // Placeholder for tRPC client import
 
 // Define types for treasury data
 interface TreasuryData {
@@ -37,7 +49,7 @@ const CryptoTreasuryDashboard: React.FC<CryptoTreasuryDashboardProps> = ({ userI
   const [isDarkTheme, setIsDarkTheme] = useState(false); // Simulate dark theme toggle
 
   // Simulate fetching data with tRPC. In a real app, this would be:
-  // const { data, isLoading, error: trpcError } = trpc.crypto.getTreasuryData.useQuery({ userId });
+  // const { data, isLoading, error: trpcError } = useStubQuery({ userId });
   useEffect(() => {
     const fetchData = async () => {
       try {

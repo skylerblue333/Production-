@@ -1,6 +1,5 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoCollateralRatio
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Assuming tRPC integrates with react-query
 import { api } from '~/utils/api'; // Placeholder for tRPC client
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '~/components/ui/card'; // shadcn/ui Card
 import { Skeleton } from '~/components/ui/skeleton'; // shadcn/ui Skeleton for loading states
@@ -9,6 +8,19 @@ import { SunIcon, MoonIcon } from '@radix-ui/react-icons'; // Example icons for 
 import { Button } from '~/components/ui/button'; // shadcn/ui Button
 import { Progress } from '~/components/ui/progress'; // shadcn/ui Progress for visual ratio representation
 import { Label } from '~/components/ui/label'; // shadcn/ui Label
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Define the interface for the collateral ratio data
 interface CollateralRatioData {

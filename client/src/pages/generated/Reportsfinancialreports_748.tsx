@@ -7,6 +7,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useTheme } from 'next-themes';
 import { ArrowUpDown } from 'lucide-react';
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 // Placeholder for tRPC hook - replace with actual tRPC client setup
 const trpc = {
   reports: {
@@ -37,7 +50,7 @@ interface FinancialReport {
 
 const ReportsFinancialReports: React.FC = () => {
   const { theme, setTheme } = useTheme();
-  const { data: reports, isLoading, isError, error } = trpc.reports.getFinancialReports.useQuery();
+  const { data: reports, isLoading, isError, error } = useStubQuery();
 
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'name' | 'amount' | 'date'>('date');

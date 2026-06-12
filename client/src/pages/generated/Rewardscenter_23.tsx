@@ -1,13 +1,24 @@
 // AUTO-GENERATED DRAFT SCREEN: RewardsCenter
 
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '../utils/trpc'; // Assuming tRPC setup
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Sun, Moon, Gift } from 'lucide-react';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 type Reward = {
   id: string;
@@ -31,7 +42,7 @@ const RewardsCenter: React.FC<RewardsCenterProps> = ({ userId }) => {
     }
   }, [isDarkMode]);
 
-  const { data, isLoading, isError, error } = trpc.rewards.getRewards.useQuery({
+  const { data, isLoading, isError, error } = useStubQuery({
     userId,
   });
 

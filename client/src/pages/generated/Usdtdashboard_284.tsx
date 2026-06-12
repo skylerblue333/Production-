@@ -1,10 +1,22 @@
 // AUTO-GENERATED DRAFT SCREEN: UsdtDashboard
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Placeholder for tRPC/react-query
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'; // Placeholder for shadcn/ui
-import { Button } from './ui/button'; // Placeholder for shadcn/ui
-import { Switch } from './ui/switch'; // Placeholder for shadcn/ui for dark mode toggle
-import { Label } from './ui/label'; // Placeholder for shadcn/ui for switch label
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Placeholder for shadcn/ui
+import { Button } from '@/components/ui/button'; // Placeholder for shadcn/ui
+import { Switch } from '@/components/ui/switch'; // Placeholder for shadcn/ui for dark mode toggle
+import { Label } from '@/components/ui/label'; // Placeholder for shadcn/ui for switch label
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 // Mock tRPC-like query for demonstration purposes.
 // In a real application, this would be replaced with actual tRPC client calls.
@@ -55,7 +67,7 @@ const UsdtDashboard: React.FC<UsdtDashboardProps> = () => {
 
   // Use react-query (or tRPC hooks in a real scenario) to fetch USDT data.
   // This handles loading, error, and data states automatically.
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error } = useStubQuery({
     queryKey: ['usdtData'],
     queryFn: fetchUsdtData,
     // Optional: Add retry logic, stale time, etc., for production robustness.

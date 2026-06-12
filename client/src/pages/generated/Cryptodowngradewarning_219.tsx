@@ -8,8 +8,20 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 // Assuming tRPC hook is available
-import { trpc } from '@/utils/trpc';
 
 interface DowngradeData {
   assetId: string;
@@ -27,7 +39,7 @@ interface DowngradeData {
 
 export default function CryptoDowngradeWarning() {
   // Mock tRPC query for demonstration purposes
-  // In a real app, this would be: const { data, isLoading, isError, error, refetch } = trpc.crypto.getDowngradeAlert.useQuery({ assetId: 'SKYCOIN4444' });
+  // In a real app, this would be: const { data, isLoading, isError, error, refetch } = useStubQuery({ assetId: 'SKYCOIN4444' });
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [data, setData] = useState<DowngradeData | null>(null);

@@ -1,11 +1,23 @@
 // AUTO-GENERATED DRAFT SCREEN: QuizInterface
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query'; // Simulating tRPC hooks with react-query
-import { Button } from './ui/button'; // Placeholder for shadcn/ui button
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './ui/card'; // Placeholder for shadcn/ui card
-import { RadioGroup, RadioGroupItem } from './ui/radio-group'; // Placeholder for shadcn/ui radio group
-import { Label } from './ui/label'; // Placeholder for shadcn/ui label
+import { Button } from '@/components/ui/button'; // Placeholder for shadcn/ui button
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'; // Placeholder for shadcn/ui card
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'; // Placeholder for shadcn/ui radio group
+import { Label } from '@/components/ui/label'; // Placeholder for shadcn/ui label
 import { useTheme } from 'next-themes'; // Simulating dark theme support
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface Question {
   id: string;

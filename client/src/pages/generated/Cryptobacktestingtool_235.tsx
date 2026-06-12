@@ -9,7 +9,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Loader2, AlertCircle, Play, Settings2, TrendingUp, TrendingDown } from 'lucide-react';
-import { trpc } from '@/utils/trpc';
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 interface BacktestParams { asset: string; strategy: string; initialCapital: number; startDate: string; endDate: string; }
 interface BacktestResult { date: string; portfolioValue: number; assetPrice: number; }
 interface BacktestMetrics { totalReturn: number; annualizedReturn: number; maxDrawdown: number; sharpeRatio: number; winRate: number; totalTrades: number; }
@@ -21,7 +33,7 @@ export default function CryptoBacktestingTool() {
     startDate: '2023-01-01',
     endDate: '2023-12-31',
   });
-  const runBacktest = trpc.crypto.runBacktest.useMutation();
+  const runBacktest = useStubMutation();
   const handleParamChange = (key: keyof BacktestParams, value: string | number) => {
     setParams((prev) => ({ ...prev, [key]: value }));
   };

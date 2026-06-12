@@ -1,9 +1,21 @@
 // AUTO-GENERATED DRAFT SCREEN: ActiveSessions
 import React, { useState, useEffect } from 'react';
-import { trpc } from "../trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button"; // Assuming Button component is available from shadcn/ui
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface ActiveSessionsProps {
   limit?: number;
@@ -24,7 +36,7 @@ const ActiveSessions: React.FC<ActiveSessionsProps> = ({ limit = 10 }) => {
     setIsDarkMode(!isDarkMode);
   };
 
-  const { data, isLoading, isError, error } = trpc.activeSessions.useQuery({ limit });
+  const { data, isLoading, isError, error } = useStubQuery({ limit });
 
   if (isLoading) {
     return (

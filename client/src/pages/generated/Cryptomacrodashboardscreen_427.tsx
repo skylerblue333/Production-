@@ -1,8 +1,20 @@
 // AUTO-GENERATED DRAFT SCREEN: CryptoMacroDashboardScreen
 import React from 'react';
-import { useQuery } from '@tanstack/react-query'; // Simulating tRPC hook usage
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Simulating shadcn/ui
 import { Skeleton } from '@/components/ui/skeleton'; // Simulating shadcn/ui for loading states
+
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
 
 interface MacroData {
   id: string;

@@ -8,6 +8,19 @@ import { Switch } from '@/components/ui/switch'; // shadcn/ui switch
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // shadcn/ui card
 import { Loader2 } from 'lucide-react'; // Loading icon
 
+/* --- injected local data stubs (replaces non-existent backend hooks) --- */
+function useStubQuery<T = any>(initial?: T) {
+  return { data: initial as T, isLoading: false, isPending: false, isError: false, error: null as any, refetch: () => {} };
+}
+function useStubMutation<T = any>() {
+  return {
+    mutate: (_v?: any) => {}, mutateAsync: async (_v?: any) => ({} as T),
+    isLoading: false, isPending: false, isError: false, isSuccess: false, error: null as any, data: undefined as any, reset: () => {},
+  };
+}
+/* ----------------------------------------------------------------------- */
+
+
 interface ComplianceMixerInput {
   amount: number;
   currency: string;
@@ -26,10 +39,10 @@ const CryptoComplianceMixer: React.FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
   // Simulate tRPC query for some initial data or configuration
-  const { data: config, isLoading: isLoadingConfig, error: configError } = useQuery(['complianceConfig']);
+  const { data: config, isLoading: isLoadingConfig, error: configError } = useStubQuery(['complianceConfig']);
 
   // Simulate tRPC mutation for the mixer operation
-  const { mutate: mixFunds, isLoading: isMixing, error: mixError, data: mixResult } = useMutation(
+  const { mutate: mixFunds, isLoading: isMixing, error: mixError, data: mixResult } = useStubMutation(
     (input: ComplianceMixerInput) => Promise.resolve({ transactionId: 'tx12345', status: 'pending' }), // Mock API call
   );
 
