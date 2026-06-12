@@ -150,7 +150,15 @@ function vitePluginManusDebugCollector(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
+const isProd = process.env.NODE_ENV === "production";
+// Heavy source-location/runtime instrumentation plugins are dev-only. Including them in the
+// production build dramatically increases transform memory (contributed to deploy OOM with
+// ~1k generated screens), so we skip them when building for production.
+const plugins = [
+  react(),
+  tailwindcss(),
+  ...(isProd ? [] : [jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()]),
+];
 
 export default defineConfig({
   plugins,
@@ -167,6 +175,49 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    // Raise the warning bar (we knowingly ship large demo bundles) and split aggressively so
+    // no single chunk dominates memory during bundling/minification.
+    chunkSizeWarningLimit: 4000,
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes("node_modules")) {
+            // Streamdown bundles Shiki + full language grammars + vscode-languageserver; this is
+            // the single largest memory contributor during minify. Isolate it (and split each
+            // Shiki language grammar into its own chunk) so no single chunk dominates.
+            if (id.includes("shiki") || id.includes("@shikijs")) {
+              const lang = id.match(/langs[\\/]([^\\/]+)\.m?js$/);
+              if (lang) return `shiki-lang-${lang[1]}`;
+              return "vendor-shiki";
+            }
+            if (id.includes("streamdown") || id.includes("vscode-") || id.includes("remark") || id.includes("rehype") || id.includes("micromark") || id.includes("mdast") || id.includes("hast")) return "vendor-markdown";
+            if (id.includes("react-dom")) return "vendor-react-dom";
+            if (/[\\/]react[\\/]/.test(id) || id.includes("react/jsx-runtime")) return "vendor-react";
+            if (id.includes("recharts") || id.includes("d3-") || id.includes("victory")) return "vendor-charts";
+            if (id.includes("lucide-react")) return "vendor-icons";
+            if (id.includes("@radix-ui")) return "vendor-radix";
+            if (id.includes("framer-motion")) return "vendor-motion";
+            if (id.includes("ethers") || id.includes("web3") || id.includes("@walletconnect") || id.includes("@web3modal")) return "vendor-web3";
+            if (id.includes("@trpc") || id.includes("@tanstack")) return "vendor-trpc";
+            return "vendor";
+          }
+          // Bucket the ~966 generated demo screens into a fixed number of chunks. One chunk
+          // per file would create ~966 tiny chunks and inflate Rollup bookkeeping memory; one
+          // monolith caused the deploy OOM. Bucketing keeps chunk count low AND avoids a giant
+          // single chunk. Screens remain lazy-loaded via the route registry.
+          const m = id.match(/client\/src\/pages\/generated\/([^/]+)\.tsx$/);
+          if (m) {
+            let h = 0;
+            const name = m[1];
+            for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) >>> 0;
+            return `gen-${h % 40}`;
+          }
+          return undefined;
+        },
+      },
+      // Limit parallelism during the most memory-intensive phase.
+      maxParallelFileOps: 2,
+    },
   },
   server: {
     host: true,
