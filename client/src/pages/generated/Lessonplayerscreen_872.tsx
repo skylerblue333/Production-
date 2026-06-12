@@ -79,7 +79,7 @@ const LessonContent: React.FC<any> = ({ lesson, isLoading }) => {
   );
 };
 
-const LessonNavigation: React.FC<any> void }> = (
+const LessonNavigation: React.FC<any> = (
   { currentLessonId, nextLessonId, previousLessonId, onNavigate }
 ) => {
   return (
@@ -119,7 +119,7 @@ const LessonProgress: React.FC<any> = ({ progress, isLoading }) => {
   );
 };
 
-const QuizComponent: React.FC<any> void; isLoading: boolean }> = (
+const QuizComponent: React.FC<any> = (
   { quiz, onQuizSubmit, isLoading }
 ) => {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);

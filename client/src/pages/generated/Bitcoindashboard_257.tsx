@@ -126,7 +126,7 @@ const BitcoinDashboard: React.FC<any> = ({ isDarkMode = false }) => {
 // The styling is based on Tailwind CSS and aims to be compatible with shadcn/ui principles.
 
 // Example of a shadcn/ui-like button (assuming shadcn/ui is configured in the project)
-const Button: React.FC<any> void; className?: string }> = ({ children, onClick, className }) => (
+const Button: React.FC<any> = ({ children, onClick, className }) => (
   <button
     className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium
                 ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2

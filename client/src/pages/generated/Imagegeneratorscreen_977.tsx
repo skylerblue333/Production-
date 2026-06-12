@@ -153,8 +153,7 @@ const ImageGenerationForm: React.FC<any> void; onSubmit: (e: React.FormEvent) =>
     </form>
   );
 
-const GeneratedImageResults: React.FC<any> void; }>
-  = ({ generatedImages, isPending, options, onDownload }) => (
+const GeneratedImageResults: React.FC<any> = ({ generatedImages, isPending, options, onDownload }) => (
     <Card className="h-full min-h-[600px] border-border/50 shadow-sm flex flex-col">
       <CardHeader className="border-b border-border/50 bg-muted/20 pb-4">
         <div className="flex items-center justify-between">
