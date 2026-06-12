@@ -24,6 +24,10 @@ export default function GeneratedGallery() {
           These are AI-generated draft UIs rendered with sample/stub data (no live backend), kept
           isolated from the type-checked core app. Click any card to open it live.
         </p>
+        <p className="text-muted-foreground mt-2 max-w-3xl text-sm">
+          The generated backend is also live: explore and call all 305 typed
+          <Link href="/api-explorer"> <span className="text-primary underline underline-offset-4">generated.* tRPC endpoints</span></Link>.
+        </p>
         <div className="mt-4 flex items-center gap-3">
           <Badge variant="secondary">{filtered.length} shown</Badge>
           <Input

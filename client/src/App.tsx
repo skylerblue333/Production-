@@ -2,6 +2,7 @@ import { Router, Route, Switch } from 'wouter';
 import { Suspense } from 'react';
 import { VoiceCommands } from './components/VoiceCommands';
 import GeneratedGallery from './pages/GeneratedGallery';
+import GeneratedApiExplorer from './pages/GeneratedApiExplorer';
 import { generatedRoutes } from './pages/generated/registry';
 import { Navigation } from './components/Navigation';
 import Home from './pages/Home';
@@ -67,6 +68,7 @@ export default function App() {
       <Route path="/profile" component={Dashboard} />
       <Route path="/videos" component={VideoArea} />
       <Route path="/gallery" component={GeneratedGallery} />
+      <Route path="/api-explorer" component={GeneratedApiExplorer} />
       {generatedRoutes.map((r) => (
         <Route key={r.slug} path={`/g/${r.slug}`}>
           <Suspense fallback={<div className="container py-20 text-center text-muted-foreground">Loading…</div>}>
